@@ -1,5 +1,14 @@
+import classNames from "classnames";
+
+import SignInLandingComponent from "./_component/SignInPage";
+
+
 export default function SignInPage() {
-  return(
-    <h1>Sign In Page</h1>
+  return (
+    <section className={classNames({
+      "px-24 py-24": true,
+    })}>
+      <SignInLandingComponent />
+    </section>
   )
 }

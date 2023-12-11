@@ -1,16 +1,10 @@
-import { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { type Metadata } from "next";
 
 import { AuthProvider } from "@/components/shared/AuthProvider";
 import { ThemeProvider } from "@/components/themes/ThemeWrapper";
 import Navbar from "@/components/shared/Navbar";
+import { inter } from "@/lib/fonts";
 import "@/styles/globals.css"
-
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
 
 
 export default function RootLayout(
