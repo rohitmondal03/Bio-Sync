@@ -25,7 +25,7 @@ export function FloatingUsersComponent({
     <div className={classNames(`${top} ${left} ${bgColor}`, {
       "p-5 rounded-3xl": true,
       "flex flex-row items-center gap-3": true,
-      "w-fit relative scale-75": true,
+      "w-fit scale-75": true,
     })}>
       <User color="white" className={classNames({
         "scale-[1.5]": true,

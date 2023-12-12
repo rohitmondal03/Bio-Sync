@@ -2,10 +2,12 @@ import classNames from "classnames"
 import { Montserrat } from "next/font/google"
 import Link from "next/link"
 
+
 const font = Montserrat({
   subsets: ["cyrillic-ext"],
   weight: "800",
 })
+
 
 export default function Logo() {
   return (
