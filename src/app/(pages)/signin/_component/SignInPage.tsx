@@ -1,19 +1,17 @@
 "use client"
 
 import Image from "next/image";
-import Link from "next/link";
+import dynamic from "next/dynamic";
 import { signIn } from "next-auth/react";
 import classNames from "classnames";
 
 import { montserrat } from "@/lib/fonts";
-import { Button } from "@/components/ui/button";
-import { useUser } from "@/hooks/useUser";
+import { memo } from "react";
+
+const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 
 
-export default function SignInLandingComponent() {
-  const { authStatus, userDetails } = useUser();
-
-
+function SignInLandingComponent() {
   return (
     <section className={classNames(`${montserrat.className}`, {
       "flex flex-row items-center justify-around": true,
@@ -22,7 +20,7 @@ export default function SignInLandingComponent() {
         "space-y-16": true,
       })}>
         <h1 className={classNames({
-          "font-bold text-5xl": true,
+          "font-bold text-5xl text-orange-500 dark:text-amber-400": true,
         })}
         >
           Welcome to BioSync
@@ -34,11 +32,37 @@ export default function SignInLandingComponent() {
           Your one stop to share your bio with anyone, <br /> anytime and anywhere...
         </p>
 
-        {authStatus === "unauthenticated"
-          ? demo.unauthFooter
-          : demo.authFooter
-        }
-      </div >
+        <p className={classNames({
+          "text-4xl font-bold dark:text-violet-400": true,
+        })}>
+          Sign In to continue to BioSync
+        </p>
+
+        <div className={classNames({
+          "flex flex-row gap-x-3": true,
+        })}>
+          <Button
+            variant={"secondary"}
+            onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
+            className={classNames({
+              "text-zinc-700 dark:text-white font-bold": true,
+              "outline outline-1 outline-zinc-100": true,
+            })}
+          >
+            Continue with GitHub
+          </Button>
+
+          <Button
+            variant={"secondary"}
+            onClick={() => signIn("discord", { callbackUrl: "/dashboard" })}
+            className={classNames({
+              "outline outline-1 outline-zinc-100 text-zinc-700 dark:text-white font-bold": true,
+            })}
+          >
+            Continue with Discord
+          </Button>
+        </div>
+      </div>
 
       <div className={classNames({
       })}>
@@ -51,62 +75,9 @@ export default function SignInLandingComponent() {
           blurDataURL="/sign-in.svg"
         />
       </div>
-    </section >
+    </section>
   )
 }
 
 
-
-const demo = {
-  unauthFooter: (
-    <>
-      <p className={classNames({
-        "text-4xl font-bold text-orange-400": true,
-      })}>
-        Sign In to continue to BioSync
-      </p>
-
-      <div className={classNames({
-        "flex flex-row gap-x-3": true,
-      })}>
-        <Button
-          variant={"secondary"}
-          onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
-          className={classNames({
-            "outline outline-1 outline-zinc-100 text-zinc-700 dark:text-white font-bold": true,
-          })}
-        >
-          Continue with GitHub
-        </Button>
-
-        <Button
-          variant={"secondary"}
-          onClick={() => signIn("discord", { callbackUrl: "/dashboard" })}
-          className={classNames({
-            "outline outline-1 outline-zinc-100 text-zinc-700 dark:text-white font-bold": true,
-          })}
-        >
-          Continue with Discord
-        </Button>
-      </div>
-    </>
-  ),
-
-  authFooter: (
-    <div className={classNames({
-      "flex flex-col gap-y-5": true
-    })}>
-      <p className={classNames({
-        "": true,
-      })}>
-        Continue to your Dashboard
-      </p>
-
-      <Link href={"/dashboard"}>
-        <Button variant={"secondary"}>
-          Head to Dashboard
-        </Button>
-      </Link>
-    </div>
-  )
-}
+export default memo(SignInLandingComponent);

@@ -7,6 +7,11 @@ import { inter } from "@/lib/fonts";
 import "@/styles/globals.css"
 
 
+export const metadata: Metadata= {
+  title: "BioSync"
+} 
+
+
 export default function RootLayout(
   { children }: ILayout
 ) {

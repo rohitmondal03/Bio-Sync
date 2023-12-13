@@ -1,9 +1,15 @@
-import HeadingText from "./_components/Heading";
+import dynamic from "next/dynamic";
+import { memo } from "react";
 
-export default function HomePage() {
+const HeadingText=  dynamic(() => import("./_components/Heading"))
+
+
+function HomePage() {
   return(
     <>
       <HeadingText />
     </>
   )
 }
+
+export default memo(HomePage)
