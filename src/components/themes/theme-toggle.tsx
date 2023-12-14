@@ -2,15 +2,16 @@
 
 import { MoonIcon, SunIcon } from "lucide-react"
 import { useTheme } from "next-themes"
+import classNames from "classnames"
+import dynamic from "next/dynamic"
 
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import classNames from "classnames"
+
+const DropdownMenu= dynamic(() => import("@/components/ui/dropdown-menu").then((mod) => mod.DropdownMenu))
+const DropdownMenuContent= dynamic(() => import("@/components/ui/dropdown-menu").then((mod) => mod.DropdownMenuContent))
+const DropdownMenuItem= dynamic(() => import("@/components/ui/dropdown-menu").then((mod) => mod.DropdownMenuItem))
+const DropdownMenuTrigger= dynamic(() => import("@/components/ui/dropdown-menu").then((mod) => mod.DropdownMenuTrigger))
+
 
 
 export function ModeToggle() {
