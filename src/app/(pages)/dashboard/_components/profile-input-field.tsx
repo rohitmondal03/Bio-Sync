@@ -47,6 +47,7 @@ export default function InputFields({
           autoComplete="off"
           value={value}
           onChange={onChange}
+          required
         />
       ) : (
         <Textarea

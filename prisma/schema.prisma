@@ -54,3 +54,23 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+
+model Profile {
+    id               String      @id @default(cuid())
+    name             String
+    email            String
+    bio              String
+    githubLink       String
+    twitterLink      String
+    linkedinLink     String
+    portfolioLink    String
+    otherLinks       String[]
+    publishedOrDraft isPublished
+
+    @@unique([id, email, githubLink, twitterLink, linkedinLink, portfolioLink, otherLinks])
+}
+
+enum isPublished {
+    DRAFT
+    PUBLISHED
+}

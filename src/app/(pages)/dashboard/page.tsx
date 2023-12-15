@@ -2,7 +2,6 @@ import { redirect } from "next/navigation";
 import classNames from "classnames";
 
 import { getServerAuthSession } from "@/server/auth"
-// import cloudinary from "@/lib/cloudinary";
 import { montserrat } from "@/lib/fonts";
 import UploaderWidget from "./_components/UploaderWidget";
 
