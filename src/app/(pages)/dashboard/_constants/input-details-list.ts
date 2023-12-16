@@ -22,7 +22,7 @@ export const inputFieldDetails: TInputDetailProps[] = [
   {
     id: "bio",
     inputType: "Textarea",
-    label: "Enter something about you",
+    label: "Write something about you",
     placeholder: "e.g. I'm a software engineer having 10+year of experience and.....",
   },
   {

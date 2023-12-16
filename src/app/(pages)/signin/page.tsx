@@ -10,7 +10,7 @@ async function SignInPage() {
   const sessionDetails = await getServerAuthSession();
 
   // redirecting users if session present
-  sessionDetails ? redirect("/dashboard") : null;
+  // sessionDetails ? redirect("/dashboard") : null;
 
   return (
     <section className={classNames({

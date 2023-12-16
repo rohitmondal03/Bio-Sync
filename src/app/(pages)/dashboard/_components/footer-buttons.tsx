@@ -1,8 +1,9 @@
-import classNames from "classnames";
-import { SaveIcon, ScreenShare, Send, Github } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+import { SaveIcon, ScreenShare, Send, Github } from "lucide-react";
+import classNames from "classnames";
+
+const Button= dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 
 
 const iconsClass = "ml-3 scale-90"
@@ -31,7 +32,6 @@ export default function FooterButtons() {
       </Button>
 
       <Button
-        type="submit"
         variant={"default"}
         className={`${btnClass}`}
       >

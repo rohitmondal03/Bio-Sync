@@ -60,10 +60,10 @@ model Profile {
     name             String
     email            String
     bio              String
-    githubLink       String
-    twitterLink      String
-    linkedinLink     String
-    portfolioLink    String
+    githubLink       String?
+    twitterLink      String?
+    linkedinLink     String?
+    portfolioLink    String?
     otherLinks       String[]
     publishedOrDraft isPublished
 

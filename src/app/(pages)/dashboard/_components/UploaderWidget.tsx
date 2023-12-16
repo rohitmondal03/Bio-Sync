@@ -18,12 +18,10 @@ const Separator = dynamic(() => import("@/components/ui/separator").then((mod) =
 
 export default function UploaderWidget() {
   const { userDetails } = useUser();
-  const userProfilePic = userDetails?.image;  // profile pic
-
   const [otherLinks, setOtherLinks] = useState<ComponentType<{ onClick: () => void; }>[]>([]);
   const [userBio, setUserBio] = useState<TUserBio>({
-    name: userDetails?.name ?? "",
-    email: userDetails?.email ?? "",
+    name: "",
+    email: "",
     bio: "",
     githubLink: "",
     linkedinLink: "",
@@ -32,14 +30,22 @@ export default function UploaderWidget() {
     otherLinks: []
   });
 
+  const userProfilePic = userDetails?.image;  // profile pic
 
   // classes for profile input fields
   const inputTypeClass = "w-[43.5vw]"
   const textareaTypeClass = "w-[90rem]"
 
 
+  // function for deleting other link input field
+  function removeSection(idx: number) {
+    setOtherLinks(prevOtherLinks => prevOtherLinks.filter((_, i) => idx !== i));
+  }
+
+
+
   return (
-    <div className={classNames({
+    <form className={classNames({
       "mx-auto my-12": true,
     })}>
       {/* profile image */}
@@ -57,6 +63,7 @@ export default function UploaderWidget() {
           })}
         />
         <Button
+          type="button"
           variant={"default"}
           className={classNames({
             "font-bold": true,
@@ -74,7 +81,7 @@ export default function UploaderWidget() {
       />
 
       {/* input sections */}
-      <section className={classNames({
+      <div className={classNames({
         "flex flex-row flex-wrap items-center justify-center gap-5": true,
       })}>
         {inputFieldDetails.map((det) => (
@@ -82,51 +89,48 @@ export default function UploaderWidget() {
             id={det.id}
             inputType={det.inputType}
             label={det.label}
+            required={det.id === "bio" || det.id === "linkedinLink" ? true : false}
             placeholder={det.placeholder}
             widthClass={det.inputType === "Input" ? inputTypeClass : textareaTypeClass}
             // @ts-expect-error "giving value as any"
             value={String(userBio[`${det.id}`])}
-            onChange={(e) =>
-              setUserBio((prev) => ({ ...prev, [det.id]: e.target.value }))
-            }
+            onChange={(e) => setUserBio((prev) => ({ ...prev, [det.id]: e.target.value }))}
           />
         ))}
 
 
         {/* ADDITION LINKS INPUT FIELD...!! */}
         <div className={classNames({
-          "text-xl font-bold": true,
+          "text-xl font-bold text-center": true,
           "py-6 my-1": true,
           "space-y-8": true,
         })}>
           <h1>Mention other links</h1>
 
-          <div>
-            <div className={classNames({
-              "space-y-5": true,
-            })}>
-              {otherLinks.map((Comp, idx: number) => (
-                <Comp onClick={() => console.log(idx)} />
-              ))}
+          <div className={classNames({
+            "space-y-5 w-[30rem]": true,
+          })}>
+            {otherLinks.map((Comp, idx: number) => (
+              <Comp onClick={() => removeSection(idx)} />
+            ))}
 
-              <Button
-                size={"icon"}
-                variant={"default"}
-                className={classNames({
-                  "mx-auto w-full": true,
-                  "font-bold": true,
-                })}
-                onClick={() => setOtherLinks([...otherLinks, OtherLinkInputFields])}
-              >
-                Add More...
-              </Button>
-            </div>
+            <Button
+              type="button"
+              variant={"default"}
+              className={classNames({
+                "mx-auto w-full": true,
+                "font-bold": true,
+              })}
+              onClick={() => setOtherLinks([...otherLinks, OtherLinkInputFields])}
+            >
+              Add More...
+            </Button>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* footer buttons */}
       <FooterButtons />
-    </div>
+    </form>
   )
 }

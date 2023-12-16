@@ -14,6 +14,7 @@ type TInputFieldsProps = {
   widthClass: string;
   inputType: "Input" | "Textarea";
   value: string;
+  required: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
@@ -25,7 +26,8 @@ export default function InputFields({
   id,
   placeholder,
   inputType,
-  widthClass
+  widthClass,
+  required
 }: TInputFieldsProps
 ) {
   return (
@@ -47,7 +49,7 @@ export default function InputFields({
           autoComplete="off"
           value={value}
           onChange={onChange}
-          required
+          required={required}
         />
       ) : (
         <Textarea
@@ -56,6 +58,7 @@ export default function InputFields({
           value={value}
           rows={7}
           onChange={onChange}
+          required={required}
         />
       )}
     </div>

@@ -7,7 +7,7 @@ const Input = dynamic(() => import("@/components/ui/input").then((mod) => mod.In
 
 
 export default function OtherLinkInputFields(
-  {onClick}: {onClick: () => void}
+  { onClick }: { onClick: () => void }
 ) {
   return (
     <div className={classNames({
@@ -15,10 +15,11 @@ export default function OtherLinkInputFields(
     })}>
       <Input
         type="text"
-        placeholder="Enter any link"
+        placeholder={`enter some other links.....`}
         className={classNames({
           "outline outline-1 outline-zinc-500": true,
         })}
+        required
       />
 
       <Button
