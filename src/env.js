@@ -35,6 +35,7 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string(),
+    NEXT_PUBLIC_LOCAL_STORAGE_KEY: z.string(),
   },
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
@@ -49,6 +50,7 @@ export const env = createEnv({
     CLOUDINARY_URL: process.env.CLOUDINARY_URL,
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
     CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
+    NEXT_PUBLIC_LOCAL_STORAGE_KEY: process.env.NEXT_PUBLIC_LOCAL_STORAGE_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

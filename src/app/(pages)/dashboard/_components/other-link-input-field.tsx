@@ -15,7 +15,7 @@ export default function OtherLinkInputFields(
     })}>
       <Input
         type="text"
-        placeholder={`enter some other links.....`}
+        placeholder="enter any link...."
         className={classNames({
           "outline outline-1 outline-zinc-500": true,
         })}
