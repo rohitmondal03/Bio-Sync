@@ -16,12 +16,19 @@ const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.
 const Separator = dynamic(() => import("@/components/ui/separator").then((mod) => mod.Separator))
 
 
-export default function UploaderWidget() {
-  const { userDetails } = useUser();
+type TProps = {
+  userName: string;
+  userEmail: string;
+  userProfilePic: string
+}
+
+export default function UploaderWidget(
+  { userName, userEmail, userProfilePic }: TProps
+) {
   const [otherLinks, setOtherLinks] = useState<ComponentType<{ onClick: () => void; }>[]>([]);
   const [userBio, setUserBio] = useState<TUserBio>({
-    name: "",
-    email: "",
+    name: userName,
+    email: userEmail,
     bio: "",
     githubLink: "",
     linkedinLink: "",
@@ -30,7 +37,6 @@ export default function UploaderWidget() {
     otherLinks: []
   });
 
-  const userProfilePic = userDetails?.image;  // profile pic
 
   // classes for profile input fields
   const inputTypeClass = "w-[43.5vw]"

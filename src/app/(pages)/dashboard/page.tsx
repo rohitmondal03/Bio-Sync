@@ -12,7 +12,10 @@ export default async function DashboardPage() {
   const sessionDetails = await getServerAuthSession();
 
   const userDetails = sessionDetails?.user;  //user's details
-  const userName = userDetails?.name;
+
+  const userName = userDetails?.name;  
+  const userEmail = userDetails?.email;
+  const userProfilePic = userDetails?.image;
 
   (!sessionDetails) ? redirect("/api/auth/signin?callbackUrl=%2Fdashboard") : null;
 
@@ -32,7 +35,11 @@ export default async function DashboardPage() {
         &nbsp;BioSync
       </h1>
 
-      <UploaderWidget />
+      <UploaderWidget
+        userName={userName!}
+        userEmail={userEmail!}
+        userProfilePic={userProfilePic!}
+      />
     </section>
   )
 }
