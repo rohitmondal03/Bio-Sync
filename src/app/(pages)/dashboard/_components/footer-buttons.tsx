@@ -1,12 +1,13 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useFormStatus } from "react-dom";
 import { SaveIcon, ScreenShare, Send, Github } from "lucide-react";
 import classNames from "classnames";
 
-const PreviewScreen= dynamic(() => import("./preview-screen"))
+const PreviewScreen = dynamic(() => import("./preview-screen"))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
-const Dialog= dynamic(() => import("@/components/ui/dialog").then((mod) => mod.Dialog))
-const DialogTrigger= dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogTrigger))
+const Dialog = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.Dialog))
+const DialogTrigger = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogTrigger))
 
 
 const iconsClass = "ml-3 scale-90"
@@ -14,6 +15,9 @@ const btnClass = "font-bold";
 
 
 export default function FooterButtons() {
+  const { pending } = useFormStatus();
+
+
   return (
     <div className={classNames({
       "flex flex-row flex-wrap items-center justify-around": true,
@@ -22,6 +26,7 @@ export default function FooterButtons() {
       <Dialog>
         <DialogTrigger asChild>
           <Button
+            type="button"
             variant={"default"}
             className={`${btnClass}`}
           >
@@ -37,21 +42,28 @@ export default function FooterButtons() {
         variant={"default"}
         className={`${btnClass}`}
       >
-        Publish <Send className={`${iconsClass}`} />
+        {pending ?
+          "Publishing..."
+          : (
+            <>Publish <Send className={`${iconsClass}`} /></>
+          )
+        }
       </Button>
 
-      <Button
+      {/* <Button
+        type="button"
         variant={"default"}
         className={`${btnClass}`}
       >
         Draft <SaveIcon className={`${iconsClass}`} />
-      </Button>
+      </Button> */}
 
       <Link
         target="_blank"
         href={"https://github.com/rohitmondal03/Bio-Sync"}
       >
         <Button
+          type="button"
           variant={"default"}
           className={`${btnClass}`}
         >

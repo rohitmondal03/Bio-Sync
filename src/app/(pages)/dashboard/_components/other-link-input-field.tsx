@@ -6,8 +6,14 @@ const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.
 const Input = dynamic(() => import("@/components/ui/input").then((mod) => mod.Input))
 
 
+type TProps = {
+  onClick: () => void;
+  onChange: () => void;
+}
+
+
 export default function OtherLinkInputFields(
-  { onClick }: { onClick: () => void }
+  { onClick, onChange }: TProps
 ) {
   return (
     <div className={classNames({
@@ -19,6 +25,7 @@ export default function OtherLinkInputFields(
         className={classNames({
           "outline outline-1 outline-zinc-500": true,
         })}
+        onChange={onChange}
         required
       />
 

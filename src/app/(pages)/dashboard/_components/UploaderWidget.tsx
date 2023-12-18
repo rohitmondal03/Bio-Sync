@@ -2,18 +2,20 @@
 
 import dynamic from "next/dynamic"
 import Image from "next/image"
-import { type ComponentType, useState } from "react"
+import { type ComponentType, type ChangeEvent, useState, useEffect } from "react"
 import { Upload } from "lucide-react"
 import classNames from "classnames"
 
-import { useUser } from "@/hooks/useUser"
 import { inputFieldDetails } from "../_constants/input-details-list"
+import { submitUserBio } from "../_actions/submit-user-bio"
+import { Label } from "@/components/ui/label"
 
 const OtherLinkInputFields = dynamic(() => import("./other-link-input-field"))
 const FooterButtons = dynamic(() => import("./footer-buttons"))
 const InputsField = dynamic(() => import("./profile-input-field"))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Separator = dynamic(() => import("@/components/ui/separator").then((mod) => mod.Separator))
+const Checkbox = dynamic(() => import("@/components/ui/checkbox").then((mod) => mod.Checkbox))
 
 
 type TProps = {
@@ -22,19 +24,25 @@ type TProps = {
   userProfilePic: string
 }
 
+
 export default function UploaderWidget(
   { userName, userEmail, userProfilePic }: TProps
 ) {
-  const [otherLinks, setOtherLinks] = useState<ComponentType<{ onClick: () => void; }>[]>([]);
+  const [otherLinks, setOtherLinks] = useState<ComponentType<{
+    onClick: () => void,
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  }>[]>([]);
   const [userBio, setUserBio] = useState<TUserBio>({
     name: userName,
     email: userEmail,
     bio: "",
+    profilePic: userProfilePic,
     githubLink: "",
     linkedinLink: "",
     twitterLink: "",
     portfolioLink: "",
-    otherLinks: []
+    otherLinks: [],
+    includeProfilePicOrNot: true
   });
 
 
@@ -44,16 +52,30 @@ export default function UploaderWidget(
 
 
   // function for deleting other link input field
-  function removeSection(idx: number) {
+  function removeInputField(idx: number) {
     setOtherLinks(prevOtherLinks => prevOtherLinks.filter((_, i) => idx !== i));
   }
 
 
+  // for updating single index of 'otherLinks' array
+  const updateOtherLinkAtIndex = (idx: number, newLink: string) => {
+    setUserBio((prevState) => ({
+      ...prevState,
+      otherLinks: prevState.otherLinks.map((link, i) =>
+        i === idx ? newLink : link
+      ),
+    }));
+  };
+
+
 
   return (
-    <form className={classNames({
-      "mx-auto my-12": true,
-    })}>
+    <form
+      className={classNames({
+        "mx-auto my-12": true,
+      })}
+      action={async () => await submitUserBio(userBio)}
+    >
       {/* profile image */}
       <div className={classNames({
         "flex flex-col items-center justify-center gap-y-5": true,
@@ -67,16 +89,21 @@ export default function UploaderWidget(
             "h-40 w-40 bg-zinc-700": true,
             "rounded-full": true,
           })}
+          priority
         />
-        <Button
-          type="button"
-          variant={"default"}
-          className={classNames({
-            "font-bold": true,
-          })}
-        >
-          Upload Image <Upload className="ml-2 scale-90" />
-        </Button>
+
+        <div className={classNames({
+          "flex flex-row items-center gap-3": true,
+        })}>
+          <Label htmlFor="profile-image">Include Profile pic in your BioSync</Label>
+          <Checkbox
+            id="profile-image"
+            onCheckedChange={() => setUserBio((prev) => (
+              { ...prev, includeProfilePic: !prev.includeProfilePicOrNot }
+            ))}
+            defaultChecked
+          />
+        </div>
       </div>
 
       <Separator
@@ -117,7 +144,11 @@ export default function UploaderWidget(
             "space-y-5 w-[30rem]": true,
           })}>
             {otherLinks.map((Comp, idx: number) => (
-              <Comp onClick={() => removeSection(idx)} />
+              <Comp
+                key={idx}
+                onClick={() => removeInputField(idx)}
+                onChange={(e) => updateOtherLinkAtIndex(idx, e.target.value)}
+              />
             ))}
 
             <Button
@@ -127,6 +158,7 @@ export default function UploaderWidget(
                 "mx-auto w-full": true,
                 "font-bold": true,
               })}
+              // @ts-expect-error "giving soome unknown error"
               onClick={() => setOtherLinks([...otherLinks, OtherLinkInputFields])}
             >
               Add More...
