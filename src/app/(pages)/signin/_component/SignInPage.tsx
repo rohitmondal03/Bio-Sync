@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { signIn } from "next-auth/react";
 import classNames from "classnames";
 
-import { montserrat } from "@/lib/fonts";
+import { montserrat } from "@/lib/others/fonts";
 import { memo } from "react";
 
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))

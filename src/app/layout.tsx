@@ -1,15 +1,16 @@
 import { type Metadata } from "next";
 
+import ContextProvider from "@/components/shared/ContextProvider";
 import { AuthProvider } from "@/components/shared/AuthProvider";
 import { ThemeProvider } from "@/components/themes/ThemeWrapper";
 import Navbar from "@/components/shared/Navbar";
-import { inter } from "@/lib/fonts";
+import { inter } from "@/lib/others/fonts";
 import "@/styles/globals.css"
 
 
-export const metadata: Metadata= {
+export const metadata: Metadata = {
   title: "BioSync"
-} 
+}
 
 
 export default function RootLayout(
@@ -26,7 +27,9 @@ export default function RootLayout(
             disableTransitionOnChange
           >
             <Navbar />
-            <main>{children}</main>
+            <ContextProvider>
+              <main>{children}</main>
+            </ContextProvider>
           </ThemeProvider>
         </AuthProvider>
       </body>

@@ -30,6 +30,7 @@ export default function OtherLinkInputFields(
       />
 
       <Button
+        type="button"
         size={"icon"}
         variant={"destructive"}
         className={classNames({})}

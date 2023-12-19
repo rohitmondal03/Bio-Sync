@@ -1,7 +1,7 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useFormStatus } from "react-dom";
-import { SaveIcon, ScreenShare, Send, Github } from "lucide-react";
+import { ScreenShare, Send, Github } from "lucide-react";
 import classNames from "classnames";
 
 const PreviewScreen = dynamic(() => import("./preview-screen"))

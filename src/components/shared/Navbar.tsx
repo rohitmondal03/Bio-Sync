@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { signOut } from "next-auth/react";
 import classNames from "classnames";
 
-import { code } from "@/lib/fonts"
+import { code } from "@/lib/others/fonts"
 import { useUser } from "@/hooks/useUser";
 
 const Logo= dynamic(() => import("./Logo"))

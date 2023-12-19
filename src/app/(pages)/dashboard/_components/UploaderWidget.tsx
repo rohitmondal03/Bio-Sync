@@ -7,7 +7,7 @@ import { Upload } from "lucide-react"
 import classNames from "classnames"
 
 import { inputFieldDetails } from "../_constants/input-details-list"
-import { submitUserBio } from "../_actions/submit-user-bio"
+import { submitUserBio } from "../../../../actions/submit-user-bio"
 import { Label } from "@/components/ui/label"
 
 const OtherLinkInputFields = dynamic(() => import("./other-link-input-field"))

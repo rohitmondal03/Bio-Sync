@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import classNames from "classnames";
 
 import { getServerAuthSession } from "@/server/auth"
-import { montserrat } from "@/lib/fonts";
+import { montserrat } from "@/lib/others/fonts";
 
 const UploaderWidget = dynamic(() => import("./_components/UploaderWidget"))
 
