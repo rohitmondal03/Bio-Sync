@@ -2,20 +2,23 @@
 
 import dynamic from "next/dynamic"
 import Image from "next/image"
-import { type ComponentType, type ChangeEvent, useState, useEffect } from "react"
-import { Upload } from "lucide-react"
+import { type ComponentType, type ChangeEvent, useState } from "react"
 import classNames from "classnames"
 
-import { inputFieldDetails } from "../_constants/input-details-list"
-import { submitUserBio } from "../../../../actions/submit-user-bio"
-import { Label } from "@/components/ui/label"
+import { inputFieldDetails } from "../_constants/profile-input-details-list"
+import { submitUserBio } from "@/actions/submit-user-bio"
+import { PlusCircle } from "lucide-react"
 
+
+const PublishButton = dynamic(() => import("./buttons/publish-button"))
+const PreviewButton = dynamic(() => import("./buttons/preview-button"))
+const GithublinkButton = dynamic(() => import("./buttons/github-link-button"))
 const OtherLinkInputFields = dynamic(() => import("./other-link-input-field"))
-const FooterButtons = dynamic(() => import("./footer-buttons"))
 const InputsField = dynamic(() => import("./profile-input-field"))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Separator = dynamic(() => import("@/components/ui/separator").then((mod) => mod.Separator))
 const Checkbox = dynamic(() => import("@/components/ui/checkbox").then((mod) => mod.Checkbox))
+const Label = dynamic(() => import("@/components/ui/label").then((mod) => mod.Label))
 
 
 type TProps = {
@@ -28,7 +31,7 @@ type TProps = {
 export default function UploaderWidget(
   { userName, userEmail, userProfilePic }: TProps
 ) {
-  const [otherLinks, setOtherLinks] = useState<ComponentType<{
+  const [projectLinks, setProjectLinks] = useState<ComponentType<{
     onClick: () => void,
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
   }>[]>([]);
@@ -41,8 +44,8 @@ export default function UploaderWidget(
     linkedinLink: "",
     twitterLink: "",
     portfolioLink: "",
-    otherLinks: [],
-    includeProfilePicOrNot: true
+    projectLinks: [],
+    includeProfilePicOrNot: true,
   });
 
 
@@ -53,7 +56,7 @@ export default function UploaderWidget(
 
   // function for deleting other link input field
   function removeInputField(idx: number) {
-    setOtherLinks(prevOtherLinks => prevOtherLinks.filter((_, i) => idx !== i));
+    setProjectLinks(prevLinks => prevLinks.filter((_, i) => idx !== i));
   }
 
 
@@ -61,7 +64,7 @@ export default function UploaderWidget(
   const updateOtherLinkAtIndex = (idx: number, newLink: string) => {
     setUserBio((prevState) => ({
       ...prevState,
-      otherLinks: prevState.otherLinks.map((link, i) =>
+      projectLinks: prevState.projectLinks.map((link, i) =>
         i === idx ? newLink : link
       ),
     }));
@@ -81,8 +84,8 @@ export default function UploaderWidget(
         "flex flex-col items-center justify-center gap-y-5": true,
       })}>
         <Image
-          src={userProfilePic!}
-          alt="profile image"
+          src={userProfilePic}
+          alt="profile pic"
           width={200}
           height={200}
           className={classNames({
@@ -98,10 +101,10 @@ export default function UploaderWidget(
           <Label htmlFor="profile-image">Include Profile pic in your BioSync</Label>
           <Checkbox
             id="profile-image"
+            defaultChecked={userBio.includeProfilePicOrNot}
             onCheckedChange={() => setUserBio((prev) => (
-              { ...prev, includeProfilePic: !prev.includeProfilePicOrNot }
+              { ...prev, includeProfilePicOrNot: !prev.includeProfilePicOrNot }
             ))}
-            defaultChecked
           />
         </div>
       </div>
@@ -132,18 +135,18 @@ export default function UploaderWidget(
         ))}
 
 
-        {/* ADDITION LINKS INPUT FIELD...!! */}
+        {/* PROJECT LINKS INPUT FIELD...!! */}
         <div className={classNames({
           "text-xl font-bold text-center": true,
           "py-6 my-1": true,
           "space-y-8": true,
         })}>
-          <h1>Mention other links</h1>
+          <h1>Mention Project links</h1>
 
           <div className={classNames({
             "space-y-5 w-[30rem]": true,
           })}>
-            {otherLinks.map((Comp, idx: number) => (
+            {projectLinks.map((Comp, idx: number) => (
               <Comp
                 key={idx}
                 onClick={() => removeInputField(idx)}
@@ -159,16 +162,24 @@ export default function UploaderWidget(
                 "font-bold": true,
               })}
               // @ts-expect-error "giving soome unknown error"
-              onClick={() => setOtherLinks([...otherLinks, OtherLinkInputFields])}
+              onClick={() => setProjectLinks([...projectLinks, OtherLinkInputFields])}
             >
-              Add More...
+              <PlusCircle />
             </Button>
           </div>
         </div>
       </div>
 
+
       {/* footer buttons */}
-      <FooterButtons />
+      <div className={classNames({
+        "flex flex-row flex-wrap items-center justify-around": true,
+        "mt-10": true,
+      })}>
+        <PreviewButton />
+        <PublishButton />
+        <GithublinkButton />
+      </div>
     </form>
   )
 }

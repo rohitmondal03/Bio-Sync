@@ -11,7 +11,7 @@ const initialData: TUserBio = {
   includeProfilePicOrNot: false,
   linkedinLink: "",
   name: "",
-  otherLinks: [],
+  projectLinks: [],
   portfolioLink: "",
   profilePic: "",
   twitterLink: "",

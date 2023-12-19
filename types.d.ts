@@ -11,6 +11,6 @@ type TUserBio = {
   linkedinLink: string
   twitterLink: string
   portfolioLink: string
-  otherLinks: string[]
+  projectLinks: string[]
   includeProfilePicOrNot: boolean
 }

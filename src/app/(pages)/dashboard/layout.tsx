@@ -1,19 +1,21 @@
 import { type Metadata } from "next"
 
-// import { getServerAuthSession } from "@/server/auth"
+import { getServerAuthSession } from "@/server/auth"
 
 
-// async function getUser() {
-//   const sessionDetails= await getServerAuthSession();
+export async function generateMetadata(): Promise<Metadata> {
+  const sessionDetails = await getServerAuthSession();
 
-//   return sessionDetails?.user;
-// }
+  const userDetails = sessionDetails?.user;  //user details
+  const userName = userDetails?.name;   //user's name
+  const userProfilePic = userDetails?.image  // user's pic
 
-export const metadata: Metadata= {
-  title: `Dashboard`,
-  description: "T3- stack",
-  keywords: ["Bio Sync", "T3 stack"],
+  return {
+    title: `${userName}'s Dashboard`,
+    icons: [`${userProfilePic}`],
+  }
 }
+
 
 export default function DashboardLayout(
   { children }: ILayout

@@ -64,11 +64,11 @@ model UserBio {
     twitterLink            String?
     linkedinLink           String?
     portfolioLink          String?
-    otherLinks             String[]
+    projectLink            String[]
     // publishedOrDraft isPublished
     includeProfilePicOrNot Boolean
 
-    @@unique([id, email, githubLink, twitterLink, linkedinLink, portfolioLink, otherLinks])
+    @@unique([id, email, githubLink, twitterLink, linkedinLink, portfolioLink, projectLink])
 }
 
 enum isPublished {

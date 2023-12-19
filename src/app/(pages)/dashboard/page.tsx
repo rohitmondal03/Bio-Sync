@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import classNames from "classnames";
 
 import { getServerAuthSession } from "@/server/auth"
-import { montserrat } from "@/lib/others/fonts";
+import { montserrat } from "@/lib/fonts";
 
 const UploaderWidget = dynamic(() => import("./_components/UploaderWidget"))
 
@@ -32,7 +32,7 @@ export default async function DashboardPage() {
         })}>
           {userName}&apos;s
         </span>
-        &nbsp;BioSync
+        &nbsp;Dashboard
       </h1>
 
       <UploaderWidget
