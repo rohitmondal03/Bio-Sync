@@ -4,7 +4,7 @@ import ContextProvider from "@/components/shared/ContextProvider";
 import { AuthProvider } from "@/components/shared/AuthProvider";
 import { ThemeProvider } from "@/components/themes/ThemeWrapper";
 import Navbar from "@/components/shared/Navbar";
-import { inter } from "@/lib/fonts";
+import { inter } from "@/lib/others/fonts";
 import "@/styles/globals.css"
 
 

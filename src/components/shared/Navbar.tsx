@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { signOut } from "next-auth/react";
 import classNames from "classnames";
 
-import { code } from "@/lib/fonts"
+import { code } from "@/lib/others/fonts"
 import { useUser } from "@/hooks/useUser";
 
 const Logo= dynamic(() => import("./Logo"))
@@ -33,7 +33,7 @@ export default function Navbar() {
   return (
     <nav className={classNames({
       "flex flex-row items-center justify-around": true,
-      "py-8 border-zinc-500 border-b-2": true,
+      "py-6 border-zinc-500 border-b-2": true,
     })}>
       <>
         <Logo />

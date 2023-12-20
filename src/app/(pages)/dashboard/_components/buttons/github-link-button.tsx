@@ -11,9 +11,9 @@ export default function GithublinkButton() {
       <Button
         type="button"
         variant={"default"}
-        className={`font-bold`}
+        className= "btn"
       >
-        Github <Github className={`ml-3 scale-90`} />
+        Github <Github className="icon" />
       </Button>
     </Link>
   )

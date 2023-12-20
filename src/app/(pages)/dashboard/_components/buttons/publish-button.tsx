@@ -14,12 +14,12 @@ export default function PublishBioButton() {
     <Button
       type="submit"
       variant={"default"}
-      className={`font-bold`}
+      className="btn"
     >
       {pending ?
         "Publishing..."
         : (
-          <>Publish <Send className={`ml-3 scale-90`} /></>
+          <>Publish <Send className="icon" /></>
         )
       }
     </Button>
