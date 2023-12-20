@@ -56,17 +56,17 @@ model VerificationToken {
 }
 
 model UserBio {
-    id                     String   @id @default(cuid())
-    name                   String
-    email                  String
-    bio                    String
-    githubLink             String?
-    twitterLink            String?
-    linkedinLink           String?
-    portfolioLink          String?
-    projectLink            String[]
+    id             String   @id @default(cuid())
+    name           String
+    email          String
+    bio            String
+    githubLink     String?
+    twitterLink    String?
+    linkedinLink   String?
+    portfolioLink  String?
+    projectLink    String[]
     // publishedOrDraft isPublished
-    includeProfilePicOrNot Boolean
+    displayProfile Boolean
 
     @@unique([id, email, githubLink, twitterLink, linkedinLink, portfolioLink, projectLink])
 }

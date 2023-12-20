@@ -13,11 +13,7 @@ export default async function UploaderWidget() {
 
   return (
     <div className="flex flex-row items-start justify-around my-2">
-      <InputForm
-        userEmail={userEmail!}
-        userName={userName!}
-        userProfilePic={userProfilePic!}
-      />
+      <InputForm />
 
       {/* Mobile preview screen */}
       <div className="hidden items-center justify-end lg:flex">

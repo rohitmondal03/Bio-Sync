@@ -2,78 +2,64 @@
 
 import dynamic from "next/dynamic"
 import Image from "next/image"
-import { type ComponentType, type ChangeEvent, useState } from "react"
+import Link from "next/link"
+import { useState } from "react"
+import { Plus } from "lucide-react"
 import classNames from "classnames"
 
 import { inputFieldDetails } from "../_constants/profile-input-details-list"
 import { submitUserBio } from "@/actions/submit-user-bio"
-import { PlusCircle } from "lucide-react"
-import ShowDemoDataButton from "./buttons/show-demo-button"
+import { useData } from "@/hooks/useBioData"
 
+import ShowDemoDataButton from "./buttons/show-demo-button"
+import { useUser } from "@/hooks/useUser"
 const PublishButton = dynamic(() => import("./buttons/publish-button"))
 const PreviewButton = dynamic(() => import("./buttons/preview-button"))
-const GithublinkButton = dynamic(() => import("./buttons/github-link-button"))
-const OtherLinkInputFields = dynamic(() => import("./project-link-input-field"))
+const ResetButton = dynamic(() => import("./buttons/reset-button"))
 const InputsField = dynamic(() => import("./profile-input-field"))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Separator = dynamic(() => import("@/components/ui/separator").then((mod) => mod.Separator))
 const Checkbox = dynamic(() => import("@/components/ui/checkbox").then((mod) => mod.Checkbox))
 const Label = dynamic(() => import("@/components/ui/label").then((mod) => mod.Label))
+const Input = dynamic(() => import("@/components/ui/input").then((mod) => mod.Input))
 
 
-type TProps = {
-  userName: string;
-  userEmail: string;
-  userProfilePic: string
-}
+export default function InputForm() {
+  const { userDetails } = useUser();
+  const [projectLink, setProjectLink] = useState<string>("");
+  const {
+    data: userBioData,
+    addProjectLink,
+    toggleProfileImage,
+    handleInputChange,
+  } = useData();
 
 
-export default function InputForm(
-  { userName, userEmail, userProfilePic }: TProps
-) {
-  const [projectLinks, setProjectLinks] = useState<ComponentType<{
-    onClick: () => void,
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void
-  }>[]>([]);
-  const [userBio, setUserBio] = useState<TUserBio>({
-    name: userName,
-    email: userEmail,
-    bio: "",
-    profilePic: userProfilePic,
-    githubLink: "",
-    linkedinLink: "",
-    twitterLink: "",
-    portfolioLink: "",
-    projectLinks: [],
-    includeProfilePicOrNot: true,
-  });
+  // add project
+  function addProject() {
+    if (projectLink === undefined || projectLink.trim().length < 1) {
+      alert("Link cannot be empty");
+      setProjectLink("");
+      return;
+    }
+    if (userBioData.projectLinks.includes(projectLink)) {
+      alert("Link is already in project");
+      setProjectLink("");
+      return;
+    }
 
-
-  // function for deleting other link input field
-  function removeInputField(idx: number) {
-    setProjectLinks(prevLinks => prevLinks.filter((_, i) => idx !== i));
+    addProjectLink(projectLink);
+    setProjectLink("")
   }
-
-
-  // for updating single index of 'otherLinks' array
-  const updateOtherLinkAtIndex = (idx: number, newLink: string) => {
-    setUserBio((prevState) => ({
-      ...prevState,
-      projectLinks: prevState.projectLinks.map((link, i) =>
-        i === idx ? newLink : link
-      ),
-    }));
-  };
 
 
 
   return (
     <form
-      action={async () => await submitUserBio(userBio)}
+      // action={async () => await submitUserBio(userBio)}
       className={classNames({
         "overflow-scroll": true,
         "h-[84vh] w-fit p-4": true,
-        "border-2 border-zinc-700 rounded-2xl": true,
       })}
     >
       {/* profile image */}
@@ -82,7 +68,7 @@ export default function InputForm(
         "w-[40vw]": true,
       })}>
         <Image
-          src={userProfilePic}
+          src={String(userDetails?.image)}
           alt="profile pic"
           width={200}
           height={200}
@@ -90,8 +76,7 @@ export default function InputForm(
           className={classNames({
             "h-40 w-40 bg-zinc-700": true,
             "rounded-full": true,
-            "brightness-100": userBio.includeProfilePicOrNot,
-            "brightness-50": !userBio.includeProfilePicOrNot,
+            "brightness-50": !userBioData.displayProfile,
           })}
         />
 
@@ -101,10 +86,8 @@ export default function InputForm(
           <Label htmlFor="profile-image">Include Profile pic in your BioSync</Label>
           <Checkbox
             id="profile-image"
-            defaultChecked={userBio.includeProfilePicOrNot}
-            onCheckedChange={() => setUserBio((prev) => (
-              { ...prev, includeProfilePicOrNot: !prev.includeProfilePicOrNot }
-            ))}
+            defaultChecked={userBioData.displayProfile}
+            onCheckedChange={toggleProfileImage}
           />
         </div>
       </div>
@@ -113,7 +96,7 @@ export default function InputForm(
       <Separator
         orientation="horizontal"
         className={classNames({
-          "my-16 h-2 rounded-full bg-zinc-700 dark:bg-zinc-300": true,
+          "my-16 h-1 rounded-full bg-zinc-700 dark:bg-zinc-300": true,
         })}
       />
 
@@ -131,8 +114,8 @@ export default function InputForm(
             placeholder={det.placeholder}
             widthClass={"w-full"}
             // @ts-expect-error "giving value as any"
-            value={String(userBio[`${det.id}`])}
-            onChange={(e) => setUserBio((prev) => ({ ...prev, [det.id]: e.target.value }))}
+            value={String(userBioData[`${det.id}`])}
+            onChange={(e) => handleInputChange(e.target.value, det.id)}
           />
         ))}
 
@@ -146,28 +129,47 @@ export default function InputForm(
           <h1>Mention Project links <br /> (if any) </h1>
 
           <div className={classNames({
-            "space-y-5 w-[30rem]": true,
+            "flex flex-col items-center gap-3": true,
           })}>
-            {projectLinks.map((Comp, idx: number) => (
-              <Comp
-                key={idx}
-                onClick={() => removeInputField(idx)}
-                onChange={(e) => updateOtherLinkAtIndex(idx, e.target.value)}
+            <div className={classNames({
+              "flex flex-row items-center justify-center gap-3": true,
+            })}>
+              <Input
+                value={projectLink}
+                onChange={(e) => setProjectLink(e.target.value)}
+                className={classNames({
+                  "outline-1 outline": true,
+                  "w-96": true,
+                })}
               />
-            ))}
 
-            <Button
-              type="button"
-              variant={"default"}
-              className={classNames({
-                "mx-auto w-full": true,
-                "font-bold": true,
-              })}
-              // @ts-expect-error "giving soome unknown error"
-              onClick={() => setProjectLinks([...projectLinks, OtherLinkInputFields])}
-            >
-              <PlusCircle />
-            </Button>
+              <Button
+                size={"icon"}
+                type="button"
+                onClick={addProject}
+              >
+                <Plus />
+              </Button>
+            </div>
+
+            <div className={classNames({
+              "flex flex-col gap-2": true,
+            })}>
+              {userBioData.projectLinks.map((link) => (
+                <Link
+                  href={link.startsWith("https://") ? link : "https://" + link}
+                  target="_blank"
+                  key={link}
+                  className={classNames({
+                    "text-sm font-thin": true,
+                    "border-2 border-zinc-800 dark:border-zinc-500 rounded-lg": true,
+                    "p-2": true,
+                  })}
+                >
+                  {link}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -181,7 +183,7 @@ export default function InputForm(
         <PreviewButton />
         <PublishButton />
         <ShowDemoDataButton />
-        <GithublinkButton />
+        <ResetButton />
       </div>
     </form>
   )

@@ -8,8 +8,8 @@ import classNames from "classnames";
 import { code } from "@/lib/others/fonts"
 import { useUser } from "@/hooks/useUser";
 
-const Logo= dynamic(() => import("./Logo"))
-const ModeToggle = dynamic(() => import("@/components/themes/theme-toggle").then(mod => mod.ModeToggle))
+// const ModeToggle = dynamic(() => import("@/components/themes/theme-toggle").then(mod => mod.ModeToggle))
+const Logo = dynamic(() => import("./Logo"))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Dialog = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.Dialog))
 const DialogContent = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogContent))
@@ -63,10 +63,8 @@ export default function Navbar() {
         </Link>
 
         {authStatus === "authenticated" && (
-          optionalComponents.signOutDialog(userName)
+          optionalComponents.signOutButton(userName)
         )}
-
-        <ModeToggle />
       </div >
     </nav >
   )
@@ -82,7 +80,7 @@ const optionalComponents = {
     </Avatar>
   ),
 
-  signOutDialog: (userName: string) => (
+  signOutButton: (userName: string) => (
     <Dialog>
       <DialogTrigger asChild>
         <Button
