@@ -24,7 +24,7 @@ export default function Icon() {
           alignItems: 'center',
           justifyContent: 'center',
           color: 'white',
-          borderRadius: "20px",
+          borderRadius: "10px",
         }}
       >
         BS

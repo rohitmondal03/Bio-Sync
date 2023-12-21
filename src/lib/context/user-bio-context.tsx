@@ -1,3 +1,4 @@
+import { useUser } from '@/hooks/useUser';
 import React, { createContext, useState } from 'react';
 
 interface IDataContextType {
@@ -7,6 +8,7 @@ interface IDataContextType {
   reset: () => void,
   toggleProfileImage: () => void,
   handleInputChange: (input: string, id: string) => void,
+  removeProject: (idx: number) => void,
 }
 
 const initialData: TUserBio = {
@@ -29,7 +31,7 @@ const demoData: TUserBio = {
   githubLink: "https://github.com/rohitmondal03",
   portfolioLink: "https://portfolio-ten-virid-46.vercel.app/",
   twitterLink: "https://twitter.com/RohitMo62534745",
-  projectLinks: ["https://opentyped-nextjs.vercel.app/"],
+  projectLinks: ["https://opentyped-nextjs.vercel.app/", "https://imagewall.vercel.app/"],
   displayProfile: true,
 }
 
@@ -45,7 +47,10 @@ export const DataProvider = ({ children }: ILayout) => {
 
   // add project
   function addProjectLink(projectLink: string) {
-    data.projectLinks.push(projectLink);
+    setData((prev) => ({
+      ...prev,
+      projectLinks: [...prev.projectLinks, projectLink],
+    }))
   }
 
   // reset whole form
@@ -55,26 +60,35 @@ export const DataProvider = ({ children }: ILayout) => {
 
   // include profile image or not
   function toggleProfileImage() {
-    setData((prev) => ({...prev, displayProfile: !prev.displayProfile}))
+    setData((prev) => ({ ...prev, displayProfile: !prev.displayProfile }))
   }
 
   // changing events inputs
-  function handleInputChange(input: string, id: string){
-    if(id === "name"){
-      setData((prev) => ({...prev, name: input}))
-    } else if(id === "bio") {
-      setData((prev) => ({...prev, bio: input}))
-    } else if(id === "email") {
-      setData((prev) => ({...prev, email: input}))
-    } else if(id === "githubLink") {
-      setData((prev) => ({...prev, githubLink: input}))
-    } else if(id === "linkedinLink") {
-      setData((prev) => ({...prev, linkedinLink: input}))
-    } else if(id === "twitterLink") {
-      setData((prev) => ({...prev, twitterLink: input}))
-    } else if(id === "portfolioLink") {
-      setData((prev) => ({...prev, portfolioLink: input}))
+  function handleInputChange(input: string, id: string) {
+    if (id === "name") {
+      setData((prev) => ({ ...prev, name: input.trim() }))
+    } else if (id === "bio") {
+      setData((prev) => ({ ...prev, bio: input.trim() }))
+    } else if (id === "email") {
+      setData((prev) => ({ ...prev, email: input.trim() }))
+    } else if (id === "githubLink") {
+      setData((prev) => ({ ...prev, githubLink: input.trim() }))
+    } else if (id === "linkedinLink") {
+      setData((prev) => ({ ...prev, linkedinLink: input.trim() }))
+    } else if (id === "twitterLink") {
+      setData((prev) => ({ ...prev, twitterLink: input.trim() }))
+    } else if (id === "portfolioLink") {
+      setData((prev) => ({ ...prev, portfolioLink: input.trim() }))
     }
+  }
+
+
+  // delete project from array
+  function removeProject(idx: number) {
+    setData((prev) => ({
+      ...prev,
+      projectLinks: prev.projectLinks.filter((_, i) => i !== idx),
+    }))
   }
 
 
@@ -86,6 +100,7 @@ export const DataProvider = ({ children }: ILayout) => {
       reset,
       toggleProfileImage,
       handleInputChange,
+      removeProject,
     }}>
       {children}
     </DataContext.Provider>

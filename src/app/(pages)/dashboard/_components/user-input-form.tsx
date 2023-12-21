@@ -3,16 +3,16 @@
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
+import { type Session } from "next-auth"
 import { useState } from "react"
-import { Plus } from "lucide-react"
+import { Delete, Plus } from "lucide-react"
 import classNames from "classnames"
 
 import { inputFieldDetails } from "../_constants/profile-input-details-list"
 import { submitUserBio } from "@/actions/submit-user-bio"
 import { useData } from "@/hooks/useBioData"
 
-import ShowDemoDataButton from "./buttons/show-demo-button"
-import { useUser } from "@/hooks/useUser"
+const ShowDemoDataButton= dynamic(() => import("./buttons/show-demo-button"))
 const PublishButton = dynamic(() => import("./buttons/publish-button"))
 const PreviewButton = dynamic(() => import("./buttons/preview-button"))
 const ResetButton = dynamic(() => import("./buttons/reset-button"))
@@ -24,14 +24,17 @@ const Label = dynamic(() => import("@/components/ui/label").then((mod) => mod.La
 const Input = dynamic(() => import("@/components/ui/input").then((mod) => mod.Input))
 
 
-export default function InputForm() {
-  const { userDetails } = useUser();
+type TProps = Session["user"];
+
+
+export default function InputForm({ image }: TProps) {
   const [projectLink, setProjectLink] = useState<string>("");
   const {
     data: userBioData,
     addProjectLink,
     toggleProfileImage,
     handleInputChange,
+    removeProject,
   } = useData();
 
 
@@ -68,7 +71,7 @@ export default function InputForm() {
         "w-[40vw]": true,
       })}>
         <Image
-          src={String(userDetails?.image)}
+          src={String(image)}
           alt="profile pic"
           width={200}
           height={200}
@@ -76,6 +79,7 @@ export default function InputForm() {
           className={classNames({
             "h-40 w-40 bg-zinc-700": true,
             "rounded-full": true,
+            "transition duration-200": true,
             "brightness-50": !userBioData.displayProfile,
           })}
         />
@@ -86,7 +90,7 @@ export default function InputForm() {
           <Label htmlFor="profile-image">Include Profile pic in your BioSync</Label>
           <Checkbox
             id="profile-image"
-            defaultChecked={userBioData.displayProfile}
+            checked={userBioData.displayProfile}
             onCheckedChange={toggleProfileImage}
           />
         </div>
@@ -107,6 +111,7 @@ export default function InputForm() {
       })}>
         {inputFieldDetails.map((det) => (
           <InputsField
+            key={det.id}
             id={det.id}
             inputType={det.inputType}
             label={det.label}
@@ -116,6 +121,7 @@ export default function InputForm() {
             // @ts-expect-error "giving value as any"
             value={String(userBioData[`${det.id}`])}
             onChange={(e) => handleInputChange(e.target.value, det.id)}
+            Icon={det.icon}
           />
         ))}
 
@@ -129,47 +135,59 @@ export default function InputForm() {
           <h1>Mention Project links <br /> (if any) </h1>
 
           <div className={classNames({
-            "flex flex-col items-center gap-3": true,
+            "flex flex-row items-center justify-center gap-3": true,
           })}>
-            <div className={classNames({
-              "flex flex-row items-center justify-center gap-3": true,
-            })}>
-              <Input
-                value={projectLink}
-                onChange={(e) => setProjectLink(e.target.value)}
+            <Input
+              value={projectLink}
+              placeholder="paste your project link and press the '+' button..."
+              onChange={(e) => setProjectLink(e.target.value)}
+              className={classNames({
+                "outline-1 outline": true,
+                "w-96": true,
+              })}
+            />
+
+            <Button
+              size={"icon"}
+              type="button"
+              onClick={addProject}
+            >
+              <Plus />
+            </Button>
+          </div>
+
+          <div className={classNames({
+            "grid grid-cols-2 gap-2": true,
+          })}>
+            {userBioData.projectLinks.map((link, idx) => (
+              <div
+                key={link}
                 className={classNames({
-                  "outline-1 outline": true,
-                  "w-96": true,
+                  "flex flex-row gap-4 items-center justify-between": true,
+                  "border-2 border-zinc-800 dark:border-zinc-500 rounded-lg": true,
+                  "text-sm font-thin": true,
+                  "p-2": true,
                 })}
-              />
-
-              <Button
-                size={"icon"}
-                type="button"
-                onClick={addProject}
               >
-                <Plus />
-              </Button>
-            </div>
-
-            <div className={classNames({
-              "flex flex-col gap-2": true,
-            })}>
-              {userBioData.projectLinks.map((link) => (
                 <Link
                   href={link.startsWith("https://") ? link : "https://" + link}
                   target="_blank"
-                  key={link}
                   className={classNames({
-                    "text-sm font-thin": true,
-                    "border-2 border-zinc-800 dark:border-zinc-500 rounded-lg": true,
-                    "p-2": true,
                   })}
                 >
                   {link}
                 </Link>
-              ))}
-            </div>
+
+                <Delete
+                  fill="gray"
+                  onClick={() => removeProject(idx)}
+                  className={classNames({
+                    "hover:scale-110 transition ease-out": true,
+                    "cursor-pointer": true,
+                  })}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -177,8 +195,8 @@ export default function InputForm() {
 
       {/* footer buttons */}
       <div className={classNames({
-        "flex flex-row flex-wrap items-center justify-around": true,
-        "mt-10": true,
+        "grid grid-cols-2 items-center justify-around gap-3": true,
+        "mt-8": true,
       })}>
         <PreviewButton />
         <PublishButton />

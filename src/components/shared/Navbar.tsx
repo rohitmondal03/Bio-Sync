@@ -8,7 +8,6 @@ import classNames from "classnames";
 import { code } from "@/lib/others/fonts"
 import { useUser } from "@/hooks/useUser";
 
-// const ModeToggle = dynamic(() => import("@/components/themes/theme-toggle").then(mod => mod.ModeToggle))
 const Logo = dynamic(() => import("./Logo"))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Dialog = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.Dialog))
