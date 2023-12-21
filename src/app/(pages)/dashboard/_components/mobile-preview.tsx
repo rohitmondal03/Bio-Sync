@@ -4,17 +4,23 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import classNames from "classnames";
+import { type IconType } from "react-icons";
+import { AiOutlineMail, } from "react-icons/ai";
 import {
-  LucideGithub,
-  LucideLinkedin,
-  LucideMail,
-  LucideTwitter,
-  LucideUser
-} from "lucide-react";
+  FaDiscord,
+  FaTwitter,
+  FaGithub,
+  FaLinkedin,
+  FaUser,
+  FaYoutube,
+  FaMedium,
+  FaHashnode,
+  FaDev,
+} from "react-icons/fa6";
 
 import { useData } from "@/hooks/useBioData";
 import { useUser } from "@/hooks/useUser";
-import { inter } from "@/lib/others/fonts";
+import { inter } from "@/lib/fonts";
 
 const ScrollArea = dynamic(() => import("@/components/ui/scroll-area").then(mod => mod.ScrollArea))
 
@@ -23,10 +29,30 @@ export default function MobilePreview() {
   const { data: userBioData } = useData();
   const { userDetails } = useUser();
 
-  const { bio, displayProfile, email, githubLink, linkedinLink, name, portfolioLink, projectLinks, twitterLink } = userBioData;
+  const {
+    bio,
+    displayProfile,
+    email,
+    githubLink,
+    linkedinLink,
+    name,
+    portfolioLink,
+    projectLinks,
+    twitterLink,
+    profilePicLink,
+    youtubeLink,
+    discordLink,
+    devdotToLink,
+    hashnodeLink,
+    mediumLink,
+  } = userBioData;
 
+
+  // checking if fields are empty or not
   function isBioEmpty() {
-    return (!bio && !displayProfile && !email && !githubLink && !linkedinLink && !name && !portfolioLink && !twitterLink && projectLinks.length < 1)
+    return (
+      !bio && !displayProfile && !email && !githubLink && !linkedinLink && !name && !portfolioLink && !twitterLink && !discordLink && !youtubeLink && projectLinks.length < 1
+    )
   }
 
 
@@ -39,108 +65,176 @@ export default function MobilePreview() {
       <div className={classNames(`${inter.className}`, {
         'relative h-full w-full overflow-y-scroll break-words rounded-[32px]': true,
         "bg-white": true,
-        "pt-10 px-2": true,
+        "py-10 px-2": true,
       })}>
         {isBioEmpty() ? (
           <h1 className="text-center">No Information</h1>
         ) : (
-          <div className={`text-left flex flex-col items-center gap-4`}>
+          <div className={classNames({
+            "flex flex-col items-center justify-center gap-6": true,
+            "text-left": true,
+            "overflow-y-scroll": true,
+          })}>
             {displayProfile && (
               <Image
-                src={String(userDetails?.image)}
+                src={profilePicLink || String(userDetails?.image)}
                 alt="Profile Picture"
                 height={100}
                 width={100}
-                className="rounded-full"
+                className="rounded-full mx-auto"
               />
             )}
 
+            {name && (
+              <h1 className="text-2xl text-center font-bold underline">
+                {name}
+              </h1>
+            )}
 
-            <h1 className="text-2xl text-center font-bold underline">
-              {userBioData.name}
-            </h1>
 
-
-            {/* DISPLAYING USER'S SOCIAL LINKS */}
+            {/* DISPLAYING USER'S PROFILE LINKS */}
             <div className="space-y-1">
-              <Link
-                href={userBioData.email}
-                className={classNames({
-                  "flex items-center justify-start gap-1": true,
-                  "text-sm text-gray-500": true,
-                })}
-              >
-                <LucideMail className="scale-75" color="black" />
-                {userBioData.email}
-              </Link>
+              {email && (
+                <Link
+                  href={email}
+                  className={classNames({
+                    "flex items-center justify-start gap-2": true,
+                    "text-sm text-gray-700": true,
+                  })}
+                >
+                  <AiOutlineMail color="black" />
+                  {email}
+                </Link>
+              )}
 
 
-              <Link
-                href={userBioData.linkedinLink}
-                className={classNames({
-                  "flex items-center justify-start gap-1": true,
-                  "text-sm text-gray-500": true,
-                })}
-              >
-                <LucideLinkedin className="scale-75" color="black" />
-                {userBioData.linkedinLink.replace("https://www.linkedin.com/in/", "")}
-              </Link>
-
-
-              <Link
-                href={userBioData.githubLink}
-                className={classNames({
-                  "flex items-center justify-start gap-1": true,
-                  "text-sm text-gray-500": true,
-                })}
-              >
-                <LucideGithub className="scale-75" color="black" />
-                {userBioData.githubLink.replace("https://github.com/", "")}
-              </Link>
-
-
-              <Link
-                href={userBioData.twitterLink}
-                className={classNames({
-                  "flex items-center justify-start gap-1": true,
-                  "text-sm text-gray-500": true,
-                })}
-              >
-                <LucideTwitter className="scale-75" color="black" />
-                {userBioData.twitterLink.replace("https://twitter.com/", "")}
-              </Link>
-
-
-              <Link
-                href={userBioData.twitterLink}
-                className={classNames({
-                  "flex items-center justify-start gap-1": true,
-                  "text-sm text-gray-500": true,
-                })}
-              >
-                <LucideUser className="scale-75" color="black" />
-                {/* {userBioData.portfolioLink} */}
-                {userBioData.portfolioLink.slice(8, 50) + "..."}
-              </Link>
+              {portfolioLink && (
+                <Link
+                  href={portfolioLink}
+                  className={classNames({
+                    "flex items-center justify-start gap-2": true,
+                    "text-sm text-gray-700": true,
+                  })}
+                >
+                  <FaUser color="black" />
+                  {portfolioLink.slice(8, 50) + "..."}
+                </Link>
+              )}
             </div>
 
 
             {/* DISPLAYING 'BIO' OF USER */}
-            <ScrollArea className={classNames({
-              "border-2 border-slate-500 rounded-2xl": true,
-              "w-full h-44 p-2": true,
-              "overflow-y-scroll": true
-            })}>
-              <h1 className="mb-2 text-md font-semibold">About {userBioData.name},</h1>
+            {bio && (
+              <ScrollArea className={classNames({
+                "border-2 border-slate-500 rounded-2xl": true,
+                "w-full h-48 p-2": true,
+                "shadow-inner": true,
+              })}>
+                <h1 className="mb-2 text-md font-semibold">About {name},</h1>
 
-              <p className="text-sm text-muted-foreground">
-                {userBioData.bio}
-              </p>
-            </ScrollArea>
+                <p className="text-sm text-muted-foreground overflow-y-scroll">
+                  {bio}
+                </p>
+              </ScrollArea>
+            )}
 
+
+            {/* DISPLAYING SOCIAL LINKS */}
+            <div className="space-y-2  text-center">
+              <h1 className="font-bold">Social Links</h1>
+
+              <div className={classNames({
+                "grid grid-cols-2 gap-2 items-center justify-center": true,
+              })}>
+                {linkedinLink &&
+                  <SocialLinks
+                    href={linkedinLink}
+                    Icon={FaLinkedin as IconType}
+                    label={"LinkedIn"}
+                  />
+                }
+
+                {twitterLink &&
+                  <SocialLinks
+                    href={twitterLink}
+                    Icon={FaTwitter as IconType}
+                    label={"Twitter"}
+                  />
+                }
+
+                {githubLink &&
+                  <SocialLinks
+                    href={githubLink}
+                    Icon={FaGithub as IconType}
+                    label={"GitHub"}
+                  />
+                }
+
+                {discordLink &&
+                  <SocialLinks
+                    href={discordLink}
+                    Icon={FaDiscord as IconType}
+                    label={"Discord"}
+                  />
+                }
+
+                {mediumLink && (
+                  <SocialLinks
+                    href={mediumLink}
+                    Icon={FaMedium as IconType}
+                    label="Medium"
+                  />
+                )}
+
+                {hashnodeLink && (
+                  <SocialLinks
+                    Icon={FaHashnode as IconType}
+                    href={hashnodeLink}
+                    label="Hashnode"
+                  />
+                )}
+
+                {devdotToLink && (
+                  <SocialLinks
+                    Icon={FaDev as IconType}
+                    href={devdotToLink}
+                    label="Dev"
+                  />
+                )}
+
+                {youtubeLink &&
+                  <SocialLinks
+                    href={youtubeLink}
+                    Icon={FaYoutube as IconType}
+                    label={"Youtube"}
+                  />
+                }
+              </div>
+            </div>
           </div>
         )}
       </div>
     </div>
+  )
+}
+
+
+function SocialLinks(
+  { href, label, Icon }: { href: string, label: string, Icon: IconType }
+) {
+  return (
+    <Link
+      href={href}
+      className={classNames({
+        "flex flex-row items-center gap-4": true,
+        "text-sm": true,
+        "border border-zinc-700 rounded-xl": true,
+        "py-1 px-2": true,
+      })}
+      target="_blank"
+    >
+      <Icon fill="black" />
+      {label}
+    </Link>
   )
 }

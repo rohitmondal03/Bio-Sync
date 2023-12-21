@@ -64,8 +64,12 @@ model UserBio {
     twitterLink    String?
     linkedinLink   String?
     portfolioLink  String?
+    youtubeLink    String?
+    discordLink    String?
+    hashnodeLink   String?
+    mediumLink     String?
+    devdotToLink   String?
     projectLink    String[]
-    // publishedOrDraft isPublished
     displayProfile Boolean
 
     @@unique([id, email, githubLink, twitterLink, linkedinLink, portfolioLink, projectLink])

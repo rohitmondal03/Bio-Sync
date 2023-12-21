@@ -1,6 +1,7 @@
 import { type Metadata } from "next"
 
 import { getServerAuthSession } from "@/server/auth"
+import type { ILayout } from "types";
 
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -2,9 +2,9 @@ import { type Metadata } from "next";
 
 import ContextProvider from "@/components/shared/ContextProvider";
 import { AuthProvider } from "@/components/shared/AuthProvider";
-import { ThemeProvider } from "@/components/themes/ThemeWrapper";
 import Navbar from "@/components/shared/Navbar";
-import { inter } from "@/lib/others/fonts";
+import { inter } from "@/lib/fonts";
+import type { ILayout } from "types"
 import "@/styles/globals.css"
 
 
@@ -20,17 +20,10 @@ export default function RootLayout(
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
         <AuthProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
-            <ContextProvider>
-              <main>{children}</main>
-            </ContextProvider>
-          </ThemeProvider>
+          <Navbar />
+          <ContextProvider>
+            <main>{children}</main>
+          </ContextProvider>
         </AuthProvider>
       </body>
     </html>

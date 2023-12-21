@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import classNames from "classnames";
 
 import { getServerAuthSession } from "@/server/auth"
-import { montserrat } from "@/lib/others/fonts";
+import { montserrat } from "@/lib/fonts";
 
 const InputForm= dynamic(() => import("./_components/user-input-form"))
 const MobilePreview= dynamic(() => import("./_components/mobile-preview"))

@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { type ChangeEvent } from "react";
 import classNames from "classnames";
-import { type LucideIcon } from "lucide-react";
+import { type IconType } from "react-icons";
 
 const Input = dynamic(() => import("@/components/ui/input").then((mod) => mod.Input))
 const Textarea = dynamic(() => import("@/components/ui/textarea").then((mod) => mod.Textarea))
@@ -17,7 +17,7 @@ type TInputFieldsProps = {
   value: string;
   required: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  Icon: LucideIcon
+  Icon: IconType,
 }
 
 
@@ -48,7 +48,7 @@ export default function InputFields({
       <div className={classNames({
         "flex flex-row items-center justify-center gap-2": true,
       })}>
-        <Icon className="scale-90" />
+        <Icon className="scale-110" />
 
         {inputType === "Input" ? (
           <Input
@@ -59,8 +59,8 @@ export default function InputFields({
             onChange={onChange}
             required={required}
             className="placeholder:font-bold"
-            />
-            ) : (
+          />
+        ) : (
           <Textarea
             id={label}
             placeholder={placeholder}

@@ -1,5 +1,8 @@
-import { useUser } from '@/hooks/useUser';
 import React, { createContext, useState } from 'react';
+
+import type { TUserBio, ILayout } from 'types';
+import { initialData, demoData } from '@/lib/constants/context-data';
+
 
 interface IDataContextType {
   data: TUserBio,
@@ -7,35 +10,13 @@ interface IDataContextType {
   addProjectLink: (projectLink: string) => void,
   reset: () => void,
   toggleProfileImage: () => void,
-  handleInputChange: (input: string, id: string) => void,
+  handleInputChange: (input: string, id: keyof TUserBio) => void,
   removeProject: (idx: number) => void,
 }
 
-const initialData: TUserBio = {
-  bio: "",
-  email: "",
-  githubLink: "",
-  displayProfile: false,
-  linkedinLink: "",
-  name: "",
-  projectLinks: [],
-  portfolioLink: "",
-  twitterLink: "",
-};
-
-const demoData: TUserBio = {
-  name: "Rohit Mondal",
-  bio: "I'm a frontend developer having expertise in making user-friendly websites and cross-platform websites using ReactJS. I've expertise in NextJS, TypeScript, Prisma and other popular frameworks and libraries including Tailwind CSS",
-  email: "rohitmondall8000@gmail.com",
-  linkedinLink: "https://www.linkedin.com/in/rohit-mondal-61662a16b/",
-  githubLink: "https://github.com/rohitmondal03",
-  portfolioLink: "https://portfolio-ten-virid-46.vercel.app/",
-  twitterLink: "https://twitter.com/RohitMo62534745",
-  projectLinks: ["https://opentyped-nextjs.vercel.app/", "https://imagewall.vercel.app/"],
-  displayProfile: true,
-}
 
 export const DataContext = createContext<IDataContextType | undefined>(undefined);
+
 
 export const DataProvider = ({ children }: ILayout) => {
   const [data, setData] = useState<TUserBio>(initialData);
@@ -64,7 +45,7 @@ export const DataProvider = ({ children }: ILayout) => {
   }
 
   // changing events inputs
-  function handleInputChange(input: string, id: string) {
+  function handleInputChange(input: string, id: keyof TUserBio) {
     if (id === "name") {
       setData((prev) => ({ ...prev, name: input.trim() }))
     } else if (id === "bio") {
@@ -79,6 +60,16 @@ export const DataProvider = ({ children }: ILayout) => {
       setData((prev) => ({ ...prev, twitterLink: input.trim() }))
     } else if (id === "portfolioLink") {
       setData((prev) => ({ ...prev, portfolioLink: input.trim() }))
+    } else if (id === "youtubeLink") {
+      setData((prev) => ({ ...prev, youtubeLink: input }))
+    } else if (id === "discordLink") {
+      setData((prev) => ({ ...prev, discordLink: input }))
+    } else if (id === "devdotToLink") {
+      setData((prev) => ({ ...prev, devdotToLink: input }))
+    } else if (id === "hashnodeLink") {
+      setData((prev) => ({ ...prev, hashnodeLink: input }))
+    } else if (id === "mediumLink") {
+      setData((prev) => ({ ...prev, mediumLink: input }))
     }
   }
 

@@ -1,5 +1,7 @@
 import { type Metadata } from "next"
 
+import type { ILayout } from "types"
+
 
 export const metadata: Metadata = {
   title: 'Sign In to Bio Sync',

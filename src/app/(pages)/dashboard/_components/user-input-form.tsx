@@ -5,15 +5,17 @@ import Image from "next/image"
 import Link from "next/link"
 import { type Session } from "next-auth"
 import { useState } from "react"
-import { Delete, Plus } from "lucide-react"
+// import { Delete, Plus } from "lucide-react"
+import { FaDeleteLeft, FaPlus } from "react-icons/fa6"
 import classNames from "classnames"
 
-import { inputFieldDetails } from "../_constants/profile-input-details-list"
+import { inputFieldDetails } from "@/lib/constants/profile-input-details-list"
 import { submitUserBio } from "@/actions/submit-user-bio"
 import { useData } from "@/hooks/useBioData"
 
-const ShowDemoDataButton= dynamic(() => import("./buttons/show-demo-button"))
+const ShowDemoDataButton = dynamic(() => import("./buttons/show-demo-button"))
 const PublishButton = dynamic(() => import("./buttons/publish-button"))
+const GithubLinkButton = dynamic(() => import("./buttons/github-button"))
 const PreviewButton = dynamic(() => import("./buttons/preview-button"))
 const ResetButton = dynamic(() => import("./buttons/reset-button"))
 const InputsField = dynamic(() => import("./profile-input-field"))
@@ -63,6 +65,7 @@ export default function InputForm({ image }: TProps) {
       className={classNames({
         "overflow-scroll": true,
         "h-[84vh] w-fit p-4": true,
+        "border-2 border-zinc-400 rounded-xl": true,
       })}
     >
       {/* profile image */}
@@ -71,8 +74,8 @@ export default function InputForm({ image }: TProps) {
         "w-[40vw]": true,
       })}>
         <Image
-          src={String(image)}
-          alt="profile pic"
+          src={userBioData.profilePicLink || String(image)}
+          alt={userBioData.name}
           width={200}
           height={200}
           priority
@@ -118,7 +121,6 @@ export default function InputForm({ image }: TProps) {
             required={det.id === "bio" || det.id === "linkedinLink" ? true : false}
             placeholder={det.placeholder}
             widthClass={"w-full"}
-            // @ts-expect-error "giving value as any"
             value={String(userBioData[`${det.id}`])}
             onChange={(e) => handleInputChange(e.target.value, det.id)}
             Icon={det.icon}
@@ -152,7 +154,7 @@ export default function InputForm({ image }: TProps) {
               type="button"
               onClick={addProject}
             >
-              <Plus />
+              <FaPlus />
             </Button>
           </div>
 
@@ -172,14 +174,12 @@ export default function InputForm({ image }: TProps) {
                 <Link
                   href={link.startsWith("https://") ? link : "https://" + link}
                   target="_blank"
-                  className={classNames({
-                  })}
                 >
                   {link}
                 </Link>
 
-                <Delete
-                  fill="gray"
+                <FaDeleteLeft
+                  fill="black"
                   onClick={() => removeProject(idx)}
                   className={classNames({
                     "hover:scale-110 transition ease-out": true,
@@ -198,6 +198,7 @@ export default function InputForm({ image }: TProps) {
         "grid grid-cols-2 items-center justify-around gap-3": true,
         "mt-8": true,
       })}>
+        <GithubLinkButton />
         <PreviewButton />
         <PublishButton />
         <ShowDemoDataButton />

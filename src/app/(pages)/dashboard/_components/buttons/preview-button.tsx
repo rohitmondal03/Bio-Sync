@@ -10,7 +10,7 @@ export default function PreviewButton() {
     <Button
       type="button"
       variant={"default"}
-      className="btn"
+      className="btn block lg:hidden"
     >
       Preview <ScreenShare className="icon" />
     </Button>
