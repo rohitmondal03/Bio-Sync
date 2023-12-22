@@ -11,10 +11,13 @@ const font = Montserrat({
 
 export default function Logo() {
   return (
-    <Link href={"/"} className={classNames(`${font.className}`, {
-      "transition ease-out hover:scale-110": true,
-    })}>
-      <h1 className="text-4xl font-bold">BioSync</h1>
+    <Link href={"/"}>
+      <h1 className={classNames(`${font.className}`,{
+        "text-3xl hover:text-amber-500 font-bold": true,
+        "transition ease-out": true,
+      })}>
+        BioSync
+      </h1>
     </Link>
   )
 }

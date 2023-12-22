@@ -59,26 +59,28 @@ export const DataProvider = ({ children }: ILayout) => {
       setData((prev) => ({ ...prev, name: input.trim() }))
     } else if (id === "bio") {
       setData((prev) => ({ ...prev, bio: input.trim() }))
-    } else if (id === "email") {
-      setData((prev) => ({ ...prev, email: input.trim() }))
-    } else if (id === "githubLink") {
-      setData((prev) => ({ ...prev, githubLink: input.trim() }))
-    } else if (id === "linkedinLink") {
-      setData((prev) => ({ ...prev, linkedinLink: input.trim() }))
-    } else if (id === "twitterLink") {
-      setData((prev) => ({ ...prev, twitterLink: input.trim() }))
     } else if (id === "portfolioLink") {
       setData((prev) => ({ ...prev, portfolioLink: input.trim() }))
-    } else if (id === "youtubeLink") {
-      setData((prev) => ({ ...prev, youtubeLink: input }))
-    } else if (id === "discordLink") {
-      setData((prev) => ({ ...prev, discordLink: input }))
-    } else if (id === "devdotToLink") {
-      setData((prev) => ({ ...prev, devdotToLink: input }))
-    } else if (id === "hashnodeLink") {
-      setData((prev) => ({ ...prev, hashnodeLink: input }))
-    } else if (id === "mediumLink") {
-      setData((prev) => ({ ...prev, mediumLink: input }))
+    } else if (id === "email") {
+      setData((prev) => ({ ...prev, email: input.trim() }))
+    } else if (id === "githubUsername") {
+      setData((prev) => ({ ...prev, githubUsername: input.trim() }))
+    } else if (id === "linkedinUsername") {
+      setData((prev) => ({ ...prev, linkedinUsername: input.trim() }))
+    } else if (id === "twitterUsername") {
+      setData((prev) => ({ ...prev, twitterUsername: input.trim() }))
+    } else if (id === "youtubeUsername") {
+      setData((prev) => ({ ...prev, youtubeUsername: input }))
+    } else if (id === "discordUsername") {
+      setData((prev) => ({ ...prev, discordUsername: input }))
+    } else if (id === "devdotToUsername") {
+      setData((prev) => ({ ...prev, devdotToUsername: input }))
+    } else if (id === "hashnodeUsername") {
+      setData((prev) => ({ ...prev, hashnodeUsername: input }))
+    } else if (id === "mediumUsername") {
+      setData((prev) => ({ ...prev, mediumUsername: input }))
+    } else if (id === "whatsAppNumber") {
+      setData((prev) => ({ ...prev, whatsAppNumber: input }))
     }
   }
 

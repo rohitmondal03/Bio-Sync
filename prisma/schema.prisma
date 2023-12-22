@@ -56,26 +56,22 @@ model VerificationToken {
 }
 
 model UserBio {
-    id             String   @id @default(cuid())
-    name           String
-    email          String
-    bio            String
-    githubLink     String?
-    twitterLink    String?
-    linkedinLink   String?
-    portfolioLink  String?
-    youtubeLink    String?
-    discordLink    String?
-    hashnodeLink   String?
-    mediumLink     String?
-    devdotToLink   String?
-    projectLink    String[]
-    displayProfile Boolean
+    id               String   @id @default(cuid())
+    name             String
+    email            String
+    bio              String
+    displayProfile   Boolean
+    whatsAppNumber   String?
+    portfolioLink    String?
+    githubUsername   String?
+    twitterUsername  String?
+    linkedinUsername String?
+    youtubeUsername  String?
+    discordUsername  String?
+    hashnodeUsername String?
+    mediumUsername   String?
+    devdotToUsername String?
+    projectLink      String[]
 
-    @@unique([id, email, githubLink, twitterLink, linkedinLink, portfolioLink, projectLink])
-}
-
-enum isPublished {
-    DRAFT
-    PUBLISHED
+    @@unique([id, email, githubUsername, twitterUsername, linkedinUsername, portfolioLink, devdotToUsername, mediumUsername, hashnodeUsername, discordUsername, youtubeUsername, whatsAppNumber])
 }

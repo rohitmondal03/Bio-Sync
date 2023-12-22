@@ -11,7 +11,8 @@ import {
   FaDiscord,
   FaHashnode,
   FaDev,
-  FaMedium
+  FaMedium,
+  FaWhatsapp,
 } from "react-icons/fa6"
 
 import type { TUserBio } from "types";
@@ -29,7 +30,7 @@ type TInputDetailProps = {
 const IF_ANY = "(if any)"
 
 const COMMON_DETAIL = (input: string) => {
-  return `Enter your ${input} link`
+  return `Enter your ${input} username`
 }
 
 
@@ -52,70 +53,77 @@ export const INPUT_FIELDS_DETAILS: TInputDetailProps[] = [
     id: "bio",
     inputType: "Textarea",
     label: "Write something about you",
-    placeholder: "e.g. I'm a software engineer having 10+year of experience and.....",
+    placeholder: "e.g. I'm a software engineer having 10+ years of experience and.....",
     icon: FaTextHeight as IconType,
   },
   {
     id: "portfolioLink",
     inputType: "Input",
-    label: COMMON_DETAIL("Portfolio") + " " + IF_ANY,
+    label: "Your Portfolio Link" + " " + IF_ANY,
     placeholder: "e.g. https://portfolio-ten-virid-46.vercel.app/",
     icon: FaLink as IconType,
   },
   {
-    id: "githubLink",
+    id: "githubUsername",
     inputType: "Input",
     label: COMMON_DETAIL("GitHub") + " " + IF_ANY,
-    placeholder: "e.g. https://github.com/username",
+    placeholder: "e.g. johndoe@123",
     icon: FaGithub as IconType,
   },
   {
-    id: "linkedinLink",
+    id: "linkedinUsername",
     inputType: "Input",
     label: COMMON_DETAIL("LinkedIn") + " " + IF_ANY,
-    placeholder: "e.g. https://www.linkedin.com/in/username",
+    placeholder: "e.g. john-doe-6165",
     icon: FaLinkedin as IconType,
   },
   {
-    id: "twitterLink",
+    id: "whatsAppNumber",
+    inputType: "Input",
+    label: COMMON_DETAIL("WhatsApp") + " " + IF_ANY,
+    placeholder: "9630XXXX67",
+    icon: FaWhatsapp as IconType,
+  },
+  {
+    id: "twitterUsername",
     inputType: "Input",
     label: COMMON_DETAIL("Twitter") + " " + IF_ANY,
-    placeholder: "e.g. https://twitter.com/username",
+    placeholder: "e.g. JohnD65744224",
     icon: FaTwitter as IconType,
   },
   {
-    id: "discordLink",
+    id: "discordUsername",
     inputType: "Input",
     label: COMMON_DETAIL("Discord") + " " + IF_ANY,
-    placeholder: "e.g. https://discord.com/users/username",
+    placeholder: "e.g. johnd_05",
     icon: FaDiscord as IconType,
   },
   {
-    id: "hashnodeLink",
+    id: "hashnodeUsername",
     inputType: "Input",
     label: COMMON_DETAIL("Hashnode") + " " + IF_ANY,
-    placeholder: "e.g. https://hashnode.com/@username",
+    placeholder: "e.g. @johndoe",
     icon: FaHashnode as IconType,
   },
   {
-    id: "devdotToLink",
+    id: "devdotToUsername",
     inputType: "Input",
     label: COMMON_DETAIL("Dev") + " " + IF_ANY,
-    placeholder: "e.g. https://dev.to/yourusername",
+    placeholder: "e.g. yourusername",
     icon: FaDev as IconType,
   },
   {
-    id: "mediumLink",
+    id: "mediumUsername",
     inputType: "Input",
     label: COMMON_DETAIL("Medium") + " " + IF_ANY,
-    placeholder: "e.g. https://medium.com/@rohitmondall8000",
+    placeholder: "e.g. @johndoe8000",
     icon: FaMedium as IconType,
   },
   {
-    id: "youtubeLink",
+    id: "youtubeUsername",
     inputType: "Input",
     label: COMMON_DETAIL("Youtube") + " " + IF_ANY,
-    placeholder: "e.g. https://www.youtube.com/@username",
+    placeholder: "e.g. @JohnDoe",
     icon: FaYoutube as IconType,
   },
 ]

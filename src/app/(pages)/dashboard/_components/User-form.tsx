@@ -5,12 +5,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { type Session } from "next-auth"
 import { useState } from "react"
-// import { Delete, Plus } from "lucide-react"
 import { FaDeleteLeft, FaPlus } from "react-icons/fa6"
 import classNames from "classnames"
 
+import type { TUserBio } from "types"
 import { INPUT_FIELDS_DETAILS } from "@/lib/constants/profile-input-details-list"
-import { BACKGROUND_OPTIONS } from "@/components/background/background"
 import { submitUserBio } from "@/actions/submit-user-bio"
 import { useData } from "@/hooks/useBioData"
 
@@ -60,14 +59,20 @@ export default function InputForm({ image }: TProps) {
   }
 
 
+  // for checking if field required
+  function isFieldRequired(id: keyof TUserBio) {
+    return id === "bio" || id === "email" || id === "name"
+  }
+
+
 
   return (
     <form
       // action={async () => await submitUserBio(userBio)}
       className={classNames({
-        "overflow-scroll": true,
-        "h-[84vh] w-[50vw] p-4": true,
-        "border-2 border-zinc-400 rounded-xl": true,
+        "overflow-y-auto": true,
+        "h-[84vh] w-[50vw]": true,
+        "border-0 border-zinc-400 rounded-xl": true,
       })}
     >
       {/* profile image */}
@@ -105,7 +110,7 @@ export default function InputForm({ image }: TProps) {
       <Separator
         orientation="horizontal"
         className={classNames({
-          "my-16 h-1 rounded-full bg-zinc-700 dark:bg-zinc-300": true,
+          "my-16 h-1 rounded-full bg-zinc-700": true,
         })}
       />
 
@@ -120,7 +125,7 @@ export default function InputForm({ image }: TProps) {
             id={det.id}
             inputType={det.inputType}
             label={det.label}
-            required={det.id === "bio" || det.id === "linkedinLink" ? true : false}
+            required={isFieldRequired(det.id)}
             placeholder={det.placeholder}
             widthClass={"w-full"}
             value={String(userBioData[`${det.id}`])}
@@ -175,31 +180,6 @@ export default function InputForm({ image }: TProps) {
       </div>
 
 
-      {/* BG CHOOSNG BUTTONS */}
-      {/* <div className="space-y-3">
-        <h1 className="font-bold text-2xl">Choose Background</h1>
-
-        <div className="flex flex-grow overflow-x-auto gap-5">
-          {BACKGROUND_OPTIONS.map((bgDetails) => (
-            <Button
-              key={bgDetails.code}
-              className={classNames({
-                "bg-transparent": true,
-                "border-2 border-zinc-400 rounded-xl": true,
-                "text-black font-bold": true,
-                "p-6": true,
-                "hover:bg-zinc-300": true,
-              })}
-              type="button"
-              onClick={() => selectBg(bgDetails.code)}
-            >
-              {bgDetails.label}
-            </Button>
-          ))}
-        </div>
-      </div> */}
-
-
       {/* footer buttons */}
       <div className={classNames({
         "grid grid-cols-2 items-center justify-around gap-3": true,
@@ -225,7 +205,7 @@ function ProjectDisplayMockup(
       key={link}
       className={classNames({
         "flex flex-row gap-4 items-center justify-between": true,
-        "border-2 border-zinc-800 dark:border-zinc-500 rounded-lg": true,
+        "border-2 border-zinc-800 rounded-lg": true,
         "text-sm font-thin": true,
         "p-2": true,
       })}

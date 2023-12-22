@@ -32,28 +32,29 @@ export default function Navbar() {
   return (
     <nav className={classNames({
       "flex flex-row items-center justify-around": true,
-      "py-6 border-zinc-500 border-b-2": true,
+      "py-4 border-zinc-700 border-b-4": true,
     })}>
       <>
         <Logo />
       </>
 
       <div className="flex flex-row items-center justify-center gap-4">
-        {authStatus === "authenticated" ? (
-          optionalComponents.userAvatar(userName, userProfileSrc)
-        ) : (
-          <Link href={"/signin"}>
-            <Button
-              variant={"default"}
-              className="font-bold"
-            >
-              Sign In
-            </Button>
-          </Link>
-        )}
+        {authStatus === "authenticated" ?
+          UserAvatar(userName, userProfileSrc)
+          : (
+            <Link href={"/signin"}>
+              <Button
+                variant={"default"}
+                className="font-bold"
+              >
+                Sign In
+              </Button>
+            </Link>
+          )}
 
         <Link href={"/dashboard"}>
           <Button
+            size={"sm"}
             variant={"default"}
             className="font-bold"
           >
@@ -62,56 +63,59 @@ export default function Navbar() {
         </Link>
 
         {authStatus === "authenticated" && (
-          optionalComponents.signOutButton(userName)
+          SignOutButton(userName)
         )}
-      </div >
-    </nav >
+
+        <Link href={"https://github.com/rohitmondal03"} target="_blank">
+          <Button size={"sm"} variant={"link"}>Rohit</Button>
+        </Link>
+      </div>
+    </nav>
   )
 }
 
 
 
-const optionalComponents = {
-  userAvatar: (userName: string, userProfileSrc: string) => (
-    <Avatar>
-      <AvatarFallback>{userName.charAt(0).toLowerCase()}</AvatarFallback>
-      <AvatarImage src={userProfileSrc} />
-    </Avatar>
-  ),
+const UserAvatar = (userName: string, userProfileSrc: string) => (
+  <Avatar>
+    <AvatarFallback>{userName.charAt(0).toLowerCase()}</AvatarFallback>
+    <AvatarImage src={userProfileSrc} />
+  </Avatar>
+)
 
-  signOutButton: (userName: string) => (
-    <Dialog>
-      <DialogTrigger asChild>
+const SignOutButton = (userName: string) => (
+  <Dialog>
+    <DialogTrigger asChild>
+      <Button
+        size={"sm"}
+        variant={"destructive"}
+        className="font-bold"
+      >
+        Sign Out
+      </Button >
+    </DialogTrigger >
+
+    <DialogContent className={classNames(`${code.className}`, {
+      "border border-black": true,
+    })}>
+      <DialogHeader>
+        <DialogTitle className={classNames({
+          "leading-relaxed": true,
+        })}>
+          Are you sure you want to sign out
+          <br /><span className="text-red-500">{userName}</span>
+          ?
+        </DialogTitle>
+      </DialogHeader>
+
+      <DialogFooter>
         <Button
           variant={"destructive"}
-          className="font-bold"
+          onClick={() => signOut({ callbackUrl: "/" })}
         >
           Sign Out
-        </Button >
-      </DialogTrigger >
-
-      <DialogContent className={classNames(`${code.className}`, {
-        "border border-black dark:border-white": true,
-      })}>
-        <DialogHeader>
-          <DialogTitle className={classNames({
-            "leading-relaxed": true,
-          })}>
-            Are you sure you want to sign out
-            <br /><span className="text-red-500">{userName}</span>
-            ?
-          </DialogTitle>
-        </DialogHeader>
-
-        <DialogFooter>
-          <Button
-            variant={"destructive"}
-            onClick={() => signOut({ callbackUrl: "/" })}
-          >
-            Sign Out
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog >
-  )
-}
+        </Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog >
+)

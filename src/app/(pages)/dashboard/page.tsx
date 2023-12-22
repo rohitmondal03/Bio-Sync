@@ -19,7 +19,7 @@ export default async function DashboardPage() {
 
   return (
     <section className={classNames(`${montserrat.className}`, {
-      "py-1 px-20 my-2": true,
+      "py-3 px-20 my-2": true,
       "flex flex-row items-start justify-around": true,
       "h-fit": true,
     })}>

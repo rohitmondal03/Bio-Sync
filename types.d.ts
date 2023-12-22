@@ -15,17 +15,18 @@ type TUserBio = {
   name: string
   email: string
   bio: string
-  profilePicLink: string
-  githubLink: string
-  linkedinLink: string
-  twitterLink: string
-  portfolioLink: string
-  youtubeLink: string
-  discordLink: string
-  hashnodeLink: string,
-  mediumLink: string,
-  devdotToLink: string,
-  projectLinks: string[],
   displayProfile: boolean,
+  portfolioLink: string
+  profilePicLink: string
+  githubUsername: string
+  linkedinUsername: string
+  twitterUsername: string
+  youtubeUsername: string
+  discordUsername: string
+  hashnodeUsername: string,
+  mediumUsername: string,
+  devdotToUsername: string,
+  whatsAppNumber: string,
+  projectLinks: string[],
   // bgCode: string | null,
 } 

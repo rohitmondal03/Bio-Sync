@@ -20,20 +20,20 @@ function SignInLandingComponent() {
         "space-y-16": true,
       })}>
         <h1 className={classNames({
-          "font-bold text-5xl text-orange-500 dark:text-amber-400": true,
+          "font-bold text-5xl text-orange-500": true,
         })}
         >
           Welcome to BioSync
         </h1>
 
         <p className={classNames({
-          "text-3xl text-blue-700 dark:text-sky-300": true,
+          "text-3xl text-blue-700": true,
         })}>
           Your one stop to share your bio with anyone, <br /> anytime and anywhere...
         </p>
 
         <p className={classNames({
-          "text-4xl font-bold dark:text-violet-400": true,
+          "text-4xl font-bold": true,
         })}>
           Sign In to continue to BioSync
         </p>
@@ -45,7 +45,7 @@ function SignInLandingComponent() {
             variant={"secondary"}
             onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
             className={classNames({
-              "text-zinc-700 dark:text-white font-bold": true,
+              "text-zinc-700": true,
               "outline outline-1 outline-zinc-100": true,
             })}
           >
@@ -56,7 +56,7 @@ function SignInLandingComponent() {
             variant={"secondary"}
             onClick={() => signIn("discord", { callbackUrl: "/dashboard" })}
             className={classNames({
-              "outline outline-1 outline-zinc-100 text-zinc-700 dark:text-white font-bold": true,
+              "outline outline-1 outline-zinc-100 text-zinc-700 font-bold": true,
             })}
           >
             Continue with Discord

@@ -1,11 +1,10 @@
 "use client"
 
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import classNames from "classnames";
 import { type IconType } from "react-icons";
-import { AiOutlineBgColors, AiOutlineMail, } from "react-icons/ai";
+import { AiOutlineMail, } from "react-icons/ai";
 import {
   FaDiscord,
   FaTwitter,
@@ -16,16 +15,17 @@ import {
   FaMedium,
   FaHashnode,
   FaDev,
+  FaWhatsapp,
 } from "react-icons/fa6";
 
 import { useData } from "@/hooks/useBioData";
 import { useUser } from "@/hooks/useUser";
 import { inter } from "@/lib/fonts";
-import { BACKGROUND_OPTIONS } from "@/components/background/background";
-import { TBackgroundOptions } from "types";
-import { ReactNode } from "react";
 
 const ScrollArea = dynamic(() => import("@/components/ui/scroll-area").then(mod => mod.ScrollArea))
+const Avatar= dynamic(() => import("@/components/ui/avatar").then(mod => mod.Avatar))
+const AvatarFallback= dynamic(() => import("@/components/ui/avatar").then(mod => mod.AvatarFallback))
+const AvatarImage= dynamic(() => import("@/components/ui/avatar").then(mod => mod.AvatarImage))
 
 
 export default function MobilePreview() {
@@ -33,40 +33,60 @@ export default function MobilePreview() {
   const { userDetails } = useUser();
 
   const {
+    name,
+    profilePicLink,
     bio,
     displayProfile,
     email,
-    githubLink,
-    linkedinLink,
-    name,
-    // bgCode,
     portfolioLink,
+    whatsAppNumber,
+    githubUsername,
+    linkedinUsername,
+    twitterUsername,
+    youtubeUsername,
+    discordUsername,
+    devdotToUsername,
+    hashnodeUsername,
+    mediumUsername,
     projectLinks,
-    twitterLink,
-    profilePicLink,
-    youtubeLink,
-    discordLink,
-    devdotToLink,
-    hashnodeLink,
-    mediumLink,
   } = userBioData;
 
 
-  // find bg component from code
-  // const SELECTED_idx = BACKGROUND_OPTIONS?.find((opt) => opt.code === bgCode);
-
-  // const Sbg = () => {
-  //   if (SELECTED_idx) return SELECTED_idx.BackGround;
-  //   else return null
-  // }
-
 
   // checking if fields are empty or not
-  function isBioEmpty() {
+  function isUserBioEmpty() {
     return (
-      !bio && !displayProfile && !email && !githubLink && !linkedinLink && !name && !portfolioLink && !twitterLink && !discordLink && !youtubeLink && projectLinks.length < 1
+      !name &&
+      !bio &&
+      !email &&
+      !whatsAppNumber &&
+      !portfolioLink &&
+      !displayProfile &&
+      !githubUsername &&
+      !linkedinUsername &&
+      !twitterUsername &&
+      !discordUsername &&
+      !youtubeUsername &&
+      projectLinks.length < 1
     )
   }
+
+
+  // checking if social Links are empty
+  function isSocialFieldsEmpty() {
+    return (
+      !whatsAppNumber &&
+      !githubUsername &&
+      !linkedinUsername &&
+      !twitterUsername &&
+      !youtubeUsername &&
+      !discordUsername &&
+      !devdotToUsername &&
+      !hashnodeUsername &&
+      !mediumUsername
+    )
+  }
+
 
 
   return (
@@ -79,8 +99,9 @@ export default function MobilePreview() {
         'relative h-full w-full overflow-y-scroll break-words rounded-[32px]': true,
         "bg-white": true,
         "py-10 px-2": true,
+        // "bg-gradient-to-tr from-green-100 via-blue-100 to-purple-100": true,
       })}>
-        {isBioEmpty() ? (
+        {isUserBioEmpty() ? (
           <h1 className="text-center">No Information</h1>
         ) : (
           <>
@@ -91,18 +112,15 @@ export default function MobilePreview() {
               "overflow-y-scroll": true,
             })}>
               {displayProfile && (
-                <Image
-                  src={profilePicLink || String(userDetails?.image)}
-                  alt="Profile Picture"
-                  height={100}
-                  width={100}
-                  className="rounded-full mx-auto"
-                />
+                <Avatar className="h-32 w-32">
+                  <AvatarFallback>{name.charAt(0).toUpperCase()}</AvatarFallback>
+                  <AvatarImage src={String(profilePicLink || userDetails?.image)} alt="profile image" />
+                </Avatar>
               )}
 
               {name && (
                 <h1 className="font-bold text-center">
-                  <span className="text-muted-foreground">MySelf,</span> <br />
+                  <span className="text-zinc-500">MySelf,</span> <br />
                   <span className="font-bold text-2xl underline">{name}</span>
                 </h1>
               )}
@@ -132,13 +150,14 @@ export default function MobilePreview() {
               {/* DISPLAYING 'BIO' OF USER */}
               {bio && (
                 <ScrollArea className={classNames({
-                  "border-2 border-slate-500 rounded-2xl": true,
-                  "w-full h-48 p-2": true,
+                  "border border-slate-600 rounded-2xl": true,
+                  "w-full h-48 py-1 px-2": true,
                   "shadow-inner": true,
+                  "bg-slate-200": true,
                 })}>
                   <h1 className="mb-2 text-lg font-semibold">About me,</h1>
 
-                  <p className="text-sm text-gray-500 font-bold">
+                  <p className="text-sm text-gray-900">
                     {bio}
                   </p>
                 </ScrollArea>
@@ -146,97 +165,110 @@ export default function MobilePreview() {
 
 
               {/* DISPLAYING SOCIAL LINKS */}
-              <div className="space-y-2 mt-6 text-center">
-                <h1 className="font-bold text-xl">Connect with me...</h1>
+              {!isSocialFieldsEmpty() && (
+                <div className="space-y-3 mt-6 text-center">
+                  <h1 className="font-bold text-xl">Connect with me...</h1>
 
-                <div className={classNames({
-                  "grid grid-cols-2 gap-2 items-center justify-center": true,
-                })}>
-                  {linkedinLink &&
-                    <SocialLinkMockup
-                      href={linkedinLink}
-                      Icon={FaLinkedin as IconType}
-                      label={"LinkedIn"}
-                    />
-                  }
+                  <div className={classNames({
+                    "grid grid-cols-2 gap-2 items-center justify-center": true,
+                  })}>
+                    {whatsAppNumber && (
+                      <SocialLinkMockup
+                        href={"https://wa.me/" + whatsAppNumber}
+                        Icon={FaWhatsapp as IconType}
+                        label={"WhatsApp"}
+                      />
+                    )}
 
-                  {twitterLink &&
-                    <SocialLinkMockup
-                      href={twitterLink}
-                      Icon={FaTwitter as IconType}
-                      label={"Twitter"}
-                    />
-                  }
+                    {linkedinUsername &&
+                      <SocialLinkMockup
+                        href={"https://www.linkedin.com/in/" + linkedinUsername}
+                        Icon={FaLinkedin as IconType}
+                        label={"LinkedIn"}
+                      />
+                    }
 
-                  {githubLink &&
-                    <SocialLinkMockup
-                      href={githubLink}
-                      Icon={FaGithub as IconType}
-                      label={"GitHub"}
-                    />
-                  }
+                    {twitterUsername &&
+                      <SocialLinkMockup
+                        href={"https://twitter.com/" + twitterUsername}
+                        Icon={FaTwitter as IconType}
+                        label={"Twitter"}
+                      />
+                    }
 
-                  {discordLink &&
-                    <SocialLinkMockup
-                      href={discordLink}
-                      Icon={FaDiscord as IconType}
-                      label={"Discord"}
-                    />
-                  }
+                    {githubUsername &&
+                      <SocialLinkMockup
+                        href={"https://github.com/" + githubUsername}
+                        Icon={FaGithub as IconType}
+                        label={"GitHub"}
+                      />
+                    }
 
-                  {mediumLink && (
-                    <SocialLinkMockup
-                      href={mediumLink}
-                      Icon={FaMedium as IconType}
-                      label="Medium"
-                    />
-                  )}
+                    {discordUsername &&
+                      <SocialLinkMockup
+                        href={"https://discord.com/users/" + discordUsername}
+                        Icon={FaDiscord as IconType}
+                        label={"Discord"}
+                      />
+                    }
 
-                  {hashnodeLink && (
-                    <SocialLinkMockup
-                      Icon={FaHashnode as IconType}
-                      href={hashnodeLink}
-                      label="Hashnode"
-                    />
-                  )}
+                    {mediumUsername && (
+                      <SocialLinkMockup
+                        href={"https://medium.com/" + mediumUsername}
+                        Icon={FaMedium as IconType}
+                        label="Medium"
+                      />
+                    )}
 
-                  {devdotToLink && (
-                    <SocialLinkMockup
-                      Icon={FaDev as IconType}
-                      href={devdotToLink}
-                      label="Dev"
-                    />
-                  )}
+                    {hashnodeUsername && (
+                      <SocialLinkMockup
+                        Icon={FaHashnode as IconType}
+                        href={"https://hashnode.com/" + hashnodeUsername}
+                        label="Hashnode"
+                      />
+                    )}
 
-                  {youtubeLink &&
-                    <SocialLinkMockup
-                      href={youtubeLink}
-                      Icon={FaYoutube as IconType}
-                      label={"Youtube"}
-                    />
-                  }
+                    {devdotToUsername && (
+                      <SocialLinkMockup
+                        Icon={FaDev as IconType}
+                        href={"https://dev.to/" + devdotToUsername}
+                        label="Dev"
+                      />
+                    )}
+
+                    {youtubeUsername &&
+                      <SocialLinkMockup
+                        href={"https://www.youtube.com/" + youtubeUsername}
+                        Icon={FaYoutube as IconType}
+                        label={"Youtube"}
+                      />
+                    }
+                  </div>
                 </div>
-              </div>
+              )}
 
 
-              <div className="mt-6 space-y-2">
-                <h1 className="font-bold text-xl text-center">Project Links</h1>
+              {/* DISPLAYING PROJECTS LINKS */}
+              {projectLinks.length > 0 && (
+                <div className="mt-6 space-y-2">
+                  <h1 className="font-bold text-xl text-center">Project Links</h1>
 
-                <div className="flex flex-col gap-2">
-                  {userBioData.projectLinks.map((link, idx) => (
-                    <Link
-                      href={link}
-                      className={classNames({
-                        "border-2 border-zinc-700 rounded-xl": true,
-                        "px-2 py-1": true,
-                        "text-sm": true,
-                      })}
-                    >
-                      {idx + 1}{". "}{link.replace("https://", "")}
-                    </Link>
-                  ))}
+                  <div className="flex flex-col gap-2">
+                    {userBioData.projectLinks.map((link, idx) => (
+                      <Link
+                        href={link}
+                        className={classNames({
+                          "border-2 border-zinc-900 rounded-xl": true,
+                          "px-2 py-1": true,
+                          "text-sm": true,
+                        })}
+                      >
+                        {idx + 1}{". "}{link.replace("https://", "")}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </>
         )}
@@ -259,6 +291,7 @@ function SocialLinkMockup(
         "text-sm": true,
         "border border-zinc-700 rounded-xl": true,
         "py-1 px-2": true,
+        "bg-zinc-300": true,
       })}
       target="_blank"
     >
@@ -277,8 +310,9 @@ function PersonalLinkMockup(
       href={link}
       className={classNames({
         "flex items-center justify-start gap-2": true,
-        "text-sm text-gray-700": true,
+        "text-sm text-gray-900": true,
       })}
+      target="_blank"
     >
       <Icon color="black" />
       {label}
