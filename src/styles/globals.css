@@ -78,13 +78,17 @@
 
 /* CUSTOM */
 ::-webkit-scrollbar {
-  width: 0;  /* Remove scrollbar space */
+  width: 5px;  /* Remove scrollbar space */
   background: transparent;  /* Optional: just make scrollbar invisible */
 }
 /* Optional: show position indicator in red */
-::-webkit-scrollbar-thumb {
-  background: #FF0000;
+/* ::-webkit-scrollbar-thumb {
+  background: rgb(198, 198, 198);
 }
+
+::-webkit-scrollbar-button{
+  width: 1px;
+} */
 
 .btn {
   @apply font-bold;

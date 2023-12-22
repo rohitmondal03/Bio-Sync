@@ -9,16 +9,17 @@ import { useState } from "react"
 import { FaDeleteLeft, FaPlus } from "react-icons/fa6"
 import classNames from "classnames"
 
-import { inputFieldDetails } from "@/lib/constants/profile-input-details-list"
+import { INPUT_FIELDS_DETAILS } from "@/lib/constants/profile-input-details-list"
+import { BACKGROUND_OPTIONS } from "@/components/background/background"
 import { submitUserBio } from "@/actions/submit-user-bio"
 import { useData } from "@/hooks/useBioData"
 
-const ShowDemoDataButton = dynamic(() => import("./buttons/show-demo-button"))
-const PublishButton = dynamic(() => import("./buttons/publish-button"))
-const GithubLinkButton = dynamic(() => import("./buttons/github-button"))
-const PreviewButton = dynamic(() => import("./buttons/preview-button"))
-const ResetButton = dynamic(() => import("./buttons/reset-button"))
-const InputsField = dynamic(() => import("./profile-input-field"))
+const ShowDemoDataButton = dynamic(() => import("./buttons/Show-demo-button"))
+const PublishButton = dynamic(() => import("./buttons/Publish-button"))
+const GithubLinkButton = dynamic(() => import("./buttons/Github-button"))
+const PreviewButton = dynamic(() => import("./buttons/Preview-button"))
+const ResetButton = dynamic(() => import("./buttons/Reset-button"))
+const InputsField = dynamic(() => import("./input-field"))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Separator = dynamic(() => import("@/components/ui/separator").then((mod) => mod.Separator))
 const Checkbox = dynamic(() => import("@/components/ui/checkbox").then((mod) => mod.Checkbox))
@@ -37,6 +38,7 @@ export default function InputForm({ image }: TProps) {
     toggleProfileImage,
     handleInputChange,
     removeProject,
+    // selectBg,
   } = useData();
 
 
@@ -64,14 +66,14 @@ export default function InputForm({ image }: TProps) {
       // action={async () => await submitUserBio(userBio)}
       className={classNames({
         "overflow-scroll": true,
-        "h-[84vh] w-fit p-4": true,
+        "h-[84vh] w-[50vw] p-4": true,
         "border-2 border-zinc-400 rounded-xl": true,
       })}
     >
       {/* profile image */}
       <div className={classNames({
         "flex flex-col items-center justify-center gap-y-5": true,
-        "w-[40vw]": true,
+        "w-[40vw] mx-auto": true,
       })}>
         <Image
           src={userBioData.profilePicLink || String(image)}
@@ -112,7 +114,7 @@ export default function InputForm({ image }: TProps) {
       <div className={classNames({
         "flex flex-col items-center justify-center gap-5": true,
       })}>
-        {inputFieldDetails.map((det) => (
+        {INPUT_FIELDS_DETAILS.map((det) => (
           <InputsField
             key={det.id}
             id={det.id}
@@ -162,35 +164,40 @@ export default function InputForm({ image }: TProps) {
             "grid grid-cols-2 gap-2": true,
           })}>
             {userBioData.projectLinks.map((link, idx) => (
-              <div
-                key={link}
-                className={classNames({
-                  "flex flex-row gap-4 items-center justify-between": true,
-                  "border-2 border-zinc-800 dark:border-zinc-500 rounded-lg": true,
-                  "text-sm font-thin": true,
-                  "p-2": true,
-                })}
-              >
-                <Link
-                  href={link.startsWith("https://") ? link : "https://" + link}
-                  target="_blank"
-                >
-                  {link}
-                </Link>
-
-                <FaDeleteLeft
-                  fill="black"
-                  onClick={() => removeProject(idx)}
-                  className={classNames({
-                    "hover:scale-110 transition ease-out": true,
-                    "cursor-pointer": true,
-                  })}
-                />
-              </div>
+              <ProjectDisplayMockup
+                key={idx}
+                link={link}
+                removeProject={() => removeProject(idx)}
+              />
             ))}
           </div>
         </div>
       </div>
+
+
+      {/* BG CHOOSNG BUTTONS */}
+      {/* <div className="space-y-3">
+        <h1 className="font-bold text-2xl">Choose Background</h1>
+
+        <div className="flex flex-grow overflow-x-auto gap-5">
+          {BACKGROUND_OPTIONS.map((bgDetails) => (
+            <Button
+              key={bgDetails.code}
+              className={classNames({
+                "bg-transparent": true,
+                "border-2 border-zinc-400 rounded-xl": true,
+                "text-black font-bold": true,
+                "p-6": true,
+                "hover:bg-zinc-300": true,
+              })}
+              type="button"
+              onClick={() => selectBg(bgDetails.code)}
+            >
+              {bgDetails.label}
+            </Button>
+          ))}
+        </div>
+      </div> */}
 
 
       {/* footer buttons */}
@@ -205,5 +212,39 @@ export default function InputForm({ image }: TProps) {
         <ResetButton />
       </div>
     </form>
+  )
+}
+
+
+
+function ProjectDisplayMockup(
+  { link, removeProject }: { link: string, removeProject: (idx: number) => void }
+) {
+  return (
+    <div
+      key={link}
+      className={classNames({
+        "flex flex-row gap-4 items-center justify-between": true,
+        "border-2 border-zinc-800 dark:border-zinc-500 rounded-lg": true,
+        "text-sm font-thin": true,
+        "p-2": true,
+      })}
+    >
+      <Link
+        href={link.startsWith("https://") ? link : "https://" + link}
+        target="_blank"
+      >
+        {link}
+      </Link>
+
+      <FaDeleteLeft
+        fill="black"
+        onClick={removeProject}
+        className={classNames({
+          "hover:scale-110 transition ease-out": true,
+          "cursor-pointer": true,
+        })}
+      />
+    </div>
   )
 }

@@ -1,6 +1,19 @@
 import { type IconType } from "react-icons";
 import { AiFillMail } from "react-icons/ai"
-import { FaYoutube, FaUser, FaTextHeight, FaGithub, FaLinkedin, FaTwitter, FaLink, FaDiscord, FaHashnode, FaDev, FaMedium } from "react-icons/fa6"
+import {
+  FaYoutube,
+  FaUser,
+  FaTextHeight,
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+  FaLink,
+  FaDiscord,
+  FaHashnode,
+  FaDev,
+  FaMedium
+} from "react-icons/fa6"
+
 import type { TUserBio } from "types";
 
 
@@ -20,7 +33,7 @@ const COMMON_DETAIL = (input: string) => {
 }
 
 
-export const inputFieldDetails: TInputDetailProps[] = [
+export const INPUT_FIELDS_DETAILS: TInputDetailProps[] = [
   {
     id: "name",
     inputType: "Input",

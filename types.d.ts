@@ -1,7 +1,14 @@
 import { UserBio } from "@prisma/client"
+import { ReactNode } from "react"
 
 interface ILayout {
   children: ReactNode
+}
+
+type TBackgroundOptions = {
+  code: string,
+  BackGround: JSX.Element,
+  label: string,
 }
 
 type TUserBio = {
@@ -18,6 +25,7 @@ type TUserBio = {
   hashnodeLink: string,
   mediumLink: string,
   devdotToLink: string,
-  projectLinks: string[]
-  displayProfile: boolean
+  projectLinks: string[],
+  displayProfile: boolean,
+  // bgCode: string | null,
 } 

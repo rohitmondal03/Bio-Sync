@@ -1,7 +1,7 @@
 import type { TUserBio } from "types";
 
 
-export const initialData: TUserBio = {
+export const INITIAL_DATA: TUserBio = {
   name: "",
   email: "",
   bio: "",
@@ -17,9 +17,10 @@ export const initialData: TUserBio = {
   hashnodeLink: "",
   mediumLink: "",
   projectLinks: [],
+  // bgCode: null,
 };
 
-export const demoData: TUserBio = {
+export const DEMO_DATA: TUserBio = {
   name: "Rohit Mondal",
   displayProfile: true,
   profilePicLink: "https://avatars.githubusercontent.com/u/107113353?v=4",
@@ -35,4 +36,5 @@ export const demoData: TUserBio = {
   hashnodeLink: "https://hashnode.com/@rohitmondall8000",
   mediumLink: "https://medium.com/@prashant.kumar2_7782",
   projectLinks: ["https://opentyped-nextjs.vercel.app/", "https://imagewall.vercel.app/"],
+  // bgCode: "#C9EBFF"
 }

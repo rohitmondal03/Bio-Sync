@@ -40,7 +40,7 @@ export default function InputFields({
     })}>
       <Label
         htmlFor={id}
-        className="font-bold text-md"
+        className="font-bold text-md text-zinc-700"
       >
         {label}
       </Label>

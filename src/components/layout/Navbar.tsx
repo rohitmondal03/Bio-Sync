@@ -8,7 +8,7 @@ import classNames from "classnames";
 import { code } from "@/lib/fonts"
 import { useUser } from "@/hooks/useUser";
 
-const Logo = dynamic(() => import("./Logo"))
+const Logo = dynamic(() => import("../shared/Logo"))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Dialog = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.Dialog))
 const DialogContent = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogContent))

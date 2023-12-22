@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 
 import type { TUserBio, ILayout } from 'types';
-import { initialData, demoData } from '@/lib/constants/context-data';
+import { INITIAL_DATA, DEMO_DATA } from '@/lib/constants/context-data';
 
 
 interface IDataContextType {
@@ -12,6 +12,7 @@ interface IDataContextType {
   toggleProfileImage: () => void,
   handleInputChange: (input: string, id: keyof TUserBio) => void,
   removeProject: (idx: number) => void,
+  // selectBg: (code: string) => void,
 }
 
 
@@ -19,11 +20,11 @@ export const DataContext = createContext<IDataContextType | undefined>(undefined
 
 
 export const DataProvider = ({ children }: ILayout) => {
-  const [data, setData] = useState<TUserBio>(initialData);
+  const [data, setData] = useState<TUserBio>(INITIAL_DATA);
 
   // for showing demo data
   const showDemo = () => {
-    setData(demoData);
+    setData(DEMO_DATA);
   }
 
   // add project
@@ -34,15 +35,23 @@ export const DataProvider = ({ children }: ILayout) => {
     }))
   }
 
-  // reset whole form
+  // resetting whole form to
   function reset() {
-    setData(initialData);
+    setData(INITIAL_DATA);
   }
 
   // include profile image or not
   function toggleProfileImage() {
     setData((prev) => ({ ...prev, displayProfile: !prev.displayProfile }))
   }
+
+  // selecting background
+  // function selectBg(code: string){
+  //   setData((prev) => ({
+  //     ...prev, 
+  //     bgCode: code,
+  //   }))
+  // }
 
   // changing events inputs
   function handleInputChange(input: string, id: keyof TUserBio) {
@@ -92,6 +101,7 @@ export const DataProvider = ({ children }: ILayout) => {
       toggleProfileImage,
       handleInputChange,
       removeProject,
+      // selectBg
     }}>
       {children}
     </DataContext.Provider>
