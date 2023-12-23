@@ -7,7 +7,10 @@ import classNames from "classnames";
 
 import { code } from "@/lib/fonts"
 import { useUser } from "@/hooks/useUser";
+import { PERSONAL_LINKS_LIST } from "@/lib/constants/personal-links"
 
+import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger, } from "../ui/drawer";
+import { buttonVariants } from "@/components/ui/button";
 const Logo = dynamic(() => import("../shared/Logo"))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Dialog = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.Dialog))
@@ -50,7 +53,8 @@ export default function Navbar() {
                 Sign In
               </Button>
             </Link>
-          )}
+          )
+        }
 
         <Link href={"/dashboard"}>
           <Button
@@ -66,9 +70,13 @@ export default function Navbar() {
           SignOutButton(userName)
         )}
 
-        <Link href={"https://github.com/rohitmondal03"} target="_blank">
-          <Button size={"sm"} variant={"link"}>Rohit</Button>
-        </Link>
+        <Drawer>
+          <DrawerTrigger asChild>
+            <Button size={"sm"} variant={"link"}>@rohit</Button>
+          </DrawerTrigger>
+
+          <ProfileDrawer />
+        </Drawer>
       </div>
     </nav>
   )
@@ -82,6 +90,7 @@ const UserAvatar = (userName: string, userProfileSrc: string) => (
     <AvatarImage src={userProfileSrc} />
   </Avatar>
 )
+
 
 const SignOutButton = (userName: string) => (
   <Dialog>
@@ -118,4 +127,35 @@ const SignOutButton = (userName: string) => (
       </DialogFooter>
     </DialogContent>
   </Dialog >
+)
+
+
+const ProfileDrawer = () => (
+  <DrawerContent className="h-64">
+    <DrawerHeader>
+      <DrawerTitle className="font-bold text-3xl text-center">
+        <span className="text-muted-foreground">Developed by</span>{" "}
+        <span className="underline decoration-gray-500">Rohit</span>
+      </DrawerTitle>
+
+      <DrawerDescription className="text-center text-black text-lg">
+        Check out my Links here
+      </DrawerDescription>
+    </DrawerHeader>
+
+
+    <div className="mx-auto space-x-5">
+      {PERSONAL_LINKS_LIST.map(({ href, label, Icon }) => (
+        <DrawerClose>
+          <Link
+            href={href}
+            className={buttonVariants({ size: "lg", variant: "default" })}
+            target="_blank"
+          >
+            {label} <Icon className="ml-3" />
+          </Link>
+        </DrawerClose>
+      ))}
+    </div>
+  </DrawerContent>
 )

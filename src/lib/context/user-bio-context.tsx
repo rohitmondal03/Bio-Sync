@@ -12,7 +12,6 @@ interface IDataContextType {
   toggleProfileImage: () => void,
   handleInputChange: (input: string, id: keyof TUserBio) => void,
   removeProject: (idx: number) => void,
-  // selectBg: (code: string) => void,
 }
 
 
@@ -45,13 +44,6 @@ export const DataProvider = ({ children }: ILayout) => {
     setData((prev) => ({ ...prev, displayProfile: !prev.displayProfile }))
   }
 
-  // selecting background
-  // function selectBg(code: string){
-  //   setData((prev) => ({
-  //     ...prev, 
-  //     bgCode: code,
-  //   }))
-  // }
 
   // changing events inputs
   function handleInputChange(input: string, id: keyof TUserBio) {

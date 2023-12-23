@@ -45,7 +45,7 @@ function SignInLandingComponent() {
             variant={"secondary"}
             onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
             className={classNames({
-              "text-zinc-700": true,
+              "text-zinc-700 font-bold": true,
               "outline outline-1 outline-zinc-100": true,
             })}
           >

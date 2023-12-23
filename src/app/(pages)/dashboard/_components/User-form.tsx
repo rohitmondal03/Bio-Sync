@@ -72,7 +72,7 @@ export default function InputForm({ image }: TProps) {
       className={classNames({
         "overflow-y-auto": true,
         "h-[84vh] w-[50vw]": true,
-        "border-0 border-zinc-400 rounded-xl": true,
+        "border-0 border-zinc-400": true,
       })}
     >
       {/* profile image */}

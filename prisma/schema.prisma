@@ -45,6 +45,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    bios          UserBio[]
 }
 
 model VerificationToken {
@@ -72,6 +73,8 @@ model UserBio {
     mediumUsername   String?
     devdotToUsername String?
     projectLink      String[]
+    userId           String
+    User             User?    @relation(fields: [userId], references: [id])
 
-    @@unique([id, email, githubUsername, twitterUsername, linkedinUsername, portfolioLink, devdotToUsername, mediumUsername, hashnodeUsername, discordUsername, youtubeUsername, whatsAppNumber])
+    @@unique([id, email, githubUsername, twitterUsername, linkedinUsername, portfolioLink, devdotToUsername, mediumUsername, hashnodeUsername, discordUsername, youtubeUsername, whatsAppNumber, userId])
 }

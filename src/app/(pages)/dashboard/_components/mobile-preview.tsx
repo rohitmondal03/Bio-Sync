@@ -99,7 +99,7 @@ export default function MobilePreview() {
         'relative h-full w-full overflow-y-scroll break-words rounded-[32px]': true,
         "bg-white": true,
         "py-10 px-2": true,
-        // "bg-gradient-to-tr from-green-100 via-blue-100 to-purple-100": true,
+        "bg-zinc-100": true,
       })}>
         {isUserBioEmpty() ? (
           <h1 className="text-center">No Information</h1>
@@ -120,7 +120,7 @@ export default function MobilePreview() {
 
               {name && (
                 <h1 className="font-bold text-center">
-                  <span className="text-zinc-500">MySelf,</span> <br />
+                  <span className="text-zinc-600">MySelf,</span> <br />
                   <span className="font-bold text-2xl underline">{name}</span>
                 </h1>
               )}
