@@ -1,14 +1,27 @@
 "use server"
 
-import type { TUserBio } from "types";
-import { db } from "@/server/db";
 import { redirect } from "next/navigation";
 
+import type { TUserBio } from "types";
+import { db } from "@/server/db";
+import { getServerAuthSession } from "@/server/auth";
 
-export async function submitUserBio(data: TUserBio) {
+
+export async function submitUserBio(bioData: TUserBio) {
+  const sesssionDetails = await getServerAuthSession();
+
+  const userId = sesssionDetails?.user.id;
+
+
   await db.userBio.create({
-    data: data
+    data: {
+      ...bioData,
+      userId: userId,
+    }
   })
 
-  redirect("/dashboard")
+  const temp: number = await db.userBio.count();
+  console.log(temp);
+
+  redirect("/")
 }

@@ -48,19 +48,19 @@ export const DataProvider = ({ children }: ILayout) => {
   // changing events inputs
   function handleInputChange(input: string, id: keyof TUserBio) {
     if (id === "name") {
-      setData((prev) => ({ ...prev, name: input.trim() }))
+      setData((prev) => ({ ...prev, name: input }))
     } else if (id === "bio") {
-      setData((prev) => ({ ...prev, bio: input.trim() }))
+      setData((prev) => ({ ...prev, bio: input }))
     } else if (id === "portfolioLink") {
-      setData((prev) => ({ ...prev, portfolioLink: input.trim() }))
+      setData((prev) => ({ ...prev, portfolioLink: input }))
     } else if (id === "email") {
-      setData((prev) => ({ ...prev, email: input.trim() }))
+      setData((prev) => ({ ...prev, email: input }))
     } else if (id === "githubUsername") {
-      setData((prev) => ({ ...prev, githubUsername: input.trim() }))
+      setData((prev) => ({ ...prev, githubUsername: input }))
     } else if (id === "linkedinUsername") {
-      setData((prev) => ({ ...prev, linkedinUsername: input.trim() }))
+      setData((prev) => ({ ...prev, linkedinUsername: input }))
     } else if (id === "twitterUsername") {
-      setData((prev) => ({ ...prev, twitterUsername: input.trim() }))
+      setData((prev) => ({ ...prev, twitterUsername: input }))
     } else if (id === "youtubeUsername") {
       setData((prev) => ({ ...prev, youtubeUsername: input }))
     } else if (id === "discordUsername") {

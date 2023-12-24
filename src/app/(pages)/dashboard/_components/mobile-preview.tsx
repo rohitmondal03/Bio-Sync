@@ -23,9 +23,9 @@ import { useUser } from "@/hooks/useUser";
 import { inter } from "@/lib/fonts";
 
 const ScrollArea = dynamic(() => import("@/components/ui/scroll-area").then(mod => mod.ScrollArea))
-const Avatar= dynamic(() => import("@/components/ui/avatar").then(mod => mod.Avatar))
-const AvatarFallback= dynamic(() => import("@/components/ui/avatar").then(mod => mod.AvatarFallback))
-const AvatarImage= dynamic(() => import("@/components/ui/avatar").then(mod => mod.AvatarImage))
+const Avatar = dynamic(() => import("@/components/ui/avatar").then(mod => mod.Avatar))
+const AvatarFallback = dynamic(() => import("@/components/ui/avatar").then(mod => mod.AvatarFallback))
+const AvatarImage = dynamic(() => import("@/components/ui/avatar").then(mod => mod.AvatarImage))
 
 
 export default function MobilePreview() {
@@ -256,6 +256,7 @@ export default function MobilePreview() {
                   <div className="flex flex-col gap-2">
                     {userBioData.projectLinks.map((link, idx) => (
                       <Link
+                        key={link}
                         href={link}
                         className={classNames({
                           "border-2 border-zinc-900 rounded-xl": true,

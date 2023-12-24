@@ -1,11 +1,11 @@
 import { type Metadata } from "next";
 
+import type { ILayout } from "types"
 import ContextProvider from "@/components/shared/ContextProvider";
 import { AuthProvider } from "@/components/shared/AuthProvider";
 import Navbar from "@/components/layout/Navbar";
-import { inter } from "@/lib/fonts";
-import type { ILayout } from "types"
 import "@/styles/globals.css"
+import { montserrat } from "@/lib/fonts";
 
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default function RootLayout(
 ) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
+      <body className={`font-serif`}>
         <AuthProvider>
           <Navbar />
           <ContextProvider>

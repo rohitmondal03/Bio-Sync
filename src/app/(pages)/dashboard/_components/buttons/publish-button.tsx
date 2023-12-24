@@ -4,7 +4,7 @@ import { Send } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useFormStatus } from "react-dom";
 
-const Button= dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
+const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 
 
 export default function PublishBioButton() {
@@ -17,10 +17,9 @@ export default function PublishBioButton() {
       className="btn"
     >
       {pending ?
-        "Publishing..."
-        : (
-          <>Publish <Send className="icon" /></>
-        )
+        <>Publishing...</>
+        :
+        <>Publish <Send className="icon" /></>
       }
     </Button>
   )

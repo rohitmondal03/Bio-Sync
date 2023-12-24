@@ -6,7 +6,7 @@ import {
 
 
 export const inter = Inter({
-  subsets: ["latin"],
+  subsets: ["greek-ext"],
   variable: "--font-sans",
 });
 

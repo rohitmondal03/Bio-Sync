@@ -37,7 +37,6 @@ export default function InputForm({ image }: TProps) {
     toggleProfileImage,
     handleInputChange,
     removeProject,
-    // selectBg,
   } = useData();
 
 
@@ -68,7 +67,7 @@ export default function InputForm({ image }: TProps) {
 
   return (
     <form
-      // action={async () => await submitUserBio(userBio)}
+      action={async () => await submitUserBio(userBioData)}
       className={classNames({
         "overflow-y-auto": true,
         "h-[84vh] w-[50vw]": true,
@@ -97,7 +96,12 @@ export default function InputForm({ image }: TProps) {
         <div className={classNames({
           "flex flex-row items-center gap-3": true,
         })}>
-          <Label htmlFor="profile-image">Include Profile pic in your BioSync</Label>
+          <Label
+            htmlFor="profile-image"
+            className="text-muted-foreground"
+          >
+            Include Profile pic in your BioSync
+          </Label>
           <Checkbox
             id="profile-image"
             checked={userBioData.displayProfile}

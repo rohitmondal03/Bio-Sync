@@ -2,11 +2,12 @@
 
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
+import { TUserBio } from "types";
 
 
 export default function BioSyncViewWidget() {
   const searchParams = useSearchParams();
-  const [data, setData] = useState();
+  const [data, setData] = useState<TUserBio[]>([]);
 
   const bioSyncId = searchParams.get("v");
 
@@ -14,19 +15,19 @@ export default function BioSyncViewWidget() {
   useEffect(() => {
     async function getBioSyncDetails() {
       await fetch("/api/getBioSync", {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({ bioSyncId: bioSyncId }),
+        method: 'GET',
+        // headers: {
+        //   'content-type': 'application/json'
+        // },
+        // body: JSON.stringify({ userId: bioSyncId }),
       })
         .then((resp) => resp.json())
-        .then((data) => setData(data));
+        .then((data) => setData(data))
     }
 
     getBioSyncDetails();
 
-    console.log(data);
+    // console.log(data);
     console.log(bioSyncId);
   }, [])
 
@@ -34,7 +35,7 @@ export default function BioSyncViewWidget() {
 
   return (
     <div>
-      {/* {getUserUId} */}
+      {data?.length}
     </div>
   )
 }

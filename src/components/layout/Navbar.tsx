@@ -8,10 +8,16 @@ import classNames from "classnames";
 import { code } from "@/lib/fonts"
 import { useUser } from "@/hooks/useUser";
 import { PERSONAL_LINKS_LIST } from "@/lib/constants/personal-links"
-
-import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger, } from "../ui/drawer";
 import { buttonVariants } from "@/components/ui/button";
+
 const Logo = dynamic(() => import("../shared/Logo"))
+const Drawer= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.Drawer))
+const DrawerClose= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerClose))
+const DrawerContent= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerContent))
+const DrawerDescription= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerDescription))
+const DrawerHeader= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerHeader))
+const DrawerTitle= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerTitle))
+const DrawerTrigger= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerTrigger))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Dialog = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.Dialog))
 const DialogContent = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogContent))
@@ -49,6 +55,7 @@ export default function Navbar() {
               <Button
                 variant={"default"}
                 className="font-bold"
+                size={"sm"}
               >
                 Sign In
               </Button>
@@ -146,7 +153,7 @@ const ProfileDrawer = () => (
 
     <div className="mx-auto space-x-5">
       {PERSONAL_LINKS_LIST.map(({ href, label, Icon }) => (
-        <DrawerClose>
+        <DrawerClose key={href}>
           <Link
             href={href}
             className={buttonVariants({ size: "lg", variant: "default" })}
