@@ -1,4 +1,4 @@
-import { Github, LucideIcon, Twitter, User} from "lucide-react";
+import { type LucideIcon, Github,  Twitter, User} from "lucide-react";
 
 
 type TPersonalLink= {

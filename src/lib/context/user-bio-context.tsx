@@ -95,7 +95,6 @@ export const DataProvider = ({ children }: ILayout) => {
       toggleProfileImage,
       handleInputChange,
       removeProject,
-      // selectBg
     }}>
       {children}
     </DataContext.Provider>

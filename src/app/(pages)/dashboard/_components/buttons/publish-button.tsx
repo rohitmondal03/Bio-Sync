@@ -1,6 +1,6 @@
 "use client"
 
-import { Send } from "lucide-react";
+import { Send, LucideTimer } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useFormStatus } from "react-dom";
 
@@ -13,13 +13,18 @@ export default function PublishBioButton() {
   return (
     <Button
       type="submit"
-      variant={"default"}
+      disabled={pending}
+      variant={pending ? "destructive" : "default"}
       className="btn"
     >
       {pending ?
-        <>Publishing...</>
+        <>
+          Publishing... <LucideTimer className="icon" />
+        </>
         :
-        <>Publish <Send className="icon" /></>
+        <>
+          Publish <Send className="icon" />
+        </>
       }
     </Button>
   )

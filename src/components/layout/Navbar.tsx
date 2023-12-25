@@ -41,7 +41,7 @@ export default function Navbar() {
   return (
     <nav className={classNames({
       "flex flex-row items-center justify-around": true,
-      "py-4 border-zinc-700 border-b-4": true,
+      "py-4 border-zinc-400 border-b-4": true,
     })}>
       <>
         <Logo />
