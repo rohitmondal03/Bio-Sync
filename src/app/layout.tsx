@@ -5,7 +5,6 @@ import ContextProvider from "@/components/shared/ContextProvider";
 import { AuthProvider } from "@/components/shared/AuthProvider";
 import Navbar from "@/components/layout/Navbar";
 import "@/styles/globals.css"
-import { montserrat } from "@/lib/fonts";
 
 
 export const metadata: Metadata = {

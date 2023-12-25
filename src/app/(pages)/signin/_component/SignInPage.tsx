@@ -3,18 +3,18 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { signIn } from "next-auth/react";
-import classNames from "classnames";
-
-import { montserrat } from "@/lib/fonts";
 import { memo } from "react";
+import classNames from "classnames";
+import { ArrowRight } from "lucide-react";
+
 
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 
 
 function SignInLandingComponent() {
   return (
-    <section className={classNames(`${montserrat.className}`, {
-      "flex flex-row items-center justify-around": true,
+    <section className={classNames({
+      "flex flex-row items-center justify-around font-bold": true,
     })}>
       <div className={classNames({
         "space-y-16": true,
@@ -27,42 +27,46 @@ function SignInLandingComponent() {
         </h1>
 
         <p className={classNames({
-          "text-3xl text-blue-700": true,
+          "text-3xl": true,
         })}>
           Your one stop to share your bio with anyone, <br /> anytime and anywhere...
         </p>
 
-        <p className={classNames({
-          "text-4xl font-bold": true,
-        })}>
-          Sign In to continue to BioSync
-        </p>
-
         <div className={classNames({
-          "flex flex-row gap-x-3": true,
+          "space-y-5": true,
         })}>
-          <Button
-            variant={"secondary"}
-            onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
-            className={classNames({
-              "text-zinc-700 font-bold": true,
-              "outline outline-1 outline-zinc-100": true,
-            })}
-          >
-            Continue with GitHub
-          </Button>
+          <p className={classNames({
+            "text-4xl text-red-500": true,
+            "underline": true,
+          })}>
+            Sign In to continue
+          </p>
 
-          <Button
-            variant={"secondary"}
-            onClick={() => signIn("discord", { callbackUrl: "/dashboard" })}
-            className={classNames({
-              "outline outline-1 outline-zinc-100 text-zinc-700 font-bold": true,
-            })}
-          >
-            Continue with Discord
-          </Button>
+          <div className={classNames({
+            "flex flex-col gap-y-3": true,
+          })}>
+            <Button
+              variant={"default"}
+              onClick={() => signIn("github", { callbackUrl: "/profile" })}
+              className="btn outline outline-2 w-fit"
+            >
+              <ArrowRight className="mr-3 scale-90" />
+              Continue with GitHub
+            </Button>
+
+            <Button
+              variant={"default"}
+              onClick={() => signIn("discord", { callbackUrl: "/profile" })}
+              className="btn outline outline-2 w-fit"
+            >
+              <ArrowRight className="mr-3 scale-90" />
+              Continue with Discord
+            </Button>
+          </div>
         </div>
       </div>
+
+
 
       <div className={classNames({
       })}>
