@@ -23,8 +23,5 @@ export async function submitUserBio(bioData: TUserBio) {
     }
   })
 
-  const temp: number = await db.userBio.count();
-  console.log(temp);
-
-  redirect("/profile")
+  redirect("/view?id="+uuid)
 }

@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { signIn } from "next-auth/react";
 import { memo } from "react";
 import classNames from "classnames";
-import { ArrowRight } from "lucide-react";
+import { FaDiscord, FaGithub } from "react-icons/fa6";
 
 
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
@@ -33,7 +33,7 @@ function SignInLandingComponent() {
         </p>
 
         <div className={classNames({
-          "space-y-5": true,
+          "space-y-10": true,
         })}>
           <p className={classNames({
             "text-4xl text-red-500": true,
@@ -43,24 +43,22 @@ function SignInLandingComponent() {
           </p>
 
           <div className={classNames({
-            "flex flex-col gap-y-3": true,
+            "flex flex-row items-start gap-10 px-4": true,
           })}>
             <Button
-              variant={"default"}
+              variant={"outline"}
               onClick={() => signIn("github", { callbackUrl: "/profile" })}
-              className="btn outline outline-2 w-fit"
+              className="btn outline outline-2 outline-zinc-400 w-fit scale-125"
             >
-              <ArrowRight className="mr-3 scale-90" />
-              Continue with GitHub
+              <FaGithub className="" />
             </Button>
 
             <Button
-              variant={"default"}
+              variant={"outline"}
               onClick={() => signIn("discord", { callbackUrl: "/profile" })}
-              className="btn outline outline-2 w-fit"
+              className="btn outline outline-2 outline-zinc-400 w-fit scale-125"
             >
-              <ArrowRight className="mr-3 scale-90" />
-              Continue with Discord
+              <FaDiscord className="" />
             </Button>
           </div>
         </div>
@@ -68,8 +66,7 @@ function SignInLandingComponent() {
 
 
 
-      <div className={classNames({
-      })}>
+      <div>
         <Image
           alt="sign-in image"
           src={"/sign-in.svg"}

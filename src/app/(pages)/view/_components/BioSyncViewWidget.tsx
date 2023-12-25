@@ -1,16 +1,16 @@
 "use client"
 
-import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation"
+import { notFound, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import type { TUserBio } from "types";
+import BioSyncNotFound from "./not-found";
+import ViewBioSync from "./view-bio-sync-widget";
 
 
 export default function BioSyncViewWidget() {
   const searchParams = useSearchParams();
   const [data, setData] = useState<TUserBio>();
-  const [loading, setLoading] = useState<boolean>(false)
 
   const uid = searchParams.get("id");
 
@@ -36,11 +36,11 @@ export default function BioSyncViewWidget() {
 
   return (
     <div>
-      {data?.displayProfile ? (
-        <Image src={data?.profilePicLink} alt="profile" height={200} width={200} />
-      ) : (
-        <div>{data?.name}</div>
-      )}
+      {data ?
+        <ViewBioSync bioSyncDetails={data} />
+        :
+        <BioSyncNotFound />
+      }
     </div>
   )
 }

@@ -9,15 +9,16 @@ import { code } from "@/lib/fonts"
 import { useUser } from "@/hooks/useUser";
 import { PERSONAL_LINKS_LIST } from "@/lib/constants/personal-links"
 import { buttonVariants } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
 const Logo = dynamic(() => import("../shared/Logo"))
-const Drawer= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.Drawer))
-const DrawerClose= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerClose))
-const DrawerContent= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerContent))
-const DrawerDescription= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerDescription))
-const DrawerHeader= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerHeader))
-const DrawerTitle= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerTitle))
-const DrawerTrigger= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerTrigger))
+const Drawer = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.Drawer))
+const DrawerClose = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerClose))
+const DrawerContent = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerContent))
+const DrawerDescription = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerDescription))
+const DrawerHeader = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerHeader))
+const DrawerTitle = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerTitle))
+const DrawerTrigger = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerTrigger))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Dialog = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.Dialog))
 const DialogContent = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogContent))
@@ -41,37 +42,38 @@ export default function Navbar() {
   return (
     <nav className={classNames({
       "flex flex-row items-center justify-around": true,
-      "py-4 border-zinc-400 border-b-4": true,
+      "py-6 border-zinc-400 border-b-4": true,
     })}>
       <>
         <Logo />
       </>
 
       <div className="flex flex-row items-center justify-center gap-4">
-        {authStatus === "authenticated" ?
-          UserAvatar(userName, userProfileSrc)
-          : (
-            <Link href={"/signin"}>
+        {authStatus === "authenticated" ? (
+          <>
+            {UserAvatar(userName, userProfileSrc)}
+            <Link href={"/dashboard"}>
               <Button
+                size={"sm"}
                 variant={"default"}
                 className="font-bold"
-                size={"sm"}
               >
-                Sign In
+                Dashboard
               </Button>
             </Link>
-          )
-        }
+          </>
+        ) : (
+          <Link href={"/signin"}>
+            <Button
+              variant={"default"}
+              className="font-bold"
+              size={"sm"}
+            >
+              Sign In
+            </Button>
+          </Link>
+        )}
 
-        <Link href={"/dashboard"}>
-          <Button
-            size={"sm"}
-            variant={"default"}
-            className="font-bold"
-          >
-            Dashboard
-          </Button>
-        </Link>
 
         {authStatus === "authenticated" && (
           SignOutButton(userName)
@@ -82,7 +84,7 @@ export default function Navbar() {
             <Button size={"sm"} variant={"link"}>@rohit</Button>
           </DrawerTrigger>
 
-          <ProfileDrawer />
+          <AuthorProfileDrawer />
         </Drawer>
       </div>
     </nav>
@@ -92,10 +94,18 @@ export default function Navbar() {
 
 
 const UserAvatar = (userName: string, userProfileSrc: string) => (
-  <Avatar>
-    <AvatarFallback>{userName.charAt(0).toLowerCase()}</AvatarFallback>
-    <AvatarImage src={userProfileSrc} />
-  </Avatar>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Avatar>
+        <AvatarFallback>{userName.charAt(0).toLowerCase()}</AvatarFallback>
+        <AvatarImage src={userProfileSrc} />
+      </Avatar>
+    </DropdownMenuTrigger>
+
+    <DropdownMenuContent className="w-56">
+      <DropdownMenuLabel>hello</DropdownMenuLabel>
+    </DropdownMenuContent>
+  </DropdownMenu>
 )
 
 
@@ -137,7 +147,7 @@ const SignOutButton = (userName: string) => (
 )
 
 
-const ProfileDrawer = () => (
+const AuthorProfileDrawer = () => (
   <DrawerContent className="h-64">
     <DrawerHeader>
       <DrawerTitle className="font-bold text-3xl text-center">
