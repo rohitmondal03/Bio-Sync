@@ -1,7 +1,6 @@
 "use client"
 
-import Image from "next/image";
-import { notFound, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import type { TUserBio } from "types";
 import BioSyncNotFound from "./not-found";

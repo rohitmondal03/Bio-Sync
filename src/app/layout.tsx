@@ -3,7 +3,7 @@ import { type Metadata } from "next";
 import type { ILayout } from "types"
 import ContextProvider from "@/components/shared/ContextProvider";
 import { AuthProvider } from "@/components/shared/AuthProvider";
-import Navbar from "@/components/layout/Navbar";
+import LargeScreenNavbar from "@/components/layout/large-screen-navbar";
 import "@/styles/globals.css"
 
 
@@ -19,7 +19,7 @@ export default function RootLayout(
     <html lang="en">
       <body className={`font-serif`}>
         <AuthProvider>
-          <Navbar />
+          <LargeScreenNavbar />
           <ContextProvider>
             <main>{children}</main>
           </ContextProvider>

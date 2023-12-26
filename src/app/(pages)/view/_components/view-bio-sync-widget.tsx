@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react'
-import { TUserBio } from 'types'
+import type { TUserBio } from 'types'
 
 
 type TProps = {
