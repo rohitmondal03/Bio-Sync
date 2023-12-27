@@ -10,7 +10,7 @@ import { useUser } from "@/hooks/useUser";
 import { PERSONAL_LINKS_LIST } from "@/lib/constants/personal-links"
 import { buttonVariants } from "@/components/ui/button";
 
-const Logo = dynamic(() => import("../shared/Logo"))
+const Logo = dynamic(() => import("../Logo"))
 const Drawer = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.Drawer))
 const DrawerClose = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerClose))
 const DrawerContent = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerContent))
@@ -56,7 +56,7 @@ export default function LargeScreenNavbar() {
               <NavButton label="Profile" variant="secondary" className="font-bold" />
             </Link>
 
-            <Link href={"/dashboard"}>
+            <Link href={"/new-bio-sync"}>
               <NavButton label="New BioSync" variant="secondary" className="font-bold" />
             </Link>
 
@@ -70,7 +70,7 @@ export default function LargeScreenNavbar() {
 
         <Drawer>
           <DrawerTrigger asChild>
-            <NavButton label="@rohit" variant="link" />
+            <Button variant={"link"} size={"sm"}>@rohit</Button>
           </DrawerTrigger>
 
           <AuthorProfileDrawer />

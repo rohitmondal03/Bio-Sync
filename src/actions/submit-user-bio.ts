@@ -12,16 +12,16 @@ export async function submitUserBio(bioData: TUserBio) {
   const sesssionDetails = await getServerAuthSession();
   const userId = sesssionDetails?.user.id;
 
-  const uuid= UuidGenerator.v1();
+  const uuid = UuidGenerator.v1();
 
 
   await db.userBio.create({
     data: {
       ...bioData,
       userId: userId,
-      uid: uuid,
+      bioId: uuid,
     }
   })
 
-  redirect("/view?id="+uuid)
+  redirect("/view?bid=" + uuid)
 }

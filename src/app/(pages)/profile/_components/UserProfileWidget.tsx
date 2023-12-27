@@ -3,7 +3,10 @@ import classNames from "classnames";
 
 import { getServerAuthSession } from "@/server/auth"
 import { db } from "@/server/db";
-import { Label } from "@/components/ui/label";
+
+import UserBioSyncCard from "./user-bio-sync-card";
+import IntroLabel from "./intro-label-mockup";
+import { Separator } from "@/components/ui/separator";
 
 
 export default async function UserProfileWidget() {
@@ -16,6 +19,7 @@ export default async function UserProfileWidget() {
   const userEmail = String(userDetails?.email)
 
 
+  // FOR GETTING USER'S OAUTH Provider
   const getAccountProvider = await db.account.findFirst({
     where: {
       userId: userId
@@ -24,56 +28,68 @@ export default async function UserProfileWidget() {
       provider: true,
     }
   })
-
   const provider = String(getAccountProvider?.provider);
-
   const providerFormatted = provider.charAt(0).toUpperCase() + provider.slice(1);
 
 
 
+  // FOR GETTING USER'S BIOSYNCS
+  const usersBioSyncs = await db.userBio.findMany({
+    where: {
+      userId: userId,
+    }
+  })
+
+
+
   return (
-    <>
-      <div className="flex flex-row items-center justify-center gap-40">
+    <section className={classNames({
+      "space-y-16": true,
+    })}>
+      <div className={classNames({
+        "flex flex-col md:flex-row items-center justify-center": true,
+        "md:gap-24 lg:gap-32 xl:gap-40": true,
+      })}>
         <Image
           alt="PROFILE PIC OF USER"
           src={userImage}
           blurDataURL={userImage}
-          height={400}
-          width={400}
-          className="rounded-2xl"
+          height={350}
+          width={350}
+          className="scale-[.7] sm:scale-75 md:scale-100 rounded-full md:rounded-3xl"
           priority
         />
 
 
-        <div className="space-y-8">
-          <div>
-            <Label className="text-lg text-muted-foreground underline">Your Name</Label>
-            <h1 className={classNames({
-              "font-bold text-3xl text-gray-600": true,
-            })}>
-              {userName}
-            </h1>
-          </div>
-
-          <div>
-            <Label className="text-lg text-muted-foreground underline">Email</Label>
-            <h1 className={classNames({
-              "font-bold text-3xl text-gray-600": true,
-            })}>
-              {userEmail}
-            </h1>
-          </div>
-
-          <div>
-            <Label className="text-lg text-muted-foreground underline">OAuth Provider</Label>
-            <h1 className={classNames({
-              "font-bold text-3xl text-gray-600": true,
-            })}>
-              {providerFormatted}
-            </h1>
-          </div>
+        <div className="space-y-3 sm:space-y-4 md:space-y-8">
+          <IntroLabel label="Name" detail={userName} />
+          <IntroLabel label="Email" detail={userEmail} />
+          <IntroLabel label="OAuth Provider" detail={providerFormatted} />
         </div>
       </div>
-    </>
+
+
+      <Separator
+        orientation="horizontal"
+        className="h-2 bg-slate-500 rounded-xl"
+      />
+
+
+      <div className={classNames({
+        "space-y-10": true,
+      })}>
+        <h1 className={classNames({
+          "text-center text-3xl sm:text-4xl font-bold text-gray-600": true,
+          "underline": true,
+        })}>Your BioSyncs</h1>
+
+
+        <div className="grid md:grid-cols-2 gap-5">
+          {usersBioSyncs.map((uBios) => (
+            <UserBioSyncCard {...uBios} />
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }

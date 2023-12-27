@@ -187,10 +187,10 @@ export default function InputForm({ image }: TProps) {
       {/* footer buttons */}
       <div className={classNames({
         "grid grid-cols-2 items-center justify-around gap-3": true,
-        "mt-8 p-5": true,
+        "p-5": true,
         "sticky bottom-0 left-0": true,
         "backdrop-blur-sm bg-opacity-100": true,
-        "rounded-xl border-2 border-gray-500": true,
+        "rounded-xl border-4 border-gray-900/80": true,
       })}>
         <GithubLinkButton />
         <PreviewButton />

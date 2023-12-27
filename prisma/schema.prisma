@@ -58,7 +58,7 @@ model VerificationToken {
 
 model UserBio {
     id               String   @id @default(cuid())
-    uid              String
+    bioId            String
     name             String
     email            String
     bio              String
@@ -78,5 +78,5 @@ model UserBio {
     userId           String
     User             User?    @relation(fields: [userId], references: [id])
 
-    @@unique([id, uid, email, githubUsername, twitterUsername, linkedinUsername, portfolioLink, devdotToUsername, mediumUsername, hashnodeUsername, discordUsername, youtubeUsername, whatsAppNumber, userId])
+    @@unique([id, bioId, email, githubUsername, twitterUsername, linkedinUsername, portfolioLink, devdotToUsername, mediumUsername, hashnodeUsername, discordUsername, youtubeUsername, whatsAppNumber, userId])
 }

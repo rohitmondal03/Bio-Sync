@@ -1,8 +1,8 @@
 import { type Metadata } from "next";
 
 import type { ILayout } from "types"
-import ContextProvider from "@/components/shared/ContextProvider";
-import { AuthProvider } from "@/components/shared/AuthProvider";
+import ContextProvider from "@/components/providers/ContextProvider";
+import { AuthProvider } from "@/components/providers/AuthProvider";
 import LargeScreenNavbar from "@/components/layout/large-screen-navbar";
 import "@/styles/globals.css"
 

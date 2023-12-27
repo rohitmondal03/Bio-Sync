@@ -4,7 +4,7 @@ import type { ILayout } from "types";
 
 
 export const metadata:Metadata= {
-  title: "View BioSync"
+  title: "BioSync || Profile"
 }
 
 

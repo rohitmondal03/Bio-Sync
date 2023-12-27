@@ -3,19 +3,19 @@ import { type NextRequest, NextResponse } from "next/server";
 import { db } from "@/server/db";
 
 
-type TReq = {
-  bioSyncId: string
+type TReq= {
+  bid: string
 }
 
 
 export async function POST(req: NextRequest) {
-  const body= await req.json();
+  const body= await req.json() as TReq;   // eslint-disable-line no-use-before-define
 
-  const { uid } = body;
+  const { bid } = body;
 
   const bioSyncDetails = await db.userBio.findFirst({
     where: {
-      uid: uid,
+      bioId: bid,
     }
   });
 
