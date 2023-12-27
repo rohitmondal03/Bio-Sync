@@ -147,11 +147,11 @@ function AuthorProfileDrawer() {
       <DrawerHeader>
         <DrawerTitle className="font-bold text-3xl text-center">
           <span className="text-muted-foreground">Developed by</span>{" "}
-          <span className="underline decoration-gray-500">Rohit</span>
+          <span className="underline decoration-gray-500">@rohit</span>
         </DrawerTitle>
 
         <DrawerDescription className="text-center text-black text-lg">
-          Check out my Links here
+          Connect w/ me
         </DrawerDescription>
       </DrawerHeader>
 

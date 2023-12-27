@@ -60,7 +60,6 @@ export default async function UserProfileWidget() {
           priority
         />
 
-
         <div className="space-y-3 sm:space-y-4 md:space-y-8">
           <IntroLabel label="Name" detail={userName} />
           <IntroLabel label="Email" detail={userEmail} />
@@ -84,9 +83,9 @@ export default async function UserProfileWidget() {
         })}>Your BioSyncs</h1>
 
 
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="flex flex-wrap items-center justify-center gap-5">
           {usersBioSyncs.map((uBios) => (
-            <UserBioSyncCard {...uBios} />
+            <UserBioSyncCard key={uBios.bioId} {...uBios} />
           ))}
         </div>
       </div>

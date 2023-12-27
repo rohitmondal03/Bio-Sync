@@ -1,9 +1,21 @@
+"use client"
+
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import classNames from "classnames";
+import { ArrowBigRight } from "lucide-react";
 import type { UserBio } from "@prisma/client";
 
+import { deleteBioSync } from "@/actions/delete-bio-sync";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+
+const Dialog = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.Dialog))
+const DialogContent = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogContent))
+const DialogTrigger = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogTrigger))
+const DialogTitle = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogTitle))
+const DialogHeader = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogHeader))
+const DialogClose = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogClose))
 
 
 export default function UserBioSyncCard(
@@ -15,27 +27,63 @@ export default function UserBioSyncCard(
       className={classNames({
         "border-2 border-gray-600 rounded-xl": true,
         "transition ease-out duration-300": true,
-        "bg-zinc-100": true,
-        "hover:scale-[1.02] hover:border-black hover:shadow-slate-700 hover:shadow-md": true,
+        "bg-zinc-50": true,
       })}
     >
-      <Link href={"/view?bid=" + bioId}>
-        <CardHeader className="text-center">
-          <CardTitle>{name}</CardTitle>
-          <CardDescription>{bio}</CardDescription>
-        </CardHeader>
+      <CardHeader className="text-center ">
+        <CardTitle>{name}</CardTitle>
+        <CardDescription>{bio.slice(0, 75) + "...."}</CardDescription>
+      </CardHeader>
 
-        <CardContent>
-          <div className="flex flex-row items-center gap-2">
-            <p className="text-muted-foreground font-bold">Email:</p>
-            <p>{email}</p>
-          </div>
-        </CardContent>
+      <CardContent>
+        <div className="flex flex-row items-center gap-2">
+          <p className="text-muted-foreground font-bold">Email:</p>
+          <p>{email}</p>
+        </div>
+      </CardContent>
 
-        <CardFooter>
-          <Button variant={"destructive"} className="font-bold">Delete</Button>
-        </CardFooter>
-      </Link>
-    </Card>
+      <CardFooter className="flex flex-row items-center justify-between">
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant={"destructive"} className="font-bold">Delete</Button>
+          </DialogTrigger>
+
+          <DeleteBioSyncDialogContent bid={bioId} />
+        </Dialog>
+
+
+        <Link href={"/view?bid=" + bioId}>
+          <Button className="font-bold">
+            Link <ArrowBigRight className="icon" />
+          </Button>
+        </Link>
+      </CardFooter>
+    </Card >
+  )
+}
+
+
+
+function DeleteBioSyncDialogContent({ bid }: { bid: string }) {
+  return (
+    <DialogContent className="border-2 border-zinc-700">
+      <DialogHeader>
+        <DialogTitle className="text-2xl">
+          Are you sure you want to delete this
+          {" "}<span className="text-red-500">BioSync</span>{" "}
+          ?
+        </DialogTitle>
+      </DialogHeader>
+
+
+      <DialogClose className="flex flex-row items-center justify-end">
+        <Button
+          variant={"destructive"}
+          onClick={() => deleteBioSync(bid)}
+        >
+          Yes
+        </Button>
+      </DialogClose>
+    </DialogContent>
   )
 }
