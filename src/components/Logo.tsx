@@ -1,3 +1,4 @@
+import { montserrat } from "@/lib/fonts"
 import classNames from "classnames"
 import Link from "next/link"
 
@@ -5,8 +6,8 @@ import Link from "next/link"
 export default function Logo() {
   return (
     <Link href={"/"}>
-      <h1 className={classNames({
-        "text-3xl hover:text-amber-500 font-bold": true,
+      <h1 className={classNames(`${montserrat.className}`,{
+        "text-3xl font-bold": true,
         "transition ease-out": true,
       })}>
         BioSync

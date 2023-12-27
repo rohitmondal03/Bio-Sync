@@ -70,7 +70,7 @@ export default async function UserProfileWidget() {
 
       <Separator
         orientation="horizontal"
-        className="h-2 bg-slate-500 rounded-xl"
+        className="h-2 bg-slate-700 rounded-xl"
       />
 
 
@@ -80,7 +80,7 @@ export default async function UserProfileWidget() {
         <h1 className={classNames({
           "text-center text-3xl sm:text-4xl font-bold text-gray-600": true,
           "underline": true,
-        })}>Your BioSyncs</h1>
+        })}>Your BioSync</h1>
 
 
         <div className="flex flex-wrap items-center justify-center gap-5">

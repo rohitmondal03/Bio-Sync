@@ -71,7 +71,6 @@ export default function InputForm({ image }: TProps) {
       className={classNames({
         "overflow-y-auto": true,
         "h-[84vh] w-[50vw]": true,
-        "border-0 border-zinc-400": true,
       })}
     >
       {/* profile image */}
@@ -86,7 +85,7 @@ export default function InputForm({ image }: TProps) {
           height={200}
           priority
           className={classNames({
-            "h-40 w-40 bg-zinc-700": true,
+            "h-40 w-40": true,
             "rounded-full": true,
             "transition duration-200": true,
             "brightness-50": !userBioData.displayProfile,
@@ -152,11 +151,11 @@ export default function InputForm({ image }: TProps) {
           })}>
             <Input
               value={projectLink}
-              placeholder="paste your project link and press the '+' button..."
+              placeholder="paste your project link and press '+'"
               onChange={(e) => setProjectLink(e.target.value)}
               className={classNames({
                 "outline-1 outline": true,
-                "w-96": true,
+                "w-[25rem]": true,
               })}
             />
 
@@ -192,11 +191,11 @@ export default function InputForm({ image }: TProps) {
         "backdrop-blur-sm bg-opacity-100": true,
         "rounded-xl border-4 border-gray-900/80": true,
       })}>
+        <ShowDemoDataButton />
+        <PublishButton />
+        <ResetButton />
         <GithubLinkButton />
         <PreviewButton />
-        <PublishButton />
-        <ShowDemoDataButton />
-        <ResetButton />
       </div>
     </form>
   )

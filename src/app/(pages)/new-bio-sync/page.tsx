@@ -4,14 +4,14 @@ import classNames from "classnames";
 
 import { getServerAuthSession } from "@/server/auth"
 
-const InputForm= dynamic(() => import("./_components/User-form"))
-const MobilePreview= dynamic(() => import("./_components/mobile-preview"))
+const InputForm = dynamic(() => import("./_components/User-form"))
+const MobilePreview = dynamic(() => import("./_components/mobile-preview"))
 
 
 export default async function DashboardPage() {
   const sessionDetails = await getServerAuthSession();
 
-  const userDetails= sessionDetails?.user;
+  const userDetails = sessionDetails?.user;
 
   (!sessionDetails) ? redirect("/api/auth/signin?callbackUrl=%2Fnew-bio-sync") : null;
 
@@ -23,7 +23,10 @@ export default async function DashboardPage() {
       "h-fit": true,
     })}>
       <>
-        <InputForm id={String(userDetails?.id)} image={userDetails?.image} />
+        <InputForm
+          id={String(userDetails?.id)}
+          image={userDetails?.image}
+        />
 
         {/* Mobile preview screen */}
         <div className="hidden items-center justify-end lg:flex">

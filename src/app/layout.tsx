@@ -1,6 +1,7 @@
 import { type Metadata } from "next";
 
 import type { ILayout } from "types"
+import { code } from "@/lib/fonts";
 import ContextProvider from "@/components/providers/ContextProvider";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 import LargeScreenNavbar from "@/components/layout/large-screen-navbar";
@@ -8,7 +9,7 @@ import "@/styles/globals.css"
 
 
 export const metadata: Metadata = {
-  title: "BioSync"
+  title: "BioSync || Your one link Portfolio"
 }
 
 
@@ -17,11 +18,11 @@ export default function RootLayout(
 ) {
   return (
     <html lang="en">
-      <body className={`font-serif`}>
+      <body className={`${code.className}`}>
         <AuthProvider>
           <LargeScreenNavbar />
           <ContextProvider>
-            <main>{children}</main>
+            <>{children}</>
           </ContextProvider>
         </AuthProvider>
       </body>

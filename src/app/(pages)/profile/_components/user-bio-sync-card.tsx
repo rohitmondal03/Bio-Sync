@@ -4,6 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import classNames from "classnames";
 import { ArrowBigRight } from "lucide-react";
+import { FaDeleteLeft } from "react-icons/fa6"
 import type { UserBio } from "@prisma/client";
 
 import { deleteBioSync } from "@/actions/delete-bio-sync";
@@ -45,7 +46,9 @@ export default function UserBioSyncCard(
       <CardFooter className="flex flex-row items-center justify-between">
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant={"destructive"} className="font-bold">Delete</Button>
+            <Button variant={"destructive"} className="font-bold">
+              Delete <FaDeleteLeft className="icon" />
+            </Button>
           </DialogTrigger>
 
           <DeleteBioSyncDialogContent bid={bioId} />

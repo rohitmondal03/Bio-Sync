@@ -43,7 +43,10 @@ export default function LargeScreenNavbar() {
   return (
     <nav className={classNames({
       "flex flex-row items-center justify-around": true,
-      "py-5 border-zinc-600 border-b-4": true,
+      "py-5": true,
+      "border-zinc-600 border-b-4": true,
+      "sticky top-0 left-0 z-10": true,
+      "bg-opacity-100 backdrop-blur-2xl": true,
     })}>
       <>
         <Logo />

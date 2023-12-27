@@ -21,6 +21,8 @@ export default function DashboardLayout(
   { children }: ILayout
 ) {
   return (
-    <>{children}</>
+    <main>
+      {children}
+    </main>
   )
 }
