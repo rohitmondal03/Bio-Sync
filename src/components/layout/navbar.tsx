@@ -9,6 +9,8 @@ import { code } from "@/lib/fonts"
 import { useUser } from "@/hooks/useUser";
 import { PERSONAL_LINKS_LIST } from "@/lib/constants/personal-links"
 import { buttonVariants } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "../ui/sheet";
+import { Menu } from "lucide-react";
 
 const Logo = dynamic(() => import("../Logo"))
 const Drawer = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.Drawer))
@@ -28,7 +30,7 @@ const DialogHeader = dynamic(() => import("@/components/ui/dialog").then((mod) =
 
 
 type TNavButtonProps = {
-  variant: "default" | "link" | "secondary" | "outline";
+  variant: "secondary" | "destructive";
   className?: string;
   label: string;
 }
@@ -42,35 +44,49 @@ export default function LargeScreenNavbar() {
 
   return (
     <nav className={classNames({
-      "flex flex-row items-center justify-around": true,
-      "py-5": true,
-      "border-zinc-600 border-b-4": true,
+      "flex flex-row items-center justify-between md:justify-around": true,
+      "py-5 px-3 sm:px-10 md:px-0": true,
+      "border-zinc-500 border-b-2": true,
       "sticky top-0 left-0 z-10": true,
-      "bg-opacity-100 backdrop-blur-2xl": true,
+      "bg-opacity-100 backdrop-blur-[100px]": true,
     })}>
       <>
         <Logo />
       </>
 
-      <div className="flex flex-row items-center justify-center gap-4">
+
+      <div className={classNames({
+        "hidden md:flex flex-row items-center justify-center gap-4": true,
+      })}>
         {authStatus === "authenticated" ? (
           <>
             <Link href={"/profile"}>
-              <NavButton label="Profile" variant="secondary" className="font-bold" />
+              <NavButton label="Profile" variant="destructive" className="font-bold" />
             </Link>
 
             <Link href={"/new-bio-sync"}>
-              <NavButton label="New BioSync" variant="secondary" className="font-bold" />
+              <NavButton label="New BioSync" variant="destructive" className="font-bold" />
             </Link>
 
             <SignOutButton userName={userName} />
           </>
         ) : (
-          <Link href={"/signin"}>
-            <NavButton label="Sign In" variant="secondary" className="font-bold" />
-          </Link>
-        )}
+          <>
+            <Link href={"/signin"}>
+              <NavButton label="Sign In" variant="secondary" className="font-bold" />
+            </Link>
 
+            <Link href="/view">
+              <NavButton label="Search" variant="secondary" className="font-bold" />
+            </Link>
+          </>
+        )}
+      </div>
+
+
+      <div className={classNames({
+        "flex flex-row items-center gap-1 sm:gap-5": true,
+      })}>
         <Drawer>
           <DrawerTrigger asChild>
             <Button variant={"link"} size={"sm"}>@rohit</Button>
@@ -78,6 +94,22 @@ export default function LargeScreenNavbar() {
 
           <AuthorProfileDrawer />
         </Drawer>
+
+
+        <div className={classNames({
+          "block md:hidden": true,
+        })}>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Menu className="scale-100" />
+            </SheetTrigger>
+
+            <SmallScreenNavSheetContent
+              authenticated={authStatus === "authenticated"}
+              userName={userName}
+            />
+          </Sheet>
+        </div>
       </div>
     </nav>
   )
@@ -86,6 +118,7 @@ export default function LargeScreenNavbar() {
 
 
 
+// COMMMON NAV BUTTON MOCKUP
 function NavButton(
   { variant, className, label }: TNavButtonProps
 ) {
@@ -101,6 +134,7 @@ function NavButton(
 }
 
 
+// SINGOUT BUTTON MOCKUP
 function SignOutButton(
   { userName }: { userName: string }
 ) {
@@ -143,7 +177,7 @@ function SignOutButton(
 }
 
 
-
+//  AUTHOR PROFILE DRAWER
 function AuthorProfileDrawer() {
   return (
     <DrawerContent className="h-64">
@@ -172,5 +206,52 @@ function AuthorProfileDrawer() {
         ))}
       </div>
     </DrawerContent>
+  )
+}
+
+
+// SMALL SCREEN NAV MENUS
+function SmallScreenNavSheetContent(
+  { authenticated, userName }: { authenticated: boolean, userName: string }
+) {
+  return (
+    <SheetContent className="w-[20rem] sm:w-[60rem]">
+      <SheetHeader>
+        <SheetTitle>
+          <Logo />
+        </SheetTitle>
+        <SheetDescription className="underline">
+          Your one link platform
+        </SheetDescription>
+      </SheetHeader>
+
+      <div className={classNames({
+        "flex flex-col items-start justify-start gap-5 mt-10": true,
+      })}>
+        {authenticated ? (
+          <>
+            <SheetClose>
+              <Link href={"/profile"}>
+                <NavButton label="Profile" variant="destructive" className="font-bold" />
+              </Link>
+            </SheetClose>
+
+            <SheetClose>
+              <Link href={"/new-bio-sync"}>
+                <NavButton label="New BioSync" variant="destructive" className="font-bold" />
+              </Link>
+            </SheetClose>
+
+            <SignOutButton userName={userName} />
+          </>
+        ) : (
+          <Link href={"/signin"}>
+            <SheetClose>
+              <NavButton label="Sign In" variant="secondary" className="font-bold" />
+            </SheetClose>
+          </Link>
+        )}
+      </div>
+    </SheetContent>
   )
 }

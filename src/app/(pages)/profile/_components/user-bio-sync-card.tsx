@@ -20,7 +20,7 @@ const DialogClose = dynamic(() => import("@/components/ui/dialog").then((mod) =>
 
 
 export default function UserBioSyncCard(
-  { bioId, email, name, bio }: UserBio
+  { bioId, email, name, bio, id: defaultId }: UserBio
 ) {
   return (
     <Card
@@ -51,7 +51,7 @@ export default function UserBioSyncCard(
             </Button>
           </DialogTrigger>
 
-          <DeleteBioSyncDialogContent bid={bioId} />
+          <DeleteBioSyncDialogContent defaultId={defaultId} />
         </Dialog>
 
 
@@ -67,11 +67,13 @@ export default function UserBioSyncCard(
 
 
 
-function DeleteBioSyncDialogContent({ bid }: { bid: string }) {
+function DeleteBioSyncDialogContent(
+  { defaultId }: { defaultId: string }
+) {
   return (
     <DialogContent className="border-2 border-zinc-700">
       <DialogHeader>
-        <DialogTitle className="text-2xl">
+        <DialogTitle className="text-xl font-bold">
           Are you sure you want to delete this
           {" "}<span className="text-red-500">BioSync</span>{" "}
           ?
@@ -82,7 +84,7 @@ function DeleteBioSyncDialogContent({ bid }: { bid: string }) {
       <DialogClose className="flex flex-row items-center justify-end">
         <Button
           variant={"destructive"}
-          onClick={() => deleteBioSync(bid)}
+          onClick={() => deleteBioSync(defaultId)}
         >
           Yes
         </Button>

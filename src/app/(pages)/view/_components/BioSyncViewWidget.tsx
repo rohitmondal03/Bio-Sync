@@ -29,12 +29,14 @@ export default function BioSyncViewWidget() {
         .then((data: TUserBio) => setData(data))
     }
 
-    getBioSyncDetails().catch(err => console.log(err));
+    getBioSyncDetails().catch((err: Error) => console.log(err));
   }, [bId])
 
 
 
-  return (
+  return !bId ? (
+    <>Default page...</>
+  ) : (
     <div>
       {data ?
         <ViewBioSync bioSyncDetails={data} />

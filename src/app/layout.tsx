@@ -4,7 +4,7 @@ import type { ILayout } from "types"
 import { code } from "@/lib/fonts";
 import ContextProvider from "@/components/providers/ContextProvider";
 import { AuthProvider } from "@/components/providers/AuthProvider";
-import LargeScreenNavbar from "@/components/layout/large-screen-navbar";
+import LargeScreenNavbar from "@/components/layout/navbar";
 import "@/styles/globals.css"
 
 

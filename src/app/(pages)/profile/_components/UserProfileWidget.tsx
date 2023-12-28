@@ -70,7 +70,7 @@ export default async function UserProfileWidget() {
 
       <Separator
         orientation="horizontal"
-        className="h-2 bg-slate-700 rounded-xl"
+        className="h-2 bg-slate-400 rounded-xl"
       />
 
 
