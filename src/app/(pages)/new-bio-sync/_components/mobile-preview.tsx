@@ -21,7 +21,22 @@ import {
 import { useData } from "@/hooks/useBioData";
 import { useUser } from "@/hooks/useUser";
 import { inter } from "@/lib/fonts";
+import { isSocialFieldsEmpty } from "@/lib/functions/isSocialFieldsEmpty";
+import { isUserBioEmpty } from "@/lib/functions/isUserBioEmpty";
+import {
+  DEVDOTTO_CONST,
+  DISCORD_CONST,
+  GITHUB_CONST,
+  HASHNODE_CONST,
+  LINKEDIN_CONST,
+  MEDIUM_CONST,
+  TWITTER_CONST,
+  WHATSAPP_CONST,
+  YOUTUBE_CONST
+} from "@/lib/constants/social-links-skeleton"
 
+const PersonalLinkMockup = dynamic(() => import("@/components/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
+const SocialLinkMockup = dynamic(() => import("@/components/social-link-mockup").then((mod) => mod.SocialLinkMockup))
 const ScrollArea = dynamic(() => import("@/components/ui/scroll-area").then(mod => mod.ScrollArea))
 const Avatar = dynamic(() => import("@/components/ui/avatar").then(mod => mod.Avatar))
 const AvatarFallback = dynamic(() => import("@/components/ui/avatar").then(mod => mod.AvatarFallback))
@@ -50,43 +65,6 @@ export default function MobilePreview() {
     mediumUsername,
     projectLinks,
   } = userBioData;
-
-
-
-  // checking if fields are empty or not
-  function isUserBioEmpty() {
-    return (
-      !name &&
-      !bio &&
-      !email &&
-      !whatsAppNumber &&
-      !portfolioLink &&
-      !displayProfile &&
-      !githubUsername &&
-      !linkedinUsername &&
-      !twitterUsername &&
-      !discordUsername &&
-      !youtubeUsername &&
-      projectLinks.length < 1
-    )
-  }
-
-
-  // checking if social Links are empty
-  function isSocialFieldsEmpty() {
-    return (
-      !whatsAppNumber &&
-      !githubUsername &&
-      !linkedinUsername &&
-      !twitterUsername &&
-      !youtubeUsername &&
-      !discordUsername &&
-      !devdotToUsername &&
-      !hashnodeUsername &&
-      !mediumUsername
-    )
-  }
-
 
 
   return (
@@ -275,48 +253,5 @@ export default function MobilePreview() {
         )}
       </div>
     </div>
-  )
-}
-
-
-
-
-function SocialLinkMockup(
-  { href, label, Icon }: { href: string, label: string, Icon: IconType }
-) {
-  return (
-    <Link
-      href={href}
-      className={classNames({
-        "flex flex-row items-center gap-4": true,
-        "text-sm": true,
-        "border border-zinc-700 rounded-xl": true,
-        "py-1 px-2": true,
-        "bg-zinc-300": true,
-      })}
-      target="_blank"
-    >
-      <Icon fill="black" />
-      {label}
-    </Link>
-  )
-}
-
-
-function PersonalLinkMockup(
-  { link, label, Icon }: { link: string, label: string, Icon: IconType }
-) {
-  return (
-    <Link
-      href={link}
-      className={classNames({
-        "flex items-center justify-start gap-2": true,
-        "text-sm text-gray-900": true,
-      })}
-      target="_blank"
-    >
-      <Icon color="black" />
-      {label}
-    </Link>
   )
 }
