@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import UserProfileWidget from "./_components/UserProfileWidget";
 import classNames from "classnames";
+import { montserrat } from "@/lib/fonts";
 
 
 export default async function UsersProfilePage() {
@@ -12,7 +13,7 @@ export default async function UsersProfilePage() {
 
 
   return (
-    <section className={classNames({
+    <section className={classNames(`${montserrat.className}`,{
       "md:py-12 px-5 md:px-10 lg:px-20 my-2": true,
     })}>
       <UserProfileWidget />

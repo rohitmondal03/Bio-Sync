@@ -31,7 +31,7 @@ export default function UserBioSyncCard(
         "bg-zinc-50": true,
       })}
     >
-      <CardHeader className="text-center ">
+      <CardHeader className="text-center p-2 sm:p-6">
         <CardTitle>{name}</CardTitle>
         <CardDescription>{bio.slice(0, 75) + "...."}</CardDescription>
       </CardHeader>
@@ -43,7 +43,10 @@ export default function UserBioSyncCard(
         </div>
       </CardContent>
 
-      <CardFooter className="flex flex-row items-center justify-between">
+      <CardFooter className={classNames({
+        "flex flex-row items-center justify-between gap-2 sm:gap-0": true,
+        "p-1 sm:p-6": true,
+      })}>
         <Dialog>
           <DialogTrigger asChild>
             <Button variant={"destructive"} className="font-bold">

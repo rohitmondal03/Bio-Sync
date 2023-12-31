@@ -70,13 +70,13 @@ export default function InputForm({ image }: TProps) {
       action={async () => await submitUserBio(userBioData)}
       className={classNames({
         "overflow-y-auto": true,
-        "h-[84vh] w-[50vw]": true,
+        "h-[84vh] w-[90vw] md:w-[85vw] lg:w-[50vw]": true,
       })}
     >
-      {/* profile image */}
+      {/* PROFILE IMAGE */}
       <div className={classNames({
         "flex flex-col items-center justify-center gap-y-5": true,
-        "w-[40vw] mx-auto": true,
+        "w-auto sm:w-[40vw] mx-auto": true,
       })}>
         <Image
           src={userBioData.profilePicLink || String(image)}
@@ -93,7 +93,7 @@ export default function InputForm({ image }: TProps) {
         />
 
         <div className={classNames({
-          "flex flex-row items-center gap-3": true,
+          "flex flex-col sm:flex-row items-center gap-3": true,
         })}>
           <Label
             htmlFor="profile-image"
@@ -118,7 +118,7 @@ export default function InputForm({ image }: TProps) {
       />
 
 
-      {/* input sections */}
+      {/* INPUT SECTIONS */}
       <div className={classNames({
         "flex flex-col items-center justify-center gap-5": true,
       })}>
@@ -155,7 +155,7 @@ export default function InputForm({ image }: TProps) {
               onChange={(e) => setProjectLink(e.target.value)}
               className={classNames({
                 "outline-1 outline": true,
-                "w-[25rem]": true,
+                "w-auto sm:w-[25rem]": true,
               })}
             />
 
@@ -183,13 +183,13 @@ export default function InputForm({ image }: TProps) {
       </div>
 
 
-      {/* footer buttons */}
+      {/* FOOTER BUTTONS */}
       <div className={classNames({
         "grid grid-cols-2 items-center justify-around gap-3": true,
-        "p-5": true,
+        "p-2 sm:p-5": true,
         "sticky bottom-0 left-0": true,
         "backdrop-blur-sm bg-opacity-100": true,
-        "rounded-xl border-4 border-gray-900/80": true,
+        "rounded-xl border-4 border-gray-600/80": true,
       })}>
         <ShowDemoDataButton />
         <PublishButton />

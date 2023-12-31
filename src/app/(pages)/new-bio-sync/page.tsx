@@ -18,7 +18,7 @@ export default async function DashboardPage() {
 
   return (
     <section className={classNames({
-      "py-3 px-20 my-2": true,
+      "py-3 px-0 sm:px-20 my-2": true,
       "flex flex-row items-start justify-around": true,
       "h-fit": true,
     })}>

@@ -1,19 +1,52 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import React from 'react'
-import { AiOutlineMail } from 'react-icons/ai';
-import { FaDev, FaDiscord, FaGithub, FaHashnode, FaLinkedin, FaMedium, FaTwitter, FaUser, FaWhatsapp, FaYoutube } from 'react-icons/fa6';
+import classNames from 'classnames';
 import { type IconType } from 'react-icons';
+import { AiOutlineMail } from 'react-icons/ai';
+import {
+  FaDev,
+  FaDiscord,
+  FaGithub,
+  FaHashnode,
+  FaLinkedin,
+  FaMedium,
+  FaTwitter,
+  FaUser,
+  FaWhatsapp,
+  FaYoutube,
+} from 'react-icons/fa6';
 
 import type { TUserBio } from 'types'
-import { PersonalLinkMockup } from '@/components/personal-link-mockup';
-import classNames from 'classnames';
+import {
+  DEVDOTTO_CONST,
+  DISCORD_CONST,
+  GITHUB_CONST,
+  HASHNODE_CONST,
+  LINKEDIN_CONST,
+  MEDIUM_CONST,
+  TWITTER_CONST,
+  WHATSAPP_CONST, 
+  YOUTUBE_CONST,
+} from '@/lib/constants/social-links-skeleton';
 
-import { SocialLinkMockup } from '@/components/social-link-mockup';
-import { ProjectLinksMockup } from '@/components/projects-links-mockup';
+const PersonalLinkMockup = dynamic(() => import("@/components/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
+const SocialLinkMockup = dynamic(() => import("@/components/social-link-mockup").then((mod) => mod.SocialLinkMockup))
+const ProjectLinksMockup = dynamic(() => import("@/components/projects-links-mockup").then((mod) => mod.ProjectLinksMockup))
+
+
 
 
 type TProps = {
   bioSyncDetails: TUserBio
+}
+
+
+const PERSONAL_LINKS_CLASSES = {
+  "shadow-[2px_2px_0px]": true,
+  'border border-zinc-500 rounded-lg': true,
+  "p-1": true,
+  "hover:scale-100 transition ease-out hover:shadow-[5px_5px_0]": true,
 }
 
 
@@ -67,7 +100,7 @@ export default function ViewBioSync(
               Icon={AiOutlineMail as IconType}
               label={email}
               link={portfolioLink}
-              className='border border-zinc-500 p-1 rounded-lg shadow-md'
+              className={classNames(PERSONAL_LINKS_CLASSES)}
             />
 
             {portfolioLink &&
@@ -75,7 +108,7 @@ export default function ViewBioSync(
                 Icon={FaUser as IconType}
                 label={portfolioLink}
                 link={portfolioLink}
-                className='border border-zinc-500 p-1 rounded-lg shadow-md'
+                className={classNames(PERSONAL_LINKS_CLASSES)}
               />
             }
           </div>
@@ -102,7 +135,7 @@ export default function ViewBioSync(
         })}>
           {whatsAppNumber && (
             <SocialLinkMockup
-              href={"https://wa.me/" + whatsAppNumber}
+              href={WHATSAPP_CONST + whatsAppNumber}
               Icon={FaWhatsapp as IconType}
               label={"WhatsApp"}
             />
@@ -110,7 +143,7 @@ export default function ViewBioSync(
 
           {linkedinUsername &&
             <SocialLinkMockup
-              href={"https://www.linkedin.com/in/" + linkedinUsername}
+              href={LINKEDIN_CONST + linkedinUsername}
               Icon={FaLinkedin as IconType}
               label={"LinkedIn"}
             />
@@ -118,7 +151,7 @@ export default function ViewBioSync(
 
           {twitterUsername &&
             <SocialLinkMockup
-              href={"https://twitter.com/" + twitterUsername}
+              href={TWITTER_CONST + twitterUsername}
               Icon={FaTwitter as IconType}
               label={"Twitter"}
             />
@@ -126,7 +159,7 @@ export default function ViewBioSync(
 
           {githubUsername &&
             <SocialLinkMockup
-              href={"https://github.com/" + githubUsername}
+              href={GITHUB_CONST + githubUsername}
               Icon={FaGithub as IconType}
               label={"GitHub"}
             />
@@ -134,7 +167,7 @@ export default function ViewBioSync(
 
           {discordUsername &&
             <SocialLinkMockup
-              href={"https://discord.com/users/" + discordUsername}
+              href={DISCORD_CONST + discordUsername}
               Icon={FaDiscord as IconType}
               label={"Discord"}
             />
@@ -142,7 +175,7 @@ export default function ViewBioSync(
 
           {mediumUsername && (
             <SocialLinkMockup
-              href={"https://medium.com/" + mediumUsername}
+              href={MEDIUM_CONST + mediumUsername}
               Icon={FaMedium as IconType}
               label="Medium"
             />
@@ -151,7 +184,7 @@ export default function ViewBioSync(
           {hashnodeUsername && (
             <SocialLinkMockup
               Icon={FaHashnode as IconType}
-              href={"https://hashnode.com/" + hashnodeUsername}
+              href={HASHNODE_CONST + hashnodeUsername}
               label="Hashnode"
             />
           )}
@@ -159,14 +192,14 @@ export default function ViewBioSync(
           {devdotToUsername && (
             <SocialLinkMockup
               Icon={FaDev as IconType}
-              href={"https://dev.to/" + devdotToUsername}
+              href={DEVDOTTO_CONST + devdotToUsername}
               label="Dev"
             />
           )}
 
           {youtubeUsername &&
             <SocialLinkMockup
-              href={"https://www.youtube.com/" + youtubeUsername}
+              href={YOUTUBE_CONST + youtubeUsername}
               Icon={FaYoutube as IconType}
               label={"Youtube"}
             />
