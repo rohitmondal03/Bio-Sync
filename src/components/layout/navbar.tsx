@@ -4,13 +4,13 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { signOut } from "next-auth/react";
 import classNames from "classnames";
+import { Menu } from "lucide-react";
 
 import { code } from "@/lib/fonts"
 import { useUser } from "@/hooks/useUser";
 import { PERSONAL_LINKS_LIST } from "@/lib/constants/personal-links"
 import { buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "../ui/sheet";
-import { Menu } from "lucide-react";
 
 const Logo = dynamic(() => import("../Logo"))
 const Drawer = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.Drawer))
@@ -215,7 +215,7 @@ function SmallScreenNavSheetContent(
   { authenticated, userName }: { authenticated: boolean, userName: string }
 ) {
   return (
-    <SheetContent className="w-[20rem] sm:w-[60rem]">
+    <SheetContent className="w-[15rem] sm:w-[60rem]">
       <SheetHeader>
         <SheetTitle>
           <Logo />

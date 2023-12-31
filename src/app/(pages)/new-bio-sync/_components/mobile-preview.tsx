@@ -34,6 +34,7 @@ import {
   WHATSAPP_CONST,
   YOUTUBE_CONST
 } from "@/lib/constants/social-links-skeleton"
+import { ProjectLinksMockup } from "@/components/projects-links-mockup";
 
 const PersonalLinkMockup = dynamic(() => import("@/components/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
 const SocialLinkMockup = dynamic(() => import("@/components/social-link-mockup").then((mod) => mod.SocialLinkMockup))
@@ -233,17 +234,11 @@ export default function MobilePreview() {
 
                   <div className="flex flex-col gap-2">
                     {userBioData.projectLinks.map((link, idx) => (
-                      <Link
+                      <ProjectLinksMockup
+                        idx={idx}
+                        link={link}
                         key={link}
-                        href={link}
-                        className={classNames({
-                          "border-2 border-zinc-900 rounded-xl": true,
-                          "px-2 py-1": true,
-                          "text-sm": true,
-                        })}
-                      >
-                        {idx + 1}{". "}{link.replace("https://", "")}
-                      </Link>
+                      />
                     ))}
                   </div>
                 </div>
