@@ -62,7 +62,8 @@ export default async function UserProfileWidget() {
 
         <div className="space-y-3 sm:space-y-4 md:space-y-8">
           <IntroLabel label="Name" detail={userName} />
-          <IntroLabel label="Email" detail={userEmail} />
+          <IntroLabel label="Email" detail={userEmail.slice(0,15)+"..."} className="flex flex-col xs:hidden" />
+          <IntroLabel label="Email" detail={userEmail} className="hidden xs:flex flex-col" />
           <IntroLabel label="OAuth Provider" detail={providerFormatted} />
         </div>
       </div>

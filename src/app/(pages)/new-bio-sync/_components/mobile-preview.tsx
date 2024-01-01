@@ -1,7 +1,6 @@
 "use client"
 
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import classNames from "classnames";
 import { type IconType } from "react-icons";
 import { AiOutlineMail, } from "react-icons/ai";
@@ -34,8 +33,8 @@ import {
   WHATSAPP_CONST,
   YOUTUBE_CONST
 } from "@/lib/constants/social-links-skeleton"
-import { ProjectLinksMockup } from "@/components/projects-links-mockup";
 
+const ProjectLinksMockup = dynamic(() => import("@/components/projects-links-mockup").then((mod) => mod.ProjectLinksMockup))
 const PersonalLinkMockup = dynamic(() => import("@/components/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
 const SocialLinkMockup = dynamic(() => import("@/components/social-link-mockup").then((mod) => mod.SocialLinkMockup))
 const ScrollArea = dynamic(() => import("@/components/ui/scroll-area").then(mod => mod.ScrollArea))
@@ -153,7 +152,7 @@ export default function MobilePreview() {
                   })}>
                     {whatsAppNumber && (
                       <SocialLinkMockup
-                        href={"https://wa.me/" + whatsAppNumber}
+                        href={WHATSAPP_CONST + whatsAppNumber}
                         Icon={FaWhatsapp as IconType}
                         label={"WhatsApp"}
                       />
@@ -161,7 +160,7 @@ export default function MobilePreview() {
 
                     {linkedinUsername &&
                       <SocialLinkMockup
-                        href={"https://www.linkedin.com/in/" + linkedinUsername}
+                        href={LINKEDIN_CONST + linkedinUsername}
                         Icon={FaLinkedin as IconType}
                         label={"LinkedIn"}
                       />
@@ -169,7 +168,7 @@ export default function MobilePreview() {
 
                     {twitterUsername &&
                       <SocialLinkMockup
-                        href={"https://twitter.com/" + twitterUsername}
+                        href={TWITTER_CONST + twitterUsername}
                         Icon={FaTwitter as IconType}
                         label={"Twitter"}
                       />
@@ -177,7 +176,7 @@ export default function MobilePreview() {
 
                     {githubUsername &&
                       <SocialLinkMockup
-                        href={"https://github.com/" + githubUsername}
+                        href={GITHUB_CONST + githubUsername}
                         Icon={FaGithub as IconType}
                         label={"GitHub"}
                       />
@@ -185,7 +184,7 @@ export default function MobilePreview() {
 
                     {discordUsername &&
                       <SocialLinkMockup
-                        href={"https://discord.com/users/" + discordUsername}
+                        href={DISCORD_CONST + discordUsername}
                         Icon={FaDiscord as IconType}
                         label={"Discord"}
                       />
@@ -193,7 +192,7 @@ export default function MobilePreview() {
 
                     {mediumUsername && (
                       <SocialLinkMockup
-                        href={"https://medium.com/" + mediumUsername}
+                        href={MEDIUM_CONST + mediumUsername}
                         Icon={FaMedium as IconType}
                         label="Medium"
                       />
@@ -202,7 +201,7 @@ export default function MobilePreview() {
                     {hashnodeUsername && (
                       <SocialLinkMockup
                         Icon={FaHashnode as IconType}
-                        href={"https://hashnode.com/" + hashnodeUsername}
+                        href={HASHNODE_CONST + hashnodeUsername}
                         label="Hashnode"
                       />
                     )}
@@ -210,14 +209,14 @@ export default function MobilePreview() {
                     {devdotToUsername && (
                       <SocialLinkMockup
                         Icon={FaDev as IconType}
-                        href={"https://dev.to/" + devdotToUsername}
+                        href={DEVDOTTO_CONST + devdotToUsername}
                         label="Dev"
                       />
                     )}
 
                     {youtubeUsername &&
                       <SocialLinkMockup
-                        href={"https://www.youtube.com/" + youtubeUsername}
+                        href={YOUTUBE_CONST + youtubeUsername}
                         Icon={FaYoutube as IconType}
                         label={"Youtube"}
                       />
@@ -229,10 +228,10 @@ export default function MobilePreview() {
 
               {/* DISPLAYING PROJECTS LINKS */}
               {projectLinks.length > 0 && (
-                <div className="mt-6 space-y-2">
+                <div className="mt-6 space-y-2 mb-2">
                   <h1 className="font-bold text-xl text-center">Project Links</h1>
 
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-3">
                     {userBioData.projectLinks.map((link, idx) => (
                       <ProjectLinksMockup
                         idx={idx}

@@ -4,10 +4,10 @@ import { Label } from "@/components/ui/label";
 
 
 export default function IntroLabel(
-  { label, detail }: { label: string, detail: string }
+  { label, detail, className }: { label: string, detail: string, className?: string }
 ) {
   return (
-    <div>
+    <div className={className}>
       <Label className="text-base lg:text-lg text-muted-foreground underline">
         {label}
       </Label>

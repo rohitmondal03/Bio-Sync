@@ -16,10 +16,13 @@ export function ProjectLinksMockup(
       key={link}
       href={link}
       className={classNames({
-        "border-2 border-zinc-500 shadow-lg rounded-xl": true,
+        "border border-zinc-500 shadow-[5px_5px_0px] rounded-xl": true,
         "px-3 py-2": true,
         "text-sm": true,
+        "hover:shadow-[8px_8px_0px]": true,
+        "transition ease-out": true,
       })}
+      target="_blank"
     >
       {idx + 1}{". "}{link.replace("https://", "")}
     </Link>

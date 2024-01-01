@@ -3,10 +3,10 @@
 import dynamic from "next/dynamic"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
 import { type Session } from "next-auth"
-import { FaDeleteLeft, FaPlus } from "react-icons/fa6"
+import { useState } from "react"
 import classNames from "classnames"
+import { FaDeleteLeft, FaPlus } from "react-icons/fa6"
 
 import type { TUserBio } from "types"
 import { INPUT_FIELDS_DETAILS } from "@/lib/constants/profile-input-details-list"
@@ -70,7 +70,7 @@ export default function InputForm({ image }: TProps) {
       action={async () => await submitUserBio(userBioData)}
       className={classNames({
         "overflow-y-auto": true,
-        "h-[84vh] w-[90vw] md:w-[85vw] lg:w-[50vw]": true,
+        "h-[88vh] sm:h-[84vh] w-[95vw] md:w-[100vw] lg:w-[50vw]": true,
       })}
     >
       {/* PROFILE IMAGE */}
@@ -97,7 +97,7 @@ export default function InputForm({ image }: TProps) {
         })}>
           <Label
             htmlFor="profile-image"
-            className="text-muted-foreground"
+            className="text-muted-foreground text-center leading-5"
           >
             Include Profile pic in your BioSync
           </Label>
@@ -113,7 +113,7 @@ export default function InputForm({ image }: TProps) {
       <Separator
         orientation="horizontal"
         className={classNames({
-          "my-16 h-1 rounded-full bg-zinc-700": true,
+          "my-3 xs:my-10 lg:my-16 h-1 rounded-full bg-zinc-700": true,
         })}
       />
 
@@ -138,11 +138,11 @@ export default function InputForm({ image }: TProps) {
         ))}
 
 
-        {/* PROJECT LINKS INPUT FIELD...!! */}
+        {/* PROJECT LINKS AND INPUT FIELD...!! */}
         <div className={classNames({
           "text-xl font-bold text-center": true,
-          "py-6 my-1": true,
-          "space-y-8": true,
+          "py-3 lg:py-6": true,
+          "space-y-3": true,
         })}>
           <h1>Mention Project links <br /> (if any) </h1>
 
@@ -185,8 +185,8 @@ export default function InputForm({ image }: TProps) {
 
       {/* FOOTER BUTTONS */}
       <div className={classNames({
-        "grid grid-cols-2 items-center justify-around gap-3": true,
-        "p-2 sm:p-5": true,
+        "grid grid-cols-1 xs:grid-cols-2 items-center justify-around gap-1 sm:gap-3": true,
+        "p-1 sm:p-3": true,
         "sticky bottom-0 left-0": true,
         "backdrop-blur-sm bg-opacity-100": true,
         "rounded-xl border-4 border-gray-600/80": true,

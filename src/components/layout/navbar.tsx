@@ -6,7 +6,7 @@ import { signOut } from "next-auth/react";
 import classNames from "classnames";
 import { Menu } from "lucide-react";
 
-import { code } from "@/lib/fonts"
+import { code, montserrat } from "@/lib/fonts"
 import { useUser } from "@/hooks/useUser";
 import { PERSONAL_LINKS_LIST } from "@/lib/constants/personal-links"
 import { buttonVariants } from "@/components/ui/button";
@@ -45,7 +45,7 @@ export default function LargeScreenNavbar() {
   return (
     <nav className={classNames({
       "flex flex-row items-center justify-between md:justify-around": true,
-      "py-5 px-3 sm:px-10 md:px-0": true,
+      "py-3 sm:py-5 px-3 sm:px-10 md:px-0": true,
       "border-zinc-500 border-b-2": true,
       "sticky top-0 left-0 z-10": true,
       "bg-opacity-100 backdrop-blur-[100px]": true,
@@ -89,7 +89,13 @@ export default function LargeScreenNavbar() {
       })}>
         <Drawer>
           <DrawerTrigger asChild>
-            <Button variant={"link"} size={"sm"}>@rohit</Button>
+            <Button
+              variant={"link"}
+              size={"sm"}
+              className={`${montserrat.className} font-bold`}
+            >
+              @rohit
+            </Button>
           </DrawerTrigger>
 
           <AuthorProfileDrawer />
@@ -180,19 +186,19 @@ function SignOutButton(
 //  AUTHOR PROFILE DRAWER
 function AuthorProfileDrawer() {
   return (
-    <DrawerContent className="h-64">
+    <DrawerContent className={`${montserrat.className} h-64`}>
       <DrawerHeader>
         <DrawerTitle className="font-bold text-3xl text-center">
           <span className="text-muted-foreground">Developed by</span>{" "}
-          <span className="underline decoration-gray-500">@rohit</span>
+          <span className="decoration-gray-500">@rohit</span>
         </DrawerTitle>
 
-        <DrawerDescription className="text-center text-black text-lg">
+        <DrawerDescription className="text-center text-black text-lg underline">
           Connect w/ me
         </DrawerDescription>
       </DrawerHeader>
 
-      <div className="mx-auto space-x-5">
+      <div className="mx-auto flex flex-wrap items-center justify-center gap-2">
         {PERSONAL_LINKS_LIST.map(({ href, label, Icon }) => (
           <DrawerClose key={href}>
             <Link
@@ -230,17 +236,17 @@ function SmallScreenNavSheetContent(
       })}>
         {authenticated ? (
           <>
-            <SheetClose>
-              <Link href={"/profile"}>
+            <Link href={"/profile"}>
+              <SheetClose>
                 <NavButton label="Profile" variant="destructive" className="font-bold" />
-              </Link>
-            </SheetClose>
+              </SheetClose>
+            </Link>
 
-            <SheetClose>
-              <Link href={"/new-bio-sync"}>
+            <Link href={"/new-bio-sync"}>
+              <SheetClose>
                 <NavButton label="New BioSync" variant="destructive" className="font-bold" />
-              </Link>
-            </SheetClose>
+              </SheetClose>
+            </Link>
 
             <SignOutButton userName={userName} />
           </>

@@ -28,7 +28,7 @@ export default function UserBioSyncCard(
       className={classNames({
         "border-2 border-gray-600 rounded-xl": true,
         "transition ease-out duration-300": true,
-        "bg-zinc-50": true,
+        "bg-zinc-50 scale-90 xs:scale-100": true,
       })}
     >
       <CardHeader className="text-center p-2 sm:p-6">

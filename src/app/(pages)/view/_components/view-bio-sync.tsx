@@ -99,7 +99,7 @@ export default function ViewBioSync(
             <PersonalLinkMockup
               Icon={AiOutlineMail as IconType}
               label={email}
-              link={portfolioLink}
+              link={"mailto:"+email}
               className={classNames(PERSONAL_LINKS_CLASSES)}
             />
 

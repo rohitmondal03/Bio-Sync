@@ -9,7 +9,7 @@ import "@/styles/globals.css"
 
 
 export const metadata: Metadata = {
-  title: "BioSync || Your one link Portfolio"
+  title: "BioSync || Your single link Portfolio"
 }
 
 

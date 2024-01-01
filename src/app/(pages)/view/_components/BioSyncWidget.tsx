@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 
 import type { TUserBio } from "types";
 import BioSyncNotFound from "./not-found-bio-sync";
-import ViewBioSync from "./view-bio-sync-widget";
+import ViewBioSync from "./view-bio-sync";
 
 
 export default function BioSyncViewWidget() {

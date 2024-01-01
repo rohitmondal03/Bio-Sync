@@ -1,4 +1,5 @@
 import classNames from "classnames";
+
 import BioSyncViewWidget from "./_components/BioSyncWidget";
 import { inter } from "@/lib/fonts";
 
