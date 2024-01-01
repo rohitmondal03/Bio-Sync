@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og'
+import Image from 'next/image'
 
 // Route segment config
 export const runtime = 'edge'
@@ -27,7 +28,11 @@ export default function Icon() {
           borderRadius: "5px",
         }}
       >
-        Bs
+        <Image
+          src={"/assets/web_main_img.svg"}
+          alt=''
+          {...size}
+        />
       </div>
     ),
     size

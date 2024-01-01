@@ -10,7 +10,6 @@ import { code, montserrat } from "@/lib/fonts"
 import { useUser } from "@/hooks/useUser";
 import { PERSONAL_LINKS_LIST } from "@/lib/constants/personal-links"
 import { buttonVariants } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from "../ui/sheet";
 
 const Logo = dynamic(() => import("../Logo"))
 const Drawer = dynamic(() => import("@/components/ui/drawer").then((mod) => mod.Drawer))
@@ -27,6 +26,13 @@ const DialogTitle = dynamic(() => import("@/components/ui/dialog").then((mod) =>
 const DialogTrigger = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogTrigger))
 const DialogFooter = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogFooter))
 const DialogHeader = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogHeader))
+const Sheet= dynamic(() => import("@/components/ui/sheet").then((mod) => mod.Sheet))
+const SheetContent= dynamic(() => import("@/components/ui/sheet").then((mod) => mod.SheetContent))
+const SheetDescription= dynamic(() => import("@/components/ui/sheet").then((mod) => mod.SheetDescription))
+const SheetHeader= dynamic(() => import("@/components/ui/sheet").then((mod) => mod.SheetHeader))
+const SheetTitle= dynamic(() => import("@/components/ui/sheet").then((mod) => mod.SheetTitle))
+const SheetClose= dynamic(() => import("@/components/ui/sheet").then((mod) => mod.SheetClose))
+const SheetTrigger= dynamic(() => import("@/components/ui/sheet").then((mod) => mod.SheetTrigger))
 
 
 type TNavButtonProps = {
