@@ -3,17 +3,16 @@ import Image from "next/image";
 import { memo } from "react";
 import classNames from "classnames";
 
-import { montserrat } from "@/lib/fonts";
-import FeatureSection from "./_components/features-section";
-
 const HeadingText = dynamic(() => import("./_components/heading"))
 const AboutText = dynamic(() => import("./_components/about"))
+const FeatureSection= dynamic(() => import("./_components/features-section"))
+const OpenSourcePromotionSection= dynamic(() => import("./_components/open-source-prom-section"))
 
 
 function HomePage() {
   return (
     <section className={classNames({
-      "py-16 px-20": true,
+      "py-16 px-3 sm:px-6 md:px-12 lg:px-20": true,
       "space-y-28": true,
       "text-center": true,
     })}>
@@ -29,6 +28,7 @@ function HomePage() {
       />
       <AboutText />
       <FeatureSection />
+      <OpenSourcePromotionSection />
     </section>
   )
 }

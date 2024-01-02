@@ -4,7 +4,8 @@ import type { ILayout } from "types"
 import { poppins } from "@/lib/fonts";
 import ContextProvider from "@/components/providers/ContextProvider";
 import { AuthProvider } from "@/components/providers/AuthProvider";
-import LargeScreenNavbar from "@/components/layout/navbar";
+import Navbar from "@/components/layout/navbar";
+import Footer from "@/components/layout/footer";
 import "@/styles/globals.css"
 
 
@@ -20,10 +21,11 @@ export default function RootLayout(
     <html lang="en">
       <body className={`${poppins.className}`}>
         <AuthProvider>
-          <LargeScreenNavbar />
+          <Navbar />
           <ContextProvider>
             <>{children}</>
           </ContextProvider>
+          <Footer />
         </AuthProvider>
       </body>
     </html>

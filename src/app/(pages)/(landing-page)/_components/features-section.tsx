@@ -3,6 +3,7 @@ import { type LucideIcon } from 'lucide-react';
 
 import { WEBSITE_FEATURES } from '@/lib/constants/website-features';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import classNames from 'classnames';
 
 
 
@@ -15,10 +16,10 @@ type TFeatures = {
 
 export default function FeatureSection() {
   return (
-    <section className='space-y-5'>
-      <h2 className="text-4xl font-bold">Features</h2>
+    <section className='space-y-10'>
+      <h2 className="text-4xl font-bold underline">Features</h2>
 
-      <div className='grid md:grid-cols-3 gap-5'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
         {WEBSITE_FEATURES.map((feat) => (
           <FeatureCard
             key={feat.description}
@@ -37,14 +38,16 @@ function FeatureCard(
   { title, description, Icon }: TFeatures
 ) {
   return (
-    <Card className='shadow-lg border-2 border-zinc-400'>
+    <Card className={classNames({
+      'shadow-lg rounded-2xl border-2 border-zinc-400': true,
+    })}>
       <CardHeader>
-        <CardTitle className='text-3xl'>{title}</CardTitle>
+        <CardTitle className='text-2xl xs:text-3xl'>{title}</CardTitle>
       </CardHeader>
 
-      <Icon className='scale-125 mx-auto' />
+      <Icon className='scale-150 mx-auto fill-slate-300' />
 
-      <CardContent className='pt-6 text-muted-foreground'>
+      <CardContent className='text-sm xs:text-base pt-6 text-muted-foreground'>
         {description}
       </CardContent>
     </Card>

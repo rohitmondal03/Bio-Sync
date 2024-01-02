@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 
 import UserProfileWidget from "./_components/UserProfileWidget";
 import classNames from "classnames";
-import { montserrat } from "@/lib/fonts";
 
 
 export default async function UsersProfilePage() {

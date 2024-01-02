@@ -1,12 +1,13 @@
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import classNames from "classnames";
 
 import { getServerAuthSession } from "@/server/auth"
 import { db } from "@/server/db";
 
-import UserBioSyncCard from "./user-bio-sync-card";
-import IntroLabel from "./intro-label-mockup";
-import { Separator } from "@/components/ui/separator";
+const IntroLabel = dynamic(() => import("./intro-label-mockup"))
+const UserBioSyncCard = dynamic(() => import("./user-bio-sync-card"))
+
 
 
 export default async function UserProfileWidget() {
@@ -62,17 +63,11 @@ export default async function UserProfileWidget() {
 
         <div className="space-y-3 sm:space-y-4 md:space-y-8">
           <IntroLabel label="Name" detail={userName} />
-          <IntroLabel label="Email" detail={userEmail.slice(0,15)+"..."} className="flex flex-col xs:hidden" />
+          <IntroLabel label="Email" detail={userEmail.slice(0, 15) + "..."} className="flex flex-col xs:hidden" />
           <IntroLabel label="Email" detail={userEmail} className="hidden xs:flex flex-col" />
           <IntroLabel label="OAuth Provider" detail={providerFormatted} />
         </div>
       </div>
-
-
-      <Separator
-        orientation="horizontal"
-        className="h-2 bg-slate-400 rounded-xl"
-      />
 
 
       <div className={classNames({
@@ -93,3 +88,4 @@ export default async function UserProfileWidget() {
     </section>
   )
 }
+

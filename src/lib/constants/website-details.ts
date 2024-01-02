@@ -1,0 +1,1 @@
+export const WEBSITE_GITHUB_LINK= "https://github.com/rohitmondal03/Bio-Sync"

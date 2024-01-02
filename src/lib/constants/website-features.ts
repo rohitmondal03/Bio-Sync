@@ -1,4 +1,7 @@
-import { Globe, Settings, User, type LucideIcon } from "lucide-react"
+import {
+  type LucideIcon,
+  Globe, Settings, User, Tablet,
+} from "lucide-react"
 
 
 type TFeatures = {
@@ -15,13 +18,18 @@ export const WEBSITE_FEATURES: TFeatures[] = [
     Icon: User,
   },
   {
+    title: "Responsive Design",
+    description: `Designed to work on all devices of different screen sizes with internet access.`,
+    Icon: Tablet,
+  },
+  {
     title: "Open-Source",
     description: "Join the vibrant community! Collaborate, contribute, and unlock endless possibilities together.",
     Icon: Globe,
   },
   {
-    title: "Modern day Tech stacks",
-    description: "BioSync is built with NextJS, Prisma, TailwindCSS and some other awesome packages, libraries and frameworks.",
+    title: "Modern day Tech-stacks",
+    description: "BioSync is built with NextJS, NextAuth/AuthJS, Prisma, TailwindCSS and some other awesome packages, libraries and frameworks.",
     Icon: Settings,
   },
 ]
