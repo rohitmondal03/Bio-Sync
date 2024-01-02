@@ -22,9 +22,9 @@ export default function SignOutButton(
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          variant={"secondary"}
+          variant={"destructive"}
           size={"sm"}
-          className="font-bold text-red-600"
+          className="font-bold"
         >
           Sign Out
         </Button>

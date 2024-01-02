@@ -8,7 +8,7 @@ export default function Logo() {
   return (
     <Link href={"/"}>
       <h1 className={classNames(`${montserrat.className}`,{
-        "text-2xl sm:text-3xl font-bold text-slate-600": true,
+        "text-2xl sm:text-3xl font-bold text-slate-800": true,
         "transition ease-out": true,
       })}>
         BioSync

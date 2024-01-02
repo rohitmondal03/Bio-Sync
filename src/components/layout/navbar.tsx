@@ -21,7 +21,7 @@ const SheetTrigger = dynamic(() => import("@/components/ui/sheet").then((mod) =>
 
 
 type TNavButtonProps = {
-  variant: "secondary" | "destructive";
+  variant: "secondary" | "destructive" | "default";
   className?: string;
   label: string;
 }
@@ -69,11 +69,11 @@ export default function LargeScreenNavbar() {
           {authStatus === "authenticated" ? (
             <>
               <Link href={"/profile"}>
-                <NavButton label="Profile" variant="destructive" className="font-bold" />
+                <NavButton label="Profile" variant="default" className="font-bold" />
               </Link>
 
               <Link href={"/new-bio-sync"}>
-                <NavButton label="New BioSync" variant="destructive" className="font-bold" />
+                <NavButton label="New BioSync" variant="default" className="font-bold" />
               </Link>
 
               <SignOutButton userName={userName} />
@@ -154,13 +154,13 @@ function SmallScreenNavSheetContent(
           <>
             <Link href={"/profile"}>
               <SheetClose>
-                <NavButton label="Profile" variant="destructive" className="font-bold" />
+                <NavButton label="Profile" variant="default" className="font-bold" />
               </SheetClose>
             </Link>
 
             <Link href={"/new-bio-sync"}>
               <SheetClose>
-                <NavButton label="New BioSync" variant="destructive" className="font-bold" />
+                <NavButton label="New BioSync" variant="default" className="font-bold" />
               </SheetClose>
             </Link>
 

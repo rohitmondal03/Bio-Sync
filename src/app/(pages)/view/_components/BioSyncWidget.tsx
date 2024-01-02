@@ -12,7 +12,7 @@ export default function BioSyncViewWidget() {
   const searchParams = useSearchParams();
   const [data, setData] = useState<TUserBio>();
 
-  const bId = searchParams.get("bid");
+  const bId = searchParams.get("share");
 
 
   useEffect(() => {

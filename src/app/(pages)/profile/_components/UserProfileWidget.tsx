@@ -57,7 +57,11 @@ export default async function UserProfileWidget() {
           blurDataURL={userImage}
           height={350}
           width={350}
-          className="scale-[.7] sm:scale-75 md:scale-100 rounded-full md:rounded-3xl"
+          className={classNames({
+            "rounded-full md:rounded-3xl": true,
+            "scale-[.7] sm:scale-75 md:scale-100": true,
+            "shadow-[10px_10px_0] shadow-gray-700": true,
+          })}
           priority
         />
 
@@ -79,7 +83,7 @@ export default async function UserProfileWidget() {
         })}>Your BioSync</h1>
 
 
-        <div className="flex flex-wrap items-center justify-center gap-5">
+        <div className="flex flex-wrap items-center justify-center gap-7">
           {usersBioSyncs.map((uBios) => (
             <UserBioSyncCard key={uBios.bioId} {...uBios} />
           ))}

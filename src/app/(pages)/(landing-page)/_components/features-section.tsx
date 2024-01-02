@@ -39,7 +39,7 @@ function FeatureCard(
 ) {
   return (
     <Card className={classNames({
-      'shadow-lg rounded-2xl border-2 border-zinc-400': true,
+      'shadow-[10px_10px_0] rounded-2xl border border-zinc-600': true,
     })}>
       <CardHeader>
         <CardTitle className='text-2xl xs:text-3xl'>{title}</CardTitle>
