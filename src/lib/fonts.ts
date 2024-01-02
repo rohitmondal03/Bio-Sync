@@ -1,7 +1,8 @@
 import {
   Inter,
   Montserrat_Alternates as Montserrat,
-  Fira_Code as CodeFont
+  Fira_Code as CodeFont,
+  Poppins,
 } from "next/font/google";
 
 
@@ -16,6 +17,11 @@ export const montserrat = Montserrat({
 })
 
 export const code = CodeFont({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"]
+})
+
+export const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "600", "700"]
 })

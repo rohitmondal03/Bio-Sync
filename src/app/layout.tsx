@@ -1,7 +1,7 @@
 import { type Metadata } from "next";
 
 import type { ILayout } from "types"
-import { code } from "@/lib/fonts";
+import { poppins } from "@/lib/fonts";
 import ContextProvider from "@/components/providers/ContextProvider";
 import { AuthProvider } from "@/components/providers/AuthProvider";
 import LargeScreenNavbar from "@/components/layout/navbar";
@@ -18,7 +18,7 @@ export default function RootLayout(
 ) {
   return (
     <html lang="en">
-      <body className={`${code.className}`}>
+      <body className={`${poppins.className}`}>
         <AuthProvider>
           <LargeScreenNavbar />
           <ContextProvider>

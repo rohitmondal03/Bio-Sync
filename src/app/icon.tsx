@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og'
 import Image from 'next/image'
+import { User } from 'lucide-react'
 
 // Route segment config
 export const runtime = 'edge'
@@ -17,7 +18,7 @@ export default function Icon() {
     (
       <div
         style={{
-          fontSize: 20,
+          fontSize: 24,
           background: 'white',
           width: '100%',
           height: '100%',
@@ -28,11 +29,7 @@ export default function Icon() {
           borderRadius: "5px",
         }}
       >
-        <Image
-          src={"/assets/web_main_img.svg"}
-          alt=''
-          {...size}
-        />
+        /
       </div>
     ),
     size
