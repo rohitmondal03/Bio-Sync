@@ -23,5 +23,5 @@ export async function submitUserBio(bioData: TUserBio) {
     }
   })
 
-  redirect("/view?bid=" + uuid)
+  redirect("/view?share=" + uuid)
 }

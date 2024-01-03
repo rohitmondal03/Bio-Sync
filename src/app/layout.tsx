@@ -10,8 +10,14 @@ import "@/styles/globals.css"
 
 
 export const metadata: Metadata = {
-  title: "BioSync || Your single link Portfolio",
-  metadataBase: new URL("https://youtube.com"),
+  title: "BioSync, your single link Portfolio",
+  metadataBase: new URL("https://biosync.vercel.app"),
+  openGraph: {
+    type: "website",
+    title: "BioSync",
+    description: "Your single link portfolio...",
+    siteName: "BioSync",
+  }
 }
 
 

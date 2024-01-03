@@ -29,6 +29,7 @@ import {
   WHATSAPP_CONST, 
   YOUTUBE_CONST,
 } from '@/lib/constants/social-links-skeleton';
+import { inter } from '@/lib/fonts';
 
 const PersonalLinkMockup = dynamic(() => import("@/components/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
 const SocialLinkMockup = dynamic(() => import("@/components/social-link-mockup").then((mod) => mod.SocialLinkMockup))
@@ -74,7 +75,10 @@ export default function ViewBioSync(
 
 
   return (
-    <section className='space-y-16 sm:space-y-24 md:space-y-32'>
+    <section className={classNames(`${inter.className}`, {
+        "px-2 md:px-20 lg:px-24 py-10 md:py-16": true,
+        "space-y-16 sm:space-y-24": true,
+    })}>
       <div className={classNames({
         'flex flex-col md:flex-row items-center justify-center gap-0 md:gap-12 lg:gap-32': true,
       })}>
@@ -116,8 +120,15 @@ export default function ViewBioSync(
       </div>
 
 
-      <div className='w-fit sm:w-[40rem] space-y-5 mx-auto'>
-        <h1 className='text-2xl text-center underline text-muted-foreground font-bold'>
+      <div className={classNames({
+        'sm:w-[40rem] mx-auto': true,
+        "w-fit": true,
+        "p-4 rounded-xl": true,
+        "space-y-5": true,
+        "shadow-[10px_10px_0]": true,
+        "border border-zinc-600": true,
+      })}>
+        <h1 className='text-2xl text-left underline text-zinc-600 font-bold'>
           About {name},
         </h1>
 

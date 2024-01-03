@@ -45,7 +45,7 @@ export default async function UserProfileWidget() {
 
   return (
     <section className={classNames({
-      "space-y-16": true,
+      "space-y-24 sm:space-y-32": true,
     })}>
       <div className={classNames({
         "flex flex-col md:flex-row items-center justify-center": true,

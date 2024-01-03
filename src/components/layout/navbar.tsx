@@ -55,11 +55,11 @@ export default function LargeScreenNavbar() {
             "border-2 border-slate-500/60 rounded-full": true,
             "p-2": true,
             "transition ease-out": true,
-            "hover:scale-110 hover:fill-zinc-400": true,
+            "hover:scale- hover:p-[0.35rem] hover:border-4 hover:border-dotted hover:border-zinc-500": true,
           })}
           target="_blank"
         >
-          <Github className="fill-zinc-300" />
+          <Github />
         </Link>
 
 
@@ -143,7 +143,7 @@ function SmallScreenNavSheetContent(
           <Logo />
         </SheetTitle>
         <SheetDescription className="underline">
-          Your one link platform
+          Your one link portfolio...
         </SheetDescription>
       </SheetHeader>
 

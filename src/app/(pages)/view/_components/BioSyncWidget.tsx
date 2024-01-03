@@ -1,23 +1,31 @@
 "use client"
 
-import { useSearchParams } from "next/navigation"
+import { notFound, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
 import type { TUserBio } from "types";
 import BioSyncNotFound from "./not-found-bio-sync";
 import ViewBioSync from "./view-bio-sync";
+import GlobalLoadingState from "@/app/loading";
 
 
 export default function BioSyncViewWidget() {
   const searchParams = useSearchParams();
   const [data, setData] = useState<TUserBio>();
+  const [isLoading, setLoading] = useState<boolean>(false);
 
   const bId = searchParams.get("share");
 
 
   useEffect(() => {
     async function getBioSyncDetails() {
+      setLoading(true);
+
       await fetch("/api/getBioSyncById", {
+        next: {
+          revalidate: 3600,
+        },
+        keepalive: false,
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -27,16 +35,20 @@ export default function BioSyncViewWidget() {
       })
         .then((resp) => resp.json())
         .then((data: TUserBio) => setData(data))
+
+      setLoading(false);
     }
 
     getBioSyncDetails().catch((err: Error) => console.log(err));
-  }, [bId])
+  }, [])
 
 
+  if (isLoading) {
+    return <GlobalLoadingState />
+  }
 
-  return !bId ? (
-    <>Default page...</>
-  ) : (
+
+  return bId ? (
     <div>
       {data ?
         <ViewBioSync bioSyncDetails={data} />
@@ -44,5 +56,7 @@ export default function BioSyncViewWidget() {
         <BioSyncNotFound />
       }
     </div>
+  ) : (
+    notFound()
   )
 }

@@ -13,7 +13,7 @@ export default async function UsersProfilePage() {
 
   return (
     <section className={classNames({
-      "md:py-12 px-3 md:px-10 lg:px-20 my-2": true,
+      "pb-10 md:py-12 px-3 md:px-10 lg:px-20 my-2": true,
     })}>
       <UserProfileWidget />
     </section>
