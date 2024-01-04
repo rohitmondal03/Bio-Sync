@@ -1,23 +1,8 @@
-import { type Metadata } from 'next'
-
-import { getServerAuthSession } from '@/server/auth'
 import type { ILayout } from 'types'
+import { dynamicMetadataForProfilePage } from '@/lib/config/metadata.config'
 
 
-export async function generateMetadata(): Promise<Metadata> {
-  const sessionDetails = await getServerAuthSession();
-
-  const userDetails = sessionDetails?.user;
-  const userProfilePic = userDetails?.image;
-  const userName = userDetails?.name;
-
-
-  return {
-    title: "Profile || " + userName,
-    icons: [`${userProfilePic}`]
-  }
-}
-
+export const generateMetadata= async () => dynamicMetadataForProfilePage()
 
 
 export default function ProfileLayout(

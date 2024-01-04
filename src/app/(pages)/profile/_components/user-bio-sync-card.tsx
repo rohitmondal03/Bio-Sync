@@ -8,8 +8,15 @@ import { FaDeleteLeft } from "react-icons/fa6"
 import type { UserBio } from "@prisma/client";
 
 import { deleteBioSync } from "@/actions/delete-bio-sync";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const Dialog = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.Dialog))
 const DialogContent = dynamic(() => import("@/components/ui/dialog").then((mod) => mod.DialogContent))

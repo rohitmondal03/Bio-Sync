@@ -5,11 +5,14 @@ import dynamic from "next/dynamic";
 import classNames from "classnames";
 import { Github, Menu } from "lucide-react";
 
-import { WEBSITE_GITHUB_LINK } from "@/lib/constants/website-details";
+import { montserrat } from "@/lib/fonts"
+import { WEBSITE_GITHUB_LINK } from "@/lib/config/website-details.config";
 import { useUser } from "@/hooks/useUser";
-import SignOutButton from "../sign-out-button";
+import SignOutButton from "../buttons/sign-out-button";
 
-const Logo = dynamic(() => import("../Logo"))
+
+
+// const Logo = dynamic(() => import("../Logo"))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Sheet = dynamic(() => import("@/components/ui/sheet").then((mod) => mod.Sheet))
 const SheetContent = dynamic(() => import("@/components/ui/sheet").then((mod) => mod.SheetContent))
@@ -175,5 +178,21 @@ function SmallScreenNavSheetContent(
         )}
       </div>
     </SheetContent>
+  )
+}
+
+
+
+// NAVBAR LOGO
+function Logo() {
+  return (
+    <Link href={"/"}>
+      <h1 className={classNames(`${montserrat.className}`, {
+        "text-2xl sm:text-3xl font-bold text-slate-800": true,
+        "transition ease-out": true,
+      })}>
+        BioSync
+      </h1>
+    </Link>
   )
 }

@@ -31,9 +31,9 @@ import {
 } from '@/lib/constants/social-links-skeleton';
 import { inter } from '@/lib/fonts';
 
-const PersonalLinkMockup = dynamic(() => import("@/components/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
-const SocialLinkMockup = dynamic(() => import("@/components/social-link-mockup").then((mod) => mod.SocialLinkMockup))
-const ProjectLinksMockup = dynamic(() => import("@/components/projects-links-mockup").then((mod) => mod.ProjectLinksMockup))
+const PersonalLinkMockup = dynamic(() => import("@/components/mockup/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
+const SocialLinkMockup = dynamic(() => import("@/components/mockup/social-link-mockup").then((mod) => mod.SocialLinkMockup))
+const ProjectLinksMockup = dynamic(() => import("@/components/mockup/projects-links-mockup").then((mod) => mod.ProjectLinksMockup))
 
 
 

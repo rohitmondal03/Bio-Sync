@@ -22,9 +22,9 @@ import { useData } from "@/hooks/useBioData";
 import { isUserBioEmpty } from "@/lib/functions/isUserBioEmpty";
 import { isSocialFieldsEmpty } from "@/lib/functions/isSocialFieldsEmpty";
 
-const SocialLinkMockup= dynamic(() => import("@/components/social-link-mockup").then((mod) => mod.SocialLinkMockup))
-const ProjectLinksMockup= dynamic(() => import("@/components/projects-links-mockup").then((mod) => mod.ProjectLinksMockup))
-const PersonalLinkMockup= dynamic(() => import("@/components/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
+const SocialLinkMockup= dynamic(() => import("@/components/mockup/social-link-mockup").then((mod) => mod.SocialLinkMockup))
+const ProjectLinksMockup= dynamic(() => import("@/components/mockup/projects-links-mockup").then((mod) => mod.ProjectLinksMockup))
+const PersonalLinkMockup= dynamic(() => import("@/components/mockup/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Drawer= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.Drawer))
 const DrawerContent= dynamic(() => import("@/components/ui/drawer").then((mod) => mod.DrawerContent))

@@ -5,7 +5,7 @@ import Link from "next/link";
 import classNames from "classnames";
 
 import { montserrat } from "@/lib/fonts";
-import { PERSONAL_LINKS_LIST } from "@/lib/constants/personal-links";
+import { PERSONAL_LINKS_LIST } from "@/lib/config/personal-links.config";
 import { buttonVariants } from "@/components/ui/button";
 
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
