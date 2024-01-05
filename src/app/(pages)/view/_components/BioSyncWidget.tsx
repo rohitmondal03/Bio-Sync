@@ -2,8 +2,8 @@
 
 import { notFound, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
+import type { UserBio } from "@prisma/client";
 
-import type { TUserBio } from "types";
 import BioSyncNotFound from "./not-found-bio-sync";
 import ViewBioSync from "./view-bio-sync";
 import GlobalLoadingState from "@/app/loading";
@@ -11,7 +11,7 @@ import GlobalLoadingState from "@/app/loading";
 
 export default function BioSyncViewWidget() {
   const searchParams = useSearchParams();
-  const [data, setData] = useState<TUserBio>();
+  const [data, setData] = useState<UserBio>();
   const [isLoading, setLoading] = useState<boolean>(false);
 
   const bId = searchParams.get("share");
@@ -34,7 +34,7 @@ export default function BioSyncViewWidget() {
         body: JSON.stringify({ bid: bId }),
       })
         .then((resp) => resp.json())
-        .then((data: TUserBio) => setData(data))
+        .then((data: UserBio) => setData(data))
 
       setLoading(false);
     }

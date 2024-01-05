@@ -75,7 +75,7 @@ export default function LargeScreenNavbar() {
                 <NavButton label="Profile" variant="default" className="font-bold" />
               </Link>
 
-              <Link href={"/new-bio-sync"}>
+              <Link href={"/new"}>
                 <NavButton label="New BioSync" variant="default" className="font-bold" />
               </Link>
 
@@ -84,11 +84,7 @@ export default function LargeScreenNavbar() {
           ) : (
             <>
               <Link href={"/signin"}>
-                <NavButton label="Sign In" variant="secondary" className="font-bold" />
-              </Link>
-
-              <Link href="/view">
-                <NavButton label="Search" variant="secondary" className="font-bold" />
+                <NavButton label="Sign In" variant="destructive" className="font-bold" />
               </Link>
             </>
           )}
@@ -161,7 +157,7 @@ function SmallScreenNavSheetContent(
               </SheetClose>
             </Link>
 
-            <Link href={"/new-bio-sync"}>
+            <Link href={"/new"}>
               <SheetClose>
                 <NavButton label="New BioSync" variant="default" className="font-bold" />
               </SheetClose>
@@ -172,7 +168,7 @@ function SmallScreenNavSheetContent(
         ) : (
           <Link href={"/signin"}>
             <SheetClose>
-              <NavButton label="Sign In" variant="secondary" className="font-bold" />
+              <NavButton label="Sign In" variant="destructive" className="font-bold" />
             </SheetClose>
           </Link>
         )}

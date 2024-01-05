@@ -9,8 +9,8 @@ export default function HeadingText() {
         Your single link Portfolio....
       </p>
 
-      <p className="text-xl md:text-2xl text-amber-5 font-semibold md:w-[25rem] mx-auto">
-        Share your BioSync&apos;s link with anyone to let them connect with you....
+      <p className="text-xl md:text-2xl text-amber-5 font-semibold md:w-[60rem] mx-auto">
+        A platform to add all your important links at a single place. BioSync provider an easy to use interface for the users to add all the important links, and share the link with anyone they to showcase themselves.
       </p>
     </section>
   )

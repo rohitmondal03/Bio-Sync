@@ -2,7 +2,9 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import React from 'react'
 import classNames from 'classnames';
-import { type IconType } from 'react-icons';
+import type { UserBio } from '@prisma/client';
+import { Copy } from 'lucide-react';
+import { type IconType, } from 'react-icons';
 import { AiOutlineMail } from 'react-icons/ai';
 import {
   FaDev,
@@ -17,7 +19,9 @@ import {
   FaYoutube,
 } from 'react-icons/fa6';
 
-import type { TUserBio } from 'types'
+import { inter } from '@/lib/fonts';
+import { WEBSITE_LINK } from '@/lib/config/website-details.config';
+import { Button } from '@/components/ui/button';
 import {
   DEVDOTTO_CONST,
   DISCORD_CONST,
@@ -26,10 +30,9 @@ import {
   LINKEDIN_CONST,
   MEDIUM_CONST,
   TWITTER_CONST,
-  WHATSAPP_CONST, 
+  WHATSAPP_CONST,
   YOUTUBE_CONST,
 } from '@/lib/constants/social-links-skeleton';
-import { inter } from '@/lib/fonts';
 
 const PersonalLinkMockup = dynamic(() => import("@/components/mockup/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
 const SocialLinkMockup = dynamic(() => import("@/components/mockup/social-link-mockup").then((mod) => mod.SocialLinkMockup))
@@ -39,7 +42,7 @@ const ProjectLinksMockup = dynamic(() => import("@/components/mockup/projects-li
 
 
 type TProps = {
-  bioSyncDetails: TUserBio
+  bioSyncDetails: UserBio
 }
 
 
@@ -55,6 +58,7 @@ export default function ViewBioSync(
   { bioSyncDetails }: TProps
 ) {
   const {
+    bioId,
     displayProfile,
     profilePicLink,
     name,
@@ -74,10 +78,16 @@ export default function ViewBioSync(
   } = bioSyncDetails;
 
 
+  // COPY LINK BUTTON FUNCTION
+  async function copyLink() {
+    await navigator.clipboard.writeText(WEBSITE_LINK + "/view?share=" + bioId);
+  }
+
+
   return (
     <section className={classNames(`${inter.className}`, {
-        "px-2 md:px-20 lg:px-24 py-10 md:py-16": true,
-        "space-y-16 sm:space-y-24": true,
+      "px-2 md:px-20 lg:px-24 py-10 md:py-16": true,
+      "space-y-16 sm:space-y-24": true,
     })}>
       <div className={classNames({
         'flex flex-col md:flex-row items-center justify-center gap-0 md:gap-12 lg:gap-32': true,
@@ -93,17 +103,25 @@ export default function ViewBioSync(
         }
 
 
-        <div className='space-y-6 sm:space-y-10'>
+        <div className='space-y-6 sm:space-y-8'>
           <h1 className='font-bold text-center sm:text-left text-3xl sm:text-5xl'>
             <span className='text-muted-foreground text-center text-xl sm:text-2xl'>MySelf,</span> <br />
             {name}
           </h1>
 
+          <Button
+            size={'sm'}
+            variant={'default'}
+            onClick={copyLink}
+          >
+            Copy Link <Copy className='icon' />
+          </Button>
+
           <div className='space-y-2'>
             <PersonalLinkMockup
               Icon={AiOutlineMail as IconType}
               label={email}
-              link={"mailto:"+email}
+              link={"mailto:" + email}
               className={classNames(PERSONAL_LINKS_CLASSES)}
             />
 

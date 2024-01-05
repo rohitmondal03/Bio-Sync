@@ -15,7 +15,7 @@ export default function ShowDemoDataButton() {
       className="btn"
       onClick={showDemo}
     >
-      Show Demo <PictureInPicture className="icon" />
+      Demo <PictureInPicture className="icon" />
     </Button>
   )
 }

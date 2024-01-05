@@ -35,7 +35,7 @@ export default function InputFields({
 ) {
   return (
     <div className={classNames(`${widthClass}`, {
-      "border-4 border-black/20 rounded-lg": true,
+      "border-2 border-zinc-400 rounded-lg": true,
       "p-4 space-y-4": true,
     })}>
       <Label

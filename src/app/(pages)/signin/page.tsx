@@ -14,7 +14,7 @@ async function SignInPage() {
 
   return (
     <section className={classNames({
-      "px-20 py-24": true,
+      "px-2 sm:px-10 md:px-20 py-20 lg:py-28": true,
     })}>
       <SignInLandingComponent />
     </section>

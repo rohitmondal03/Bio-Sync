@@ -60,7 +60,7 @@ export const RootMetadata: Metadata = {
 
 // NEW BIOSYNC PAGE METADATA
 export const NewBioSyncPageMetadata: Metadata = {
-  title: "Create a new BioSync !",
+  title: "Create a new BioSync",
   description: `Create your own BioSync page by sharing information about yourself, your social links and your projects.`,
 }
 

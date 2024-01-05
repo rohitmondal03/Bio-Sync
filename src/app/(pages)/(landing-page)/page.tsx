@@ -5,8 +5,8 @@ import classNames from "classnames";
 
 const HeadingText = dynamic(() => import("./_components/heading"))
 const AboutText = dynamic(() => import("./_components/about"))
-const FeatureSection= dynamic(() => import("./_components/features-section"))
-const OpenSourcePromotionSection= dynamic(() => import("./_components/open-source-prom-section"))
+const FeatureSection = dynamic(() => import("./_components/features-section"))
+const OpenSourcePromotionSection = dynamic(() => import("./_components/open-source-prom-section"))
 
 
 function HomePage() {

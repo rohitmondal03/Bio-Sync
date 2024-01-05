@@ -13,7 +13,7 @@ export default async function DashboardPage() {
 
   const userDetails = sessionDetails?.user;
 
-  (!sessionDetails) ? redirect("/api/auth/signin?callbackUrl=%2Fnew-bio-sync") : null;
+  (!sessionDetails) ? redirect("/api/auth/signin?callbackUrl=%2Fnew") : null;
 
 
   return (

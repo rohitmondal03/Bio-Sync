@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import classNames from "classnames";
 
 import { montserrat } from "@/lib/fonts";
@@ -20,12 +21,16 @@ const DrawerTrigger = dynamic(() => import("@/components/ui/drawer").then((mod) 
 
 
 export default function Footer() {
+  const path= usePathname();
+
+
   return (
     <footer className={classNames({
       "flex items-center justify-center": true,
       "text-white text-base": true,
       "bg-black": true,
       "p-1": true,
+      "hidden": path === "/new",
     })}>
       <span>Made by:</span>
 

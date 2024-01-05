@@ -185,11 +185,11 @@ export default function InputForm({ image }: TProps) {
 
       {/* FOOTER BUTTONS */}
       <div className={classNames({
-        "grid grid-cols-1 xs:grid-cols-2 items-center justify-around gap-1 sm:gap-3": true,
+        "grid grid-cols-2 sm:grid-cols-4 items-center justify-around gap-1": true,
         "p-1 sm:p-3": true,
         "sticky bottom-0 left-0": true,
-        "backdrop-blur-sm bg-opacity-100": true,
-        "rounded-xl border-4 border-gray-600/80": true,
+        "backdrop-blur-[2px] bg-slate-400/70 bg-opacity-80": true,
+        "rounded-xl border-2 border-black": true,
       })}>
         <ShowDemoDataButton />
         <PublishButton />
