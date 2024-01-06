@@ -29,13 +29,10 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: z.string(),
     GITHUB_CLIENT_ID: z.string(),
     GITHUB_CLIENT_SECRET: z.string(),
-    CLOUDINARY_URL: z.string(),
-    CLOUDINARY_API_KEY: z.string(),
-    CLOUDINARY_API_SECRET: z.string(),
+    SUPABASE_URL: z.string(),
+    SUPABASE_ANON_KEY: z.string(),
   },
-  client: {
-    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string(),
-  },
+  client: {},
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
@@ -45,10 +42,8 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
-    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-    CLOUDINARY_URL: process.env.CLOUDINARY_URL,
-    CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
-    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
+    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
+    SUPABASE_URL: process.env.SUPABASE_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

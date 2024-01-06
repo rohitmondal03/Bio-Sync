@@ -18,7 +18,7 @@ import {
 } from "react-icons/fa6";
 
 import { useData } from "@/hooks/useBioData";
-import { useUser } from "@/hooks/useUser";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { inter } from "@/lib/fonts";
 import { isSocialFieldsEmpty } from "@/lib/functions/isSocialFieldsEmpty";
 import { isUserBioEmpty } from "@/lib/functions/isUserBioEmpty";
@@ -46,7 +46,7 @@ const AvatarImage = dynamic(() => import("@/components/ui/avatar").then(mod => m
 
 export default function MobilePreview() {
   const { data: userBioData } = useData();
-  const { userDetails } = useUser();
+  const { userDetails } = useCurrentUser();
 
   const {
     name,

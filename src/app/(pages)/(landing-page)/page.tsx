@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { memo } from "react";
 import classNames from "classnames";
+import { uploadFile } from "@/lib/supabase";
 
 const HeadingText = dynamic(() => import("./_components/heading"))
 const AboutText = dynamic(() => import("./_components/about"))

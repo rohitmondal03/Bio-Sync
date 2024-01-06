@@ -2,17 +2,17 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { memo } from "react";
 import classNames from "classnames";
 import { Github, Menu } from "lucide-react";
 
 import { montserrat } from "@/lib/fonts"
 import { WEBSITE_GITHUB_LINK } from "@/lib/config/website-details.config";
-import { useUser } from "@/hooks/useUser";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
+
+
 import SignOutButton from "../buttons/sign-out-button";
 
-
-
-// const Logo = dynamic(() => import("../Logo"))
 const Button = dynamic(() => import("@/components/ui/button").then((mod) => mod.Button))
 const Sheet = dynamic(() => import("@/components/ui/sheet").then((mod) => mod.Sheet))
 const SheetContent = dynamic(() => import("@/components/ui/sheet").then((mod) => mod.SheetContent))
@@ -30,8 +30,8 @@ type TNavButtonProps = {
 }
 
 
-export default function LargeScreenNavbar() {
-  const { authStatus, userDetails } = useUser();
+function Navbar() {
+  const { authStatus, userDetails } = useCurrentUser();
 
   const userName = userDetails?.name ?? "";   // user's name
 
@@ -55,14 +55,14 @@ export default function LargeScreenNavbar() {
         <Link
           href={WEBSITE_GITHUB_LINK}
           className={classNames({
-            "border-2 border-slate-500/60 rounded-full": true,
+            "border-2 border-slate-700/60 rounded-full": true,
             "p-2": true,
             "transition ease-out": true,
-            "hover:scale- hover:p-[0.35rem] hover:border-4 hover:border-dotted hover:border-zinc-500": true,
+            "hover:scale- hover:p-[0.35rem] hover:border-4 hover:border-dotted hover:border-zinc-700": true,
           })}
           target="_blank"
         >
-          <Github />
+          <Github className="fill-slate-300" />
         </Link>
 
 
@@ -110,6 +110,7 @@ export default function LargeScreenNavbar() {
   )
 }
 
+export default memo(Navbar)
 
 
 
@@ -184,7 +185,10 @@ function Logo() {
   return (
     <Link href={"/"}>
       <h1 className={classNames(`${montserrat.className}`, {
-        "text-2xl sm:text-3xl font-bold text-slate-800": true,
+        "text-2xl sm:text-3xl font-bold text-orange-600": true,
+        "border border-zinc-500 rounded-md": true,
+        "shadow-[5px_5px_0] shadow-orange-600/60": true,
+        "p-2": true,
         "transition ease-out": true,
       })}>
         BioSync

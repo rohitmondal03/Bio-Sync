@@ -4,9 +4,9 @@ import { notFound, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import type { UserBio } from "@prisma/client";
 
+import GlobalLoadingState from "@/app/loading";
 import BioSyncNotFound from "./not-found-bio-sync";
 import ViewBioSync from "./view-bio-sync";
-import GlobalLoadingState from "@/app/loading";
 
 
 export default function BioSyncViewWidget() {
