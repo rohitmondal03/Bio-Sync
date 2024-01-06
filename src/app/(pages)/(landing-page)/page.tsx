@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { memo } from "react";
 import classNames from "classnames";
 
 import HeadingText from "./_components/heading";

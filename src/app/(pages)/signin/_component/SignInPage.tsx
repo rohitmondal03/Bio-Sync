@@ -3,7 +3,6 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { signIn } from "next-auth/react";
-import { memo } from "react";
 import classNames from "classnames";
 import { FaDiscord, FaGithub } from "react-icons/fa6";
 
@@ -84,4 +83,4 @@ function SignInLandingComponent() {
 }
 
 
-export default memo(SignInLandingComponent);
+export default SignInLandingComponent

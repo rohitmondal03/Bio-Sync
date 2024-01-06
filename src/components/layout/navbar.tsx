@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { memo } from "react";
 import classNames from "classnames";
 import { Github, Menu } from "lucide-react";
 
@@ -110,7 +109,7 @@ function Navbar() {
   )
 }
 
-export default memo(Navbar)
+export default Navbar
 
 
 

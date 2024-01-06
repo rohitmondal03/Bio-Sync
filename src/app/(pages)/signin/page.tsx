@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-import { memo } from "react";
 import classNames from "classnames";
 
 import { getServerAuthSession } from "@/server/auth";
@@ -21,4 +20,4 @@ async function SignInPage() {
   )
 }
 
-export default memo(SignInPage);
+export default SignInPage
