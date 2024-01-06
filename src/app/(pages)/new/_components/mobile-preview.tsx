@@ -37,6 +37,7 @@ import {
 const ProjectLinksMockup = dynamic(() => import("@/components/mockup/projects-links-mockup").then((mod) => mod.ProjectLinksMockup))
 const PersonalLinkMockup = dynamic(() => import("@/components/mockup/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
 const SocialLinkMockup = dynamic(() => import("@/components/mockup/social-link-mockup").then((mod) => mod.SocialLinkMockup))
+const SkillsMockup = dynamic(() => import("@/components/mockup/skills-mockup").then((mod) => mod.SkillsMockup))
 const ScrollArea = dynamic(() => import("@/components/ui/scroll-area").then(mod => mod.ScrollArea))
 const Avatar = dynamic(() => import("@/components/ui/avatar").then(mod => mod.Avatar))
 const AvatarFallback = dynamic(() => import("@/components/ui/avatar").then(mod => mod.AvatarFallback))
@@ -64,6 +65,7 @@ export default function MobilePreview() {
     hashnodeUsername,
     mediumUsername,
     projectLinks,
+    skills,
   } = userBioData;
 
 
@@ -129,8 +131,8 @@ export default function MobilePreview() {
               {bio && (
                 <ScrollArea className={classNames({
                   "border border-slate-600 rounded-2xl": true,
-                  "w-full h-48 py-1 px-2": true,
-                  "shadow-inner": true,
+                  "w-[95%] h-48 py-1 px-2": true,
+                  "shadow-[4px_4px_0] shadow-slate-600": true,
                   "bg-slate-200": true,
                 })}>
                   <h1 className="mb-2 text-lg font-semibold">About me,</h1>
@@ -221,6 +223,20 @@ export default function MobilePreview() {
                         label={"Youtube"}
                       />
                     }
+                  </div>
+                </div>
+              )}
+
+
+              {/* DISPLAYING SKILLS */}
+              {skills.length > 0 && (
+                <div className="my-5">
+                  <h1 className="font-bold text-xl text-center">Skills</h1>
+
+                  <div className="space-y-3">
+                    {skills.map((skill, idx) => (
+                      <SkillsMockup skill={skill} idx={idx} key={skill} />
+                    ))}
                   </div>
                 </div>
               )}

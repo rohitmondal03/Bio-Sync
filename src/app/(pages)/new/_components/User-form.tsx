@@ -31,12 +31,15 @@ type TProps = Session["user"];
 
 export default function InputForm({ image }: TProps) {
   const [projectLink, setProjectLink] = useState<string>("");
+  const [skill, setSkill] = useState<string>("");
   const {
     data: userBioData,
     addProjectLink,
     toggleProfileImage,
     handleInputChange,
     removeProject,
+    addSkills,
+    removeSkill,
   } = useData();
 
 
@@ -58,6 +61,24 @@ export default function InputForm({ image }: TProps) {
   }
 
 
+  // for adding skills in array
+  function addSkill() {
+    if (skill === undefined || skill.trim().length < 1) {
+      alert("Skill's field cannot be empty");
+      setSkill("");
+      return;
+    }
+    if (userBioData.skills.includes(skill)) {
+      alert("This skill is already added !!");
+      setSkill("");
+      return;
+    }
+
+    addSkills(projectLink);
+    setSkill("");
+  }
+
+
   // for checking if field required
   function isFieldRequired(id: keyof TUserBio) {
     return id === "bio" || id === "email" || id === "name"
@@ -74,7 +95,7 @@ export default function InputForm({ image }: TProps) {
       })}
     >
       {/* PROFILE IMAGE */}
-      <div className={classNames({
+      <section className={classNames({
         "flex flex-col items-center justify-center gap-y-5": true,
         "w-auto sm:w-[40vw] mx-auto": true,
       })}>
@@ -107,7 +128,7 @@ export default function InputForm({ image }: TProps) {
             onCheckedChange={toggleProfileImage}
           />
         </div>
-      </div>
+      </section>
 
 
       <Separator
@@ -119,7 +140,7 @@ export default function InputForm({ image }: TProps) {
 
 
       {/* INPUT SECTIONS */}
-      <div className={classNames({
+      <section className={classNames({
         "flex flex-col items-center justify-center gap-5": true,
       })}>
         {INPUT_FIELDS_DETAILS.map((det) => (
@@ -137,8 +158,52 @@ export default function InputForm({ image }: TProps) {
           />
         ))}
 
+        {/* FOR ADDING SKILLS */}
+        <div className={classNames({
+          "text-xl font-bold text-center": true,
+          "py-3 lg:py-6": true,
+          "space-y-3": true,
+        })}>
+          <h1>Add Skills </h1>
 
-        {/* PROJECT LINKS AND INPUT FIELD...!! */}
+          <div className={classNames({
+            "flex flex-row items-center justify-center gap-3": true,
+          })}>
+            <Input
+              value={skill}
+              placeholder="add your skill and press '+'"
+              onChange={(e) => setSkill(e.target.value)}
+              className={classNames({
+                "outline-1 outline": true,
+                "w-auto sm:w-[25rem]": true,
+              })}
+            />
+
+            <Button
+              size={"icon"}
+              type="button"
+              onClick={addSkill}
+            >
+              <FaPlus />
+            </Button>
+          </div>
+
+          <div className={classNames({
+            "grid grid-cols-1 sm:grid-cols-2 gap-2": true,
+          })}>
+            {userBioData.skills.map((skill: string, idx) => (
+              <SkillsDisplayMockup
+                key={idx}
+                skill={skill}
+                idx={idx}
+                removeSkills={() => removeSkill(idx)}
+              />
+            ))}
+          </div>
+        </div>
+
+
+        {/* PROJECT LINKS ...!! */}
         <div className={classNames({
           "text-xl font-bold text-center": true,
           "py-3 lg:py-6": true,
@@ -169,7 +234,7 @@ export default function InputForm({ image }: TProps) {
           </div>
 
           <div className={classNames({
-            "grid grid-cols-2 gap-2": true,
+            "grid grid-cols-1 sm:grid-cols-2 gap-2": true,
           })}>
             {userBioData.projectLinks.map((link, idx) => (
               <ProjectDisplayMockup
@@ -180,11 +245,11 @@ export default function InputForm({ image }: TProps) {
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
 
       {/* FOOTER BUTTONS */}
-      <div className={classNames({
+      <section className={classNames({
         "grid grid-cols-2 sm:grid-cols-4 items-center justify-around gap-1": true,
         "p-1 sm:p-3": true,
         "sticky bottom-0 left-0": true,
@@ -196,13 +261,13 @@ export default function InputForm({ image }: TProps) {
         <ResetButton />
         <GithubLinkButton />
         <PreviewButton />
-      </div>
+      </section>
     </form>
   )
 }
 
 
-
+// PROJECT DISPLAY MOCKUP
 function ProjectDisplayMockup(
   { link, removeProject }: { link: string, removeProject: (idx: number) => void }
 ) {
@@ -226,6 +291,38 @@ function ProjectDisplayMockup(
       <FaDeleteLeft
         fill="black"
         onClick={removeProject}
+        className={classNames({
+          "hover:scale-110 transition ease-out": true,
+          "cursor-pointer": true,
+        })}
+      />
+    </div>
+  )
+}
+
+
+
+// PROJECT DISPLAY MOCKUP
+function SkillsDisplayMockup(
+  { skill, removeSkills, idx }: { skill: string, idx: number, removeSkills: (idx: number) => void }
+) {
+  return (
+    <div
+      key={skill}
+      className={classNames({
+        "flex flex-row gap-4 items-center justify-between": true,
+        "border-2 border-zinc-800 rounded-lg": true,
+        "text-sm font-thin text-left": true,
+        "p-2": true,
+        "bg-zinc-100": true,
+        "shadow-[2px_2px_0]": true,
+      })}
+    >
+      <p>{idx + 1 + ". "}{skill}</p>
+
+      <FaDeleteLeft
+        fill="black"
+        onClick={removeSkills}
         className={classNames({
           "hover:scale-110 transition ease-out": true,
           "cursor-pointer": true,

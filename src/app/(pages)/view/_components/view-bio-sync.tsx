@@ -33,6 +33,7 @@ import {
   WHATSAPP_CONST,
   YOUTUBE_CONST,
 } from '@/lib/constants/social-links-skeleton';
+import { SkillsMockup } from '@/components/mockup/skills-mockup';
 
 const PersonalLinkMockup = dynamic(() => import("@/components/mockup/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
 const SocialLinkMockup = dynamic(() => import("@/components/mockup/social-link-mockup").then((mod) => mod.SocialLinkMockup))
@@ -75,6 +76,7 @@ export default function ViewBioSync(
     twitterUsername,
     youtubeUsername,
     projectLinks,
+    skills,
   } = bioSyncDetails;
 
 
@@ -151,6 +153,25 @@ export default function ViewBioSync(
         </h1>
 
         <p className='sm:text-lg'>{bio}</p>
+      </div>
+
+
+      <div className='mx-auto space-y-8'>
+        <h1 className='text-center text-2xl sm:text-3xl font-bold underline'>
+          Skills
+        </h1>
+
+        <div className={classNames({
+          'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center gap-4': true,
+        })}>
+          {skills.map(((skill, idx) => (
+            <SkillsMockup
+              idx={idx}
+              skill={skill}
+              key={idx}
+            />
+          )))}
+        </div>
       </div>
 
 

@@ -22,6 +22,7 @@ import { useData } from "@/hooks/useBioData";
 import { isUserBioEmpty } from "@/lib/functions/isUserBioEmpty";
 import { isSocialFieldsEmpty } from "@/lib/functions/isSocialFieldsEmpty";
 
+import { SkillsMockup } from "@/components/mockup/skills-mockup";
 const SocialLinkMockup= dynamic(() => import("@/components/mockup/social-link-mockup").then((mod) => mod.SocialLinkMockup))
 const ProjectLinksMockup= dynamic(() => import("@/components/mockup/projects-links-mockup").then((mod) => mod.ProjectLinksMockup))
 const PersonalLinkMockup= dynamic(() => import("@/components/mockup/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
@@ -41,7 +42,8 @@ export default function PreviewButton() {
     email,
     portfolioLink,
     devdotToUsername, discordUsername, githubUsername, hashnodeUsername, linkedinUsername, mediumUsername, twitterUsername, whatsAppNumber, youtubeUsername,
-    projectLinks
+    projectLinks,
+    skills,
   } = data;
 
 
@@ -86,6 +88,7 @@ export default function PreviewButton() {
               )}
             </div>
 
+
             <div className="flex flex-col items-center justify-center gap-1">
               {email && (
                 <PersonalLinkMockup
@@ -108,21 +111,25 @@ export default function PreviewButton() {
               )}
             </div>
 
+
             {bio && (
               <p className={classNames({
                 "border-2 border-zinc-600 rounded-xl": true,
+                "shadow-[7px_7px_0]": true,
                 "text-left text-sm xs:text-base": true,
                 "p-3": true,
+                "mx-auto": true,
+                "w-[90vw] sm:w-[70vw]": true,
               })}>
                 {bio}
-
               </p>
             )}
+
 
             {!isSocialFieldsEmpty() && (
               <div className="space-y-3">
                 <h1 className="font-bold text-xl">
-                  My Social Links...
+                  Connect w/ me...
                 </h1>
 
                 <div className={classNames({
@@ -202,6 +209,28 @@ export default function PreviewButton() {
                 </div>
               </div>
             )}
+
+
+            {skills.length > 0 && (
+              <div className="space-y-3">
+              <h1 className="font-bold text-2xl underline">
+                Skills
+              </h1>
+
+              <div className={classNames({
+                "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-x-0 items-center justify-center": true,
+              })}>
+                {skills.map((skill, idx) =>
+                  <SkillsMockup
+                    idx={idx}
+                    skill={skill}
+                    key={skill}
+                  />
+                )}
+              </div>
+            </div>
+            )}
+
 
             {projectLinks.length > 0 && (
               <div className="space-y-3">

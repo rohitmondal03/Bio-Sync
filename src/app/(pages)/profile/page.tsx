@@ -1,8 +1,8 @@
 import { getServerAuthSession } from "@/server/auth"
 import { redirect } from "next/navigation";
+import classNames from "classnames";
 
 import UserProfileWidget from "./_components/UserProfileWidget";
-import classNames from "classnames";
 
 
 export default async function UsersProfilePage() {

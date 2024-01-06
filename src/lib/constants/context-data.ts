@@ -18,6 +18,7 @@ export const INITIAL_DATA: TUserBio = {
   hashnodeUsername: "",
   mediumUsername: "",
   projectLinks: [],
+  skills: [],
 };
 
 export const DEMO_DATA: TUserBio = {
@@ -37,4 +38,5 @@ export const DEMO_DATA: TUserBio = {
   hashnodeUsername: "@rohitmondall8000",
   mediumUsername: "@rohitmondall8000",
   projectLinks: ["https://opentyped-nextjs.vercel.app/", "https://imagewall.vercel.app/"],
+  skills: ["JavsScript", "TypeScript", "ReactJS", "NextJS", "Prisma", "Working with APIs and serverless Databases."]
 }

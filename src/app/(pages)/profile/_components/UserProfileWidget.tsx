@@ -84,9 +84,13 @@ export default async function UserProfileWidget() {
 
 
         <div className="flex flex-wrap items-center justify-center gap-7">
-          {usersBioSyncs.map((uBios) => (
-            <UserBioSyncCard key={uBios.bioId} {...uBios} />
-          ))}
+          {usersBioSyncs.length > 0 ?
+            usersBioSyncs.map((uBios) => (
+              <UserBioSyncCard key={uBios.bioId} {...uBios} />
+            )) : (
+              <h1>You have no BioSync</h1>
+            )
+          }
         </div>
       </div>
     </section>

@@ -8,10 +8,12 @@ interface IDataContextType {
   data: TUserBio,
   showDemo: () => void,
   addProjectLink: (projectLink: string) => void,
+  addSkills: (skill: string) => void,
   reset: () => void,
   toggleProfileImage: () => void,
   handleInputChange: (input: string, id: keyof TUserBio) => void,
   removeProject: (idx: number) => void,
+  removeSkill: (idx: number) => void,
 }
 
 
@@ -26,6 +28,7 @@ export const DataProvider = ({ children }: ILayout) => {
     setData(DEMO_DATA);
   }
 
+
   // add project
   function addProjectLink(projectLink: string) {
     setData((prev) => ({
@@ -34,10 +37,21 @@ export const DataProvider = ({ children }: ILayout) => {
     }))
   }
 
+
+  // add skills
+  function addSkills(skill: string) {
+    setData((prev) => ({
+      ...prev,
+      skills: [...prev.skills, skill]
+    }))
+  }
+
+
   // resetting whole form to
   function reset() {
     setData(INITIAL_DATA);
   }
+
 
   // include profile image or not
   function toggleProfileImage() {
@@ -86,15 +100,26 @@ export const DataProvider = ({ children }: ILayout) => {
   }
 
 
+  // for deleting skills from array
+  function removeSkill(idx: number) {
+    setData((prev) => ({
+      ...prev,
+      skills: prev.skills.filter((_, i) => i !== idx)
+    }))
+  }
+
+
   return (
     <DataContext.Provider value={{
       data,
       showDemo,
       addProjectLink,
+      addSkills,
       reset,
       toggleProfileImage,
       handleInputChange,
       removeProject,
+      removeSkill,
     }}>
       {children}
     </DataContext.Provider>

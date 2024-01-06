@@ -28,5 +28,6 @@ type TUserBio = {
   devdotToUsername: string,
   whatsAppNumber: string,
   projectLinks: string[],
+  skills: string[],
   // bgCode: string | null,
 } 
