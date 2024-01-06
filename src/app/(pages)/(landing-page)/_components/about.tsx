@@ -1,7 +1,7 @@
 import classNames from "classnames";
 
 
-export default function AboutTexts() {
+export default function AboutText() {
   return (
     <section>
       <p className={classNames({
