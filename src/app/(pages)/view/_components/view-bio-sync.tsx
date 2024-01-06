@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react'
 import classNames from 'classnames';
 import type { UserBio } from '@prisma/client';
-import { Copy, Delete } from 'lucide-react';
+import { Copy } from 'lucide-react';
 import { type IconType, } from 'react-icons';
 import { AiOutlineMail } from 'react-icons/ai';
 import {

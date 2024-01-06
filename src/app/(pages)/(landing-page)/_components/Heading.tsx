@@ -1,7 +1,7 @@
 export default function HeadingText() {
   return (
     <section className="space-y-4">
-      <h1 className="text-6xl md:text-7xl font-bold text-slate-700 underline">
+      <h1 className="text-6xl md:text-7xl font-bold text-slate-500 underline">
         BioSync
       </h1>
 
