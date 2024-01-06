@@ -19,11 +19,11 @@ export function SocialLinkMockup(
       className={classNames({
         "flex flex-row items-center gap-4": true,
         "text-sm": true,
-        "border-2 border-zinc-400 rounded-xl": true,
+        "border border-zinc-400 rounded-xl": true,
         "py-1 px-2": true,
         "bg-zinc-200": true,
         "shadow-[3px_3px_0]": true,
-        "hover:scale-105 hover:rounded-lg hover:bg-rose-200 hover:border-2 hover:border-black": true,
+        "hover:scale-105 hover:rounded-lg hover:bg-rose-200 hover:border-black": true,
         "duration-200 transition ease": true,
       })}
       target="_blank"

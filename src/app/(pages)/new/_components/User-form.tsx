@@ -74,7 +74,7 @@ export default function InputForm({ image }: TProps) {
       return;
     }
 
-    addSkills(projectLink);
+    addSkills(skill);
     setSkill("");
   }
 
