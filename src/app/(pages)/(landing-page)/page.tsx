@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { memo } from "react";
 import classNames from "classnames";
@@ -33,4 +32,4 @@ function HomePage() {
   )
 }
 
-export default memo(HomePage)
+export default HomePage;
