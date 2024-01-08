@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import classNames from 'classnames';
 import type { UserBio } from '@prisma/client';
 import { Copy } from 'lucide-react';
@@ -34,7 +34,7 @@ import {
   YOUTUBE_CONST,
 } from '@/lib/constants/social-links-skeleton';
 
-const SkillsMockup= dynamic(() => import('@/components/mockup/skills-mockup').then((mod) => mod.SkillsMockup))
+const SkillsMockup = dynamic(() => import('@/components/mockup/skills-mockup').then((mod) => mod.SkillsMockup))
 const PersonalLinkMockup = dynamic(() => import("@/components/mockup/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
 const SocialLinkMockup = dynamic(() => import("@/components/mockup/social-link-mockup").then((mod) => mod.SocialLinkMockup))
 const ProjectLinksMockup = dynamic(() => import("@/components/mockup/projects-links-mockup").then((mod) => mod.ProjectLinksMockup))
