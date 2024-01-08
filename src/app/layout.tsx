@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import { type Metadata } from "next";
 
 import type { ILayout } from "types"
@@ -8,11 +9,13 @@ import { AuthProvider } from "@/components/providers/AuthProvider";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 
+// const Toaster= dynamic(() => import("@/components/ui/toaster").then((mod) => mod.Toaster))
+// const GlobalToastProvider= dynamic(() => import("@/components/providers/ToastProvider").then((mod) => mod.GlobalToastProvider))
+
 import "@/styles/globals.css"
 
 
-
-export const metadata: Metadata= RootMetadata;
+export const metadata: Metadata = RootMetadata;
 
 
 export default function RootLayout(
@@ -24,11 +27,14 @@ export default function RootLayout(
         <AuthProvider>
           <Navbar />
           <ContextProvider>
+            {/* <GlobalToastProvider> */}
             <>{children}</>
+            {/* </GlobalToastProvider> */}
+            {/* <Toaster /> */}
           </ContextProvider>
           <Footer />
         </AuthProvider>
       </body>
-    </html>
+    </html >
   );
 }

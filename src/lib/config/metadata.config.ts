@@ -13,7 +13,7 @@ import { getServerAuthSession } from "@/server/auth";
 // ROOT METADATA
 const RootMetadata: Metadata = {
   title: "BioSync, your single link Portfolio",
-  description: "Your single link portfolio...",
+  description: WEBSITE_DESC,
   applicationName: WEBSITE_TITLE,
   metadataBase: new URL(WEBSITE_LINK),
   openGraph: {

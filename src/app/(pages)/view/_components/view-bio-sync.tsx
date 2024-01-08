@@ -33,12 +33,13 @@ import {
   WHATSAPP_CONST,
   YOUTUBE_CONST,
 } from '@/lib/constants/social-links-skeleton';
+import { useToast } from '@/components/ui/use-toast';
 
 const SkillsMockup = dynamic(() => import('@/components/mockup/skills-mockup').then((mod) => mod.SkillsMockup))
 const PersonalLinkMockup = dynamic(() => import("@/components/mockup/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
 const SocialLinkMockup = dynamic(() => import("@/components/mockup/social-link-mockup").then((mod) => mod.SocialLinkMockup))
 const ProjectLinksMockup = dynamic(() => import("@/components/mockup/projects-links-mockup").then((mod) => mod.ProjectLinksMockup))
-
+const ToastAction = dynamic(() => import("@/components/ui/toast").then((mod) => mod.ToastAction))
 
 
 
@@ -79,10 +80,14 @@ export default async function ViewBioSync(
     skills,
   } = bioSyncDetails;
 
+  const { toast } = useToast()
+
 
   // COPY LINK BUTTON FUNCTION
   async function copyLink() {
     await navigator.clipboard.writeText(WEBSITE_LINK + "/view?share=" + bioId);
+
+    
   }
 
 
@@ -114,7 +119,13 @@ export default async function ViewBioSync(
           <Button
             size={'sm'}
             variant={'default'}
-            onClick={copyLink}
+            onClick={() => {
+              copyLink();
+
+              // toast({
+              //   title: "Link Copied !!",
+              // })
+            }}
           >
             Copy Link <Copy className='icon' />
           </Button>
