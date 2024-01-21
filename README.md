@@ -6,7 +6,7 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="https://bio-sync.vercel.app/twitter-image.png?492d8ce7053c4e93" alt="project-screenshot" width="300" height="500/">
+<img src="https://bio-sync.vercel.app/twitter-image.png?492d8ce7053c4e93" alt="project-screenshot" width="300" height="300/">
 
 <img src="https://socialify.git.ci/rohitmondal03/Bio-Sync/image?language=1&amp;name=1&amp;owner=1&amp;stargazers=1&amp;theme=Light" alt="project-screenshot" width="300" height="400/">
 
