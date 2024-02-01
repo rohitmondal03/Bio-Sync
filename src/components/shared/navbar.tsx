@@ -38,7 +38,7 @@ function Navbar() {
   return (
     <nav className={classNames({
       "flex flex-row items-center justify-between md:justify-around": true,
-      "py-3 sm:py-5 px-3 sm:px-10 md:px-0": true,
+      "py-3 sm:py-4 px-3 sm:px-10 md:px-0": true,
       "border-zinc-500 border-b-2": true,
       "sticky top-0 left-0 z-10": true,
       "bg-opacity-100 backdrop-blur-[100px]": true,

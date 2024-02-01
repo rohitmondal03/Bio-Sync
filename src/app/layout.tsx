@@ -5,8 +5,8 @@ import { poppins } from "@/lib/fonts";
 import { RootMetadata } from "@/lib/config/metadata.config";
 import ContextProvider from "@/components/providers/ContextProvider";
 import { AuthProvider } from "@/components/providers/AuthProvider";
-import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
+import Navbar from "@/components/shared/navbar";
+import Footer from "@/components/shared/footer";
 
 import "@/styles/globals.css"
 
