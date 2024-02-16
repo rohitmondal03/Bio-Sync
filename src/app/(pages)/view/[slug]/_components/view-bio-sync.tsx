@@ -35,7 +35,6 @@ import {
   WHATSAPP_CONST,
   YOUTUBE_CONST,
 } from '@/lib/constants/social-links-skeleton';
-import { Separator } from '@/components/ui/separator';
 
 const SkillsMockup = dynamic(() => import('@/components/mockup/skills-mockup').then((mod) => mod.SkillsMockup))
 const PersonalLinkMockup = dynamic(() => import("@/components/mockup/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
