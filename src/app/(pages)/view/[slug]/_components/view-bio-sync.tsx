@@ -1,3 +1,6 @@
+"use client"
+
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import classNames from 'classnames';
@@ -32,16 +35,22 @@ import {
   WHATSAPP_CONST,
   YOUTUBE_CONST,
 } from '@/lib/constants/social-links-skeleton';
+import { Separator } from '@/components/ui/separator';
 
 const SkillsMockup = dynamic(() => import('@/components/mockup/skills-mockup').then((mod) => mod.SkillsMockup))
 const PersonalLinkMockup = dynamic(() => import("@/components/mockup/personal-link-mockup").then((mod) => mod.PersonalLinkMockup))
-const SocialLinkMockup = dynamic(() => import("@/components/mockup/social-link-mockup").then((mod) => mod.SocialLinkMockup))
 const ProjectLinksMockup = dynamic(() => import("@/components/mockup/projects-links-mockup").then((mod) => mod.ProjectLinksMockup))
 
 
 
 type TProps = {
   bioSyncDetails: UserBio
+}
+
+
+type TSocialLinkMockup = {
+  href: string;
+  Icon: IconType;
 }
 
 
@@ -80,7 +89,7 @@ export default async function ViewBioSync(
 
   // COPY LINK BUTTON FUNCTION
   async function copyLink() {
-    await navigator.clipboard.writeText(WEBSITE_LINK + "/view?share=" + bioId);
+    await navigator.clipboard.writeText(WEBSITE_LINK + "/view/" + bioId);
   }
 
 
@@ -89,53 +98,130 @@ export default async function ViewBioSync(
       "px-2 md:px-20 lg:px-24 py-10 md:py-16": true,
       "space-y-16 sm:space-y-24": true,
     })}>
-      <div className={classNames({
-        'flex flex-col md:flex-row items-center justify-center gap-0 md:gap-12 lg:gap-32': true,
-      })}>
-        {displayProfile &&
-          <Image
-            src={profilePicLink}
-            alt='profile pic'
-            height={300}
-            width={300}
-            className='scale-75 sm:scale-90 md:scale-100 rounded-2xl'
-          />
-        }
-
-
-        <div className='space-y-6 sm:space-y-8'>
-          <h1 className='font-bold text-center sm:text-left text-3xl sm:text-5xl'>
-            <span className='text-muted-foreground text-center text-xl sm:text-2xl'>MySelf,</span> <br />
-            {name}
-          </h1>
-
-          <Button
-            size={'sm'}
-            variant={'default'}
-            onClick={copyLink}
-          >
-            Copy Link <Copy className='icon' />
-          </Button>
-
-          <div className='space-y-2'>
-            <PersonalLinkMockup
-              Icon={AiOutlineMail as IconType}
-              label={email}
-              link={"mailto:" + email}
-              className={classNames(PERSONAL_LINKS_CLASSES)}
+      <div className='space-y-10'>
+        <div className={classNames({
+          'flex flex-col md:flex-row items-center justify-center gap-0 md:gap-12 lg:gap-32': true,
+        })}>
+          {displayProfile &&
+            <Image
+              src={profilePicLink}
+              alt='profile pic'
+              height={300}
+              width={300}
+              className={classNames({
+                'scale-75 sm:scale-90 md:scale-100': true,
+                "rounded-2xl": true,
+              })}
+              loading='lazy'
+              placeholder='blur'
+              blurDataURL={"/web_main_img.svg"}
             />
+          }
 
-            {portfolioLink &&
+          <div className='space-y-6 sm:space-y-8'>
+            <h1 className='font-bold text-center sm:text-left text-3xl sm:text-5xl'>
+              <span className='text-muted-foreground text-center text-xl sm:text-2xl'>MySelf,</span> <br />
+              {name}
+            </h1>
+
+            <Button
+              size={'sm'}
+              variant={'default'}
+              onClick={copyLink}
+            >
+              Copy Link <Copy className='icon' />
+            </Button>
+
+            <div className='space-y-2'>
               <PersonalLinkMockup
-                Icon={FaUser as IconType}
-                label={portfolioLink}
-                link={portfolioLink}
+                Icon={AiOutlineMail as IconType}
+                link={"mailto:" + email}
                 className={classNames(PERSONAL_LINKS_CLASSES)}
+                label={email}
               />
-            }
+
+              {portfolioLink &&
+                <PersonalLinkMockup
+                  Icon={FaUser as IconType}
+                  link={portfolioLink}
+                  className={classNames(PERSONAL_LINKS_CLASSES)}
+                  label={portfolioLink}
+                />
+              }
+            </div>
           </div>
         </div>
+
+        <Separator className='h-2 rounded-md bg-zinc-300' />
+
+        <div className={classNames({
+          "flex flex-grow flex-wrap gap-x-6 gap-y-4 sm:gap-x-8 items-center justify-center": true,
+        })}>
+          {whatsAppNumber && (
+            <SocialLinkMockup
+              href={WHATSAPP_CONST + whatsAppNumber}
+              Icon={FaWhatsapp as IconType}
+            />
+          )}
+
+          {linkedinUsername &&
+            <SocialLinkMockup
+              href={LINKEDIN_CONST + linkedinUsername}
+              Icon={FaLinkedin as IconType}
+            />
+          }
+
+          {twitterUsername &&
+            <SocialLinkMockup
+              href={TWITTER_CONST + twitterUsername}
+              Icon={FaTwitter as IconType}
+            />
+          }
+
+          {githubUsername &&
+            <SocialLinkMockup
+              href={GITHUB_CONST + githubUsername}
+              Icon={FaGithub as IconType}
+            />
+          }
+
+          {discordUsername &&
+            <SocialLinkMockup
+              href={DISCORD_CONST + discordUsername}
+              Icon={FaDiscord as IconType}
+            />
+          }
+
+          {mediumUsername && (
+            <SocialLinkMockup
+              href={MEDIUM_CONST + mediumUsername}
+              Icon={FaMedium as IconType}
+            />
+          )}
+
+          {hashnodeUsername && (
+            <SocialLinkMockup
+              Icon={FaHashnode as IconType}
+              href={HASHNODE_CONST + hashnodeUsername}
+            />
+          )}
+
+          {devdotToUsername && (
+            <SocialLinkMockup
+              Icon={FaDev as IconType}
+              href={DEVDOTTO_CONST + devdotToUsername}
+            />
+          )}
+
+          {youtubeUsername &&
+            <SocialLinkMockup
+              href={YOUTUBE_CONST + youtubeUsername}
+              Icon={FaYoutube as IconType}
+            />
+          }
+        </div>
       </div>
+
 
 
       <div className={classNames({
@@ -173,89 +259,6 @@ export default async function ViewBioSync(
       </div>
 
 
-      <div className='mx-auto flex flex-col md:flex-row items-center justify-center gap-5 md:gap-10 lg:gap-20'>
-        <h1 className='text-2xl text-center font-bold text-zinc-700'>
-          Connect w/ me...
-        </h1>
-
-        <div className={classNames({
-          "grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4 items-center justify-center": true,
-        })}>
-          {whatsAppNumber && (
-            <SocialLinkMockup
-              href={WHATSAPP_CONST + whatsAppNumber}
-              Icon={FaWhatsapp as IconType}
-              label={"WhatsApp"}
-            />
-          )}
-
-          {linkedinUsername &&
-            <SocialLinkMockup
-              href={LINKEDIN_CONST + linkedinUsername}
-              Icon={FaLinkedin as IconType}
-              label={"LinkedIn"}
-            />
-          }
-
-          {twitterUsername &&
-            <SocialLinkMockup
-              href={TWITTER_CONST + twitterUsername}
-              Icon={FaTwitter as IconType}
-              label={"Twitter"}
-            />
-          }
-
-          {githubUsername &&
-            <SocialLinkMockup
-              href={GITHUB_CONST + githubUsername}
-              Icon={FaGithub as IconType}
-              label={"GitHub"}
-            />
-          }
-
-          {discordUsername &&
-            <SocialLinkMockup
-              href={DISCORD_CONST + discordUsername}
-              Icon={FaDiscord as IconType}
-              label={"Discord"}
-            />
-          }
-
-          {mediumUsername && (
-            <SocialLinkMockup
-              href={MEDIUM_CONST + mediumUsername}
-              Icon={FaMedium as IconType}
-              label="Medium"
-            />
-          )}
-
-          {hashnodeUsername && (
-            <SocialLinkMockup
-              Icon={FaHashnode as IconType}
-              href={HASHNODE_CONST + hashnodeUsername}
-              label="Hashnode"
-            />
-          )}
-
-          {devdotToUsername && (
-            <SocialLinkMockup
-              Icon={FaDev as IconType}
-              href={DEVDOTTO_CONST + devdotToUsername}
-              label="Dev"
-            />
-          )}
-
-          {youtubeUsername &&
-            <SocialLinkMockup
-              href={YOUTUBE_CONST + youtubeUsername}
-              Icon={FaYoutube as IconType}
-              label={"Youtube"}
-            />
-          }
-        </div>
-      </div>
-
-
       <div className='mx-auto space-y-8'>
         <h1 className='text-center text-2xl sm:text-3xl font-bold underline'>Projects Links</h1>
 
@@ -272,5 +275,29 @@ export default async function ViewBioSync(
         </div>
       </div>
     </section>
+  )
+}
+
+
+// COMPONENT FOR SOCIAL LINKS
+
+export function SocialLinkMockup(
+  { href, Icon }: TSocialLinkMockup
+) {
+  return (
+    <Link
+      href={href}
+      className={classNames({
+        "border border-zinc-400 rounded-full": true,
+        "p-3": true,
+        "bg-zinc-200": true,
+        "shadow-[3px_3px_0]": true,
+        "hover:scale-105 hover:rounded-lg hover:bg-rose-200 hover:border-black": true,
+        "duration-200 transition ease": true,
+      })}
+      target="_blank"
+    >
+      <Icon fill="black" className='scale-125' />
+    </Link>
   )
 }

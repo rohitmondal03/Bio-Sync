@@ -34,7 +34,7 @@ export default function UserBioSyncCard(
       key={bioId}
       className={classNames({
         "border border-gray-600 rounded-xl": true,
-        "shadow-[10px_10px_0] shadow-gray-700": true,
+        "shadow-[5px_5px_0] md:shadow-[10px_10px_0] shadow-gray-700": true,
         "transition ease-out duration-300": true,
         "bg-zinc-50 scale-90 xs:scale-100": true,
       })}
@@ -66,7 +66,7 @@ export default function UserBioSyncCard(
         </Dialog>
 
 
-        <Link href={"/view?share=" + bioId}>
+        <Link href={"/view/" + bioId}>
           <Button className="font-bold">
             Link <ArrowBigRight className="icon" />
           </Button>

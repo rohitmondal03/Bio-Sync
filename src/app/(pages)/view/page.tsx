@@ -1,10 +1,6 @@
-import BioSyncViewWidget from "./_components/BioSyncWidget";
+import { notFound } from "next/navigation"
 
 
 export default function ViewPage() {
-  return (
-    <section>
-      <BioSyncViewWidget />
-    </section>
-  )
+  return notFound()
 }

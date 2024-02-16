@@ -29,9 +29,6 @@ export default async function UserProfileWidget() {
       provider: true,
     }
   })
-  const provider = String(getAccountProvider?.provider);
-  const providerFormatted = provider.charAt(0).toUpperCase() + provider.slice(1);
-
 
 
   // FOR GETTING USER'S BIOSYNCS
@@ -58,9 +55,9 @@ export default async function UserProfileWidget() {
           height={350}
           width={350}
           className={classNames({
-            "rounded-full md:rounded-3xl": true,
+            "rounded-3xl": true,
             "scale-[.7] sm:scale-75 md:scale-100": true,
-            "shadow-[10px_10px_0] shadow-gray-700": true,
+            "md:shadow-[10px_10px_0] md:shadow-gray-700": true,
           })}
           priority
         />
@@ -69,7 +66,7 @@ export default async function UserProfileWidget() {
           <IntroLabel label="Name" detail={userName} />
           <IntroLabel label="Email" detail={userEmail.slice(0, 15) + "..."} className="flex flex-col xs:hidden" />
           <IntroLabel label="Email" detail={userEmail} className="hidden xs:flex flex-col" />
-          <IntroLabel label="OAuth Provider" detail={providerFormatted} />
+          <IntroLabel label="OAuth Provider" detail={String(getAccountProvider?.provider).toUpperCase()} />
         </div>
       </div>
 

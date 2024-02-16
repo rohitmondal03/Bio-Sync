@@ -1,5 +1,5 @@
 export const WEBSITE_TITLE= "BioSync"
-export const WEBSITE_DESC= "Your single link portfolio..."
+export const WEBSITE_DESC= "Your single link portfolio that you can share with anyone !!"
 export const WEBSITE_LINK= "https://bio-sync.vercel.app"
 export const WEBSITE_GITHUB_LINK= "https://github.com/rohitmondal03/Bio-Sync"
 export const WEBSITE_AUTHOR= "Rohit Mondal"
