@@ -98,7 +98,7 @@ export default async function ViewBioSync(
       "px-2 md:px-20 lg:px-24 py-10 md:py-16": true,
       "space-y-16 sm:space-y-24": true,
     })}>
-      <div className='space-y-10'>
+      <div className='space-y-12'>
         <div className={classNames({
           'flex flex-col md:flex-row items-center justify-center gap-0 md:gap-12 lg:gap-32': true,
         })}>
@@ -151,8 +151,6 @@ export default async function ViewBioSync(
             </div>
           </div>
         </div>
-
-        <Separator className='h-2 rounded-md bg-zinc-300' />
 
         <div className={classNames({
           "flex flex-grow flex-wrap gap-x-6 gap-y-4 sm:gap-x-8 items-center justify-center": true,
