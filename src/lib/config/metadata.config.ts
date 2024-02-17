@@ -1,5 +1,6 @@
 import { type Metadata } from "next";
 
+import { getServerAuthSession } from "@/server/auth";
 import { GITHUB_LINK } from "@/lib/config/personal-links.config";
 import {
   WEBSITE_AUTHOR,
@@ -7,7 +8,6 @@ import {
   WEBSITE_LINK,
   WEBSITE_TITLE
 } from "@/lib/config/website-details.config";
-import { getServerAuthSession } from "@/server/auth";
 
 
 // ROOT METADATA
@@ -75,6 +75,12 @@ const SignInPageMetadata: Metadata = {
 }
 
 
+// VIEW BIOSYNC METADATA
+const ViewBioSyncMetadata: Metadata={
+  title: "BioSync",
+}
+
+
 // PROFILE PAGE METADATA
 async function dynamicMetadataForProfilePage(): Promise<Metadata> {
   const sessionDetails = await getServerAuthSession();
@@ -94,5 +100,6 @@ export {
   RootMetadata,
   NewBioSyncPageMetadata,
   SignInPageMetadata,
+  ViewBioSyncMetadata,
   dynamicMetadataForProfilePage,
 }

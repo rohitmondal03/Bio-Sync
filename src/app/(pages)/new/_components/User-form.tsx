@@ -163,11 +163,12 @@ export default function InputForm({ image }: TProps) {
           "text-xl font-bold text-center": true,
           "py-3 lg:py-6": true,
           "space-y-3": true,
+          "w-[97%]": true,
         })}>
           <h1>Add Skills </h1>
 
           <div className={classNames({
-            "flex flex-row items-center justify-center gap-3": true,
+            "flex flex-row items-center justify-center gap-1 sm:gap-3": true,
           })}>
             <Input
               value={skill}
@@ -175,7 +176,7 @@ export default function InputForm({ image }: TProps) {
               onChange={(e) => setSkill(e.target.value)}
               className={classNames({
                 "outline-1 outline": true,
-                "w-auto sm:w-[25rem]": true,
+                "w-[95%] sm:w-[25rem]": true,
               })}
             />
 
@@ -208,11 +209,12 @@ export default function InputForm({ image }: TProps) {
           "text-xl font-bold text-center": true,
           "py-3 lg:py-6": true,
           "space-y-3": true,
+          "w-[97%]": true,
         })}>
           <h1>Mention Project links <br /> (if any) </h1>
 
           <div className={classNames({
-            "flex flex-row items-center justify-center gap-3": true,
+            "flex flex-row items-center justify-center gap-1 sm:gap-3": true,
           })}>
             <Input
               value={projectLink}
@@ -220,7 +222,7 @@ export default function InputForm({ image }: TProps) {
               onChange={(e) => setProjectLink(e.target.value)}
               className={classNames({
                 "outline-1 outline": true,
-                "w-auto sm:w-[25rem]": true,
+                "w-[95%] sm:w-[25rem]": true,
               })}
             />
 

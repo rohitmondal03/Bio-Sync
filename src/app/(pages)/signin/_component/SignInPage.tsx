@@ -30,8 +30,9 @@ function SignInLandingComponent() {
         <p className={classNames({
           "text-xl sm:text-3xl": true,
           "font-thin": true,
+          "leading-tight": true,
         })}>
-          Sign In to BioSync to continue to use the services, and share the link with anyone...
+          Sign In to BioSync to continue using our services, and share the link with anyone...
         </p>
 
         <div className={classNames({
@@ -45,22 +46,22 @@ function SignInLandingComponent() {
           </p>
 
           <div className={classNames({
-            "flex flex-row justify-center md:justify-start gap-10 px-4": true,
+            "flex flex-col justify-center md:justify-start gap-5 px-4": true,
           })}>
             <Button
-              variant={"outline"}
+              variant={"default"}
               onClick={() => signIn("github", { callbackUrl: "/profile" })}
-              className="btn outline outline-2 outline-zinc-500 w-fit scale-125"
+              className="btn w-fit"
             >
-              <FaGithub className="scale-125" />
+              Sign In with Github <FaGithub className="scale-125 ml-3" />
             </Button>
 
             <Button
-              variant={"outline"}
+              variant={"default"}
               onClick={() => signIn("discord", { callbackUrl: "/profile" })}
-              className="btn outline outline-2 outline-zinc-500 w-fit scale-125"
+              className="btn w-fit"
             >
-              <FaDiscord className="scale-125" />
+              Sign In with Discord <FaDiscord className="scale-125 ml-3" />
             </Button>
           </div>
         </div>
